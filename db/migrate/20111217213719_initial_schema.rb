@@ -11,12 +11,11 @@ class InitialSchema < ActiveRecord::Migration
     end
 
     create_table      :task_runs do |t|
-      t.string        :name
+      t.string        :task_name
       t.integer       :task_object_id
       t.string        :task_object_type
       t.text          :task_options_hash
-      t.text          :task_result_hash
-      t.integer       :object_mapping_id
+      t.text          :task_log
       t.integer       :organization_id
       t.integer       :physical_location_id
       t.integer       :user_id

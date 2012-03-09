@@ -7,8 +7,9 @@ class TaskRun < ActiveRecord::Base
   belongs_to :net_svc
   belongs_to :web_app
   belongs_to :web_form
-
+  has_many :object_mappings
+  
   def to_s
-    "#{name} task -> #{task_object_type}:#{task_object_id} with options #{task_options_hash}"
+    "#{task_name} task -> #{task_object_type}:#{task_object_id} (#{object_mappings.count})"
   end
 end

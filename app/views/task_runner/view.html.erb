@@ -15,18 +15,15 @@
 
 <table>
   <tr>
-    <th>Output:</th>
+    <th>Task Name:</th>
+    <th>Task Log:</th>
   </tr>
-  <% @results.each do |r| 
-       r.each do |o| %>
+  <% @task_runs.each do |task_run| %>
   <tr>
-    <td><a href="<%=request.url%>/../../<%=o.first.class.to_s.underscore%>s/<%=o.first.id%>"> <%=o.first.to_s%></a> (New: <%=o.last%>)<br/></td>
+	<td><%= task_run.task_name %></td>
+	<td><%= task_run.task_log.gsub("\n", "<br/>").html_safe %></td>
   </tr>
-  <%   end
-     end %>
+  <% end %>
 </table>
 
-<br/>
-<b>Task Log:</b><br/>
-<%= @task.task_logger.text.gsub("\n","<br/>").html_safe %>
-<br/>
+

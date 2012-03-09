@@ -51,14 +51,8 @@ def run
       save_location = "#{EAR::TEMP_DIRECTORY}/#{@object.name}.png"
     end
 
-    #
-    # Handle a domain and a host object
-    #
-    if @object.kind_of? Domain
-      browse_location = "http://#{@object.name}"
-    else
-      browse_location "http://#{@object.ip_address}"
-    end
+    browse_location = "http://#{@object.name}"
+
 
     status = Timeout.timeout timeout do
       #

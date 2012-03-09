@@ -10,7 +10,7 @@ end
 
 # Returns an array of valid types for this task
 def allowed_types
-  [SearchString, Organization, Domain]
+  [SearchString, Organization, Domain, Host]
 end
 
 def setup(object, options={})
@@ -23,7 +23,7 @@ def run
   super
 
   # Attach to the corpwatch service & search
-  x = Ear::Client::Google::SearchService.new
+  x = Ear::Client::Google::SearchScraper.new
   
   dork_strings = ["filetype:xls","filetype:doc", "filetype:asp"]
   

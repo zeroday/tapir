@@ -11,25 +11,16 @@ class TaskManager
     @task_files = []
     @tasks = []
     @queue = RunnableTaskQueue.new
-  
-    #load_tasks(@tasks_dir)
-
-    #
-    # Load up a new thread to run a background tasks
-    #
-    #Thread.new do
-    #  while true
-    #    if @queue.has_tasks?
-    #      object, task, options = @queue.shift
-    #      task.execute(object,options)
-    #    end
-    #    sleep 1
-    #  end
-    #end
   end
 
-  def find_by_name(task_name)
-    return _get_task_by_name(task_name)
+  def create_all_tasks
+    to_return = []
+    @tasks.each {|t| to_return << t.clone}
+  to_return
+  end
+
+  def create_by_name(task_name)
+    return _create_task_by_name(task_name)
   end
 
   # 
@@ -88,7 +79,7 @@ class TaskManager
 
     @tasks.each do |task|
       if task.allowed_types.include?(object.class)
-        tasks_for_type << task
+        tasks_for_type << task.clone
       end
     end
 
@@ -100,16 +91,19 @@ class TaskManager
 
     # Make note of the fact that we're shipping this off to the queue
     EarLogger.instance.log "Task manager queueing task: #{task_name} for object #{object} with options #{options}"
-
+    
+    # Create the task 
+    task =  _create_task_by_name(task_name)
+    
     # Add it to the run queue
-    return @queue.add_task_run(object, task_name, options)
+    return @queue.add_task_run(object, task , options)
   end
 
 private
   # This method is used to translate task names into task objects
-  def _get_task_by_name(task_name)
+  def _create_task_by_name(task_name)
     @tasks.each do |t|
-      return t if t.name == task_name
+      return t.clone if t.name == task_name
     end
     raise "Unknown Task!"  # couldn't find it. boo.
   end

@@ -1,6 +1,6 @@
 class ObjectMapping < ActiveRecord::Base
-#    has_one :task_run
-
+    belongs_to :task_run
+    
     def get_child
       EarLogger.instance.log "Trying to find #{child_type}:#{child_id}"
       
@@ -22,15 +22,10 @@ class ObjectMapping < ActiveRecord::Base
         EarLogger.instance.log "Oops, couldn't find #{child_type}:#{child_id}"
         nil
       end
-    
-    end
-
-    def get_task_run
-      TaskRun.find self.task_run_id
     end
 
     def to_s
-      "#{self.class}: #{child_type}:#{child_id} <-> #{parent_type}:#{parent_id}"
+      "#{self.class}: #{child_type}:#{child_id} <-> #{parent_type}:#{parent_id} - (task_run: #{task_run.id})"
     end 
 
 end

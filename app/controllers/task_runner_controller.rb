@@ -27,12 +27,12 @@ class TaskRunnerController < ApplicationController
     #
     # Run the task on each object
     #
-    @results = []
+    @task_runs = []
     @objects.each do |o|
       #
       # Run the task
       #
-      @results << o.run_task(task_name)
+      @task_runs << o.run_task(task_name)
     end
     
     @task = Task.find task_name

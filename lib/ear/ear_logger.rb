@@ -1,6 +1,7 @@
 require 'singleton'
-
-# Simple logger class
+#
+# Simple logger class for the whole application
+#
 class EarLogger
 
   include Singleton
@@ -32,6 +33,5 @@ private
    @out.puts message
    @out.flush
   end
-
 
 end

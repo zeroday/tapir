@@ -19,6 +19,14 @@ class Object
     objects
   end
 
+  def first
+    self.all.first
+  end
+
+  def last
+    self.all.last
+  end
+
   def tasks
     tasks = []
   end
