@@ -1,10 +1,10 @@
 
 <b>Task:</b><br/>
-<%= @task %>
+<%= @task.name %>
 
 <table>
   <tr>
-    <th>Input</th>
+    <th>Input:</th>
   </tr>
   <% @objects.each do |o| %>
   <tr>
@@ -15,16 +15,15 @@
 
 <table>
   <tr>
-    <th>Output</th>
+    <th>Task Name:</th>
+    <th>Task Log:</th>
   </tr>
-  <% @results.each do |o| %>
+  <% @task_runs.each do |task_run| %>
   <tr>
-    <td><a href="<%=request.url%>/../../<%=o.underscore%>s/<%=o.id%>"> <%=o.to_s%></a><br/></td>
+	<td><%= task_run.task_name %></td>
+	<td><%= task_run.task_log.gsub("\n", "<br/>").html_safe %></td>
   </tr>
   <% end %>
 </table>
 
-<br/>
-<b>Task Log:</b><br/>
-<%= @task.task_logger.out.string.gsub("\n","<br/>").html_safe %>
-<br/>
+

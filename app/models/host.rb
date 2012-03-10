@@ -10,6 +10,14 @@ class Host < ActiveRecord::Base
   after_save   :log
 
   include ModelHelper
+  
+  #
+  # This method is highly questionable, but folks generally refer to a host
+  # by its ip address(es), and thus, this makes tasks easier to code.
+  #
+  def name
+    ip_address
+  end
 
   def to_s
     "#{self.class}: #{self.ip_address}"

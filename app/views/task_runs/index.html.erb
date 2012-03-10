@@ -2,7 +2,7 @@
 
 <table>
   <tr>
-    <th>Name</th>
+    <th>Task Name</th>
     <th>Task object</th>
     <th>Task object type</th>
     <th>Task options hash</th>
@@ -13,7 +13,7 @@
 
 <% @task_runs.each do |task_run| %>
   <tr>
-    <td><%= task_run.name %></td>
+    <td><%= task_run.task_name %></td>
     <td><%= task_run.task_object_id %></td>
     <td><%= task_run.task_object_type %></td>
     <td><%= task_run.task_options_hash %></td>

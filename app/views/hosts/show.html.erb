@@ -32,5 +32,14 @@
   </ul>
 </p>
 
+<p>
+<b>Tasks Runs:</b>
+  <ul>
+  <% @host.task_runs.each {|r|%>
+    <li><%= link_to r, task_run_path(r.id)  %></li>
+  <% } %>
+  </ul>
+</p>
+
 <%= link_to 'Edit', edit_host_path(@host) %> |
 <%= link_to 'Back', hosts_path %>

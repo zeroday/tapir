@@ -2,15 +2,15 @@ class Task
 
   # Rails model compatibility #
   def self.all
-    TaskManager.instance.tasks
+    TaskManager.instance.create_all_tasks
   end
 
   def self.find(name)
-    TaskManager.instance.find_by_name name
+    TaskManager.instance.create_by_name name
   end
 
   def self.find_by_name(name)
-    TaskManager.instance.find_by_name name
+    TaskManager.instance.create_by_name name
   end
   
   def self.model_name
@@ -25,9 +25,10 @@ class Task
   attr_accessor :task_logger
   attr_accessor :task_run
 
-  # Maintain a constructor that takes no options - all code will be eval'd in
-  def initialize
-    @task_logger = TaskLogger.new name
+  def candidates
+    x = []
+    Object.all.each {|o| x << o if self.allowed_types.include? o.class}
+  x
   end
 
   def underscore
@@ -54,28 +55,23 @@ class Task
   # Override me
   #
   def setup(object, options={})
-    #
-    # Set the task logger's name (if we don't do this, we're stuck with the
-    # logger thinking it's a generic task going forward - TODO - consider 
-    # finding a more clean way to do this
-    #
-    @task_logger.name = self.name
-
 
     @object = object # the object we're operating on
     @options = options # the options for this task
     @results = [] # temporary collection of all created objects
-
+        
     #
     # Create a new task run to record the fact that we've begun running
     # this task.
     #
     @task_run = TaskRun.create(
-      :name => name,
+      :task_name => self.name,
       :type => nil,
       :task_object_type => @object.class.to_s,
       :task_object_id => @object.id, 
       :task_options_hash => @options )
+    
+    @task_logger = TaskLogger.new(@task_run.id, self.name, true)
 
     #
     # This is an AR relationship, so we can go back and access all tasks for 
@@ -103,10 +99,6 @@ class Task
   #
   def cleanup
     @task_logger.log "Cleanup called." 
-  end
-  
-  # Checks for validity
-  def valid?
   end
   
   def to_s
@@ -147,11 +139,9 @@ class Task
     #
     if new_object.save
       @task_logger.log_good "Created new object: #{new_object}"
-      @results << [new_object,true]
     else
       @task_logger.log "Could not save object, are you sure it's valid & doesn't already exist?"
       new_object = find_object type, params
-      @results << [new_object,false]
     end
     #
     # If we have a new object, then we should keep track of the information
@@ -183,26 +173,45 @@ class Task
   #
   def execute(object, options={})
     
+    #
+    # Do some logging in the main EAR log
+    # 
     EarLogger.instance.log "Running task: #{self.name}"
     EarLogger.instance.log "Object: #{object}"
     EarLogger.instance.log "Options: #{options}"
 
+    #
+    # Call the methods to actually do something with the objects that have
+    # been passed into this task
+    #
     self.setup(object, options)
     self.run
     self.cleanup 
     
-    # RECORD RESULTS. g.h.e.t.t.o, but hey better than previous attempts
+    #
+    # Record results in the task_run
+    #
     @task_logger.log "Recording results"
-    @task_run.task_result_hash = {}
-     @results.each do |result|
-      @task_run.task_result_hash["#{result.first.class.to_s}_#{result.first.id.to_s}"] = result.last
-    end
-    @task_run.save
+    
+    #
+    # Mark complete in the task log
+    #
     @task_logger.log "done recording"
     # End recording of results
 
-   
-  #return the task run id
+    #
+    # Set the log in the task_run
+    #
+    @task_run.task_log = @task_logger.text
+
+    #
+    # Save our task run object
+    #
+    @task_run.save
+
+  #
+  #  Return result
+  #
   @task_run
   end
 
