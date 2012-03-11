@@ -16,7 +16,7 @@ module ModelHelper
       def method_missing(method, *args, &block)
          call_parent = true
          TaskManager.instance.get_tasks_for(self).each do |task|
-          puts "checking task #{task}"
+          #puts "checking task #{task}"
           if method =~ Regexp.new(task.name)
             #
             # Run the task, and mark calling super as unnecessary.

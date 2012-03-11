@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   belongs_to  :organization
   has_many    :physical_locations
   has_many    :task_runs
-  
+  has_many    :accounts
   
   after_save :log
 

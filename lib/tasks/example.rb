@@ -9,7 +9,7 @@ end
 
 ## Returns an array of types that are allowed to call this task
 def allowed_types
-  return [Domain, Host, Organization, SearchString, User]
+  [Domain, Host, Organization, SearchString, User]
 end
 
 def setup(object, options={})

@@ -15,7 +15,7 @@ end
 
 # Returns an array of valid types for this task
 def allowed_types
-  [Domain, SearchString, Host, Organization]
+  [Domain, SearchString, Organization]
 end
 
 def setup(object, options={})

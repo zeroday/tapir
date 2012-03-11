@@ -10,7 +10,7 @@ require 'iconv'
   end
 
   def allowed_types
-    return [Host]
+    [Host]
   end
 
   def setup(object, options={})

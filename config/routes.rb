@@ -1,5 +1,7 @@
 Ear::Application.routes.draw do
   
+  resources :accounts
+
   resources :images
   resources :net_blocks
   resources :findings
