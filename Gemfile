@@ -23,7 +23,7 @@ gem 'json'
 gem 'exifr'
 
 # Network Services:
-gem 'pcaprub'
+
 gem 'dnsruby'
 gem 'geoip'
 gem 'whois'
@@ -41,9 +41,16 @@ gem 'selenium-webdriver' # browser based scraping with capybara
 gem 'capybara'
 
 group :pain do
+ 
+  # Requires QTwebkit
   # https://github.com/thoughtbot/capybara-webkit#readme
-  # apt-get install libqt4-dev libqtwebkit-dev
-  gem 'capybara-webkit' # Requires QTwebkit
+  # apt-get install libqt4-dev
+  gem 'capybara-webkit'
+
+  # Requires Libpcap-dev
+  # apt-get install libpcap-dev
+  gem 'pcaprub'
+  
 end
 
 # Gems used only for assets and not required
