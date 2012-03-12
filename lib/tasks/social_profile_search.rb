@@ -1,0 +1,117 @@
+def name
+  "social_profile_search"
+end
+
+## Returns a string which describes what this task does
+def description
+  "This task searches for common social media profiles"
+end
+
+## Returns an array of types that are allowed to call this task
+def allowed_types
+  [SearchString, User]
+end
+
+def setup(object, options={})
+  super(object, options)
+end
+
+## Default method, subclasses must override this
+def run
+  super
+  
+  
+  #
+  # Store the account name, depending on the object we passed in.
+  #
+  if @object.kind_of? User
+    account_name = @object.username
+  else
+    account_name = @object.name
+  end
+  
+  ###
+  ### Twitter
+  ###
+  twitter_client = Ear::Client::Twitter::WebClient.new
+  if twitter_client.check_account_exists(account_name)
+    @task_logger.log "Found an account at: #{twitter_client.account_uri_for(account_name)}"
+    obj = create_object Account, :account_name => account_name, 
+    :service_name => "twitter", 
+    :uri => twitter_client.account_uri_for(account_name)
+    #
+    # If we passed in a user, associate that with our new account object
+    #
+    if @object.kind_of? User
+      obj.user_id = @object.id
+      obj.save!
+    end
+  else 
+    @task_logger.log "No account found at: #{twitter_client.account_uri_for(account_name)}"
+  end
+  
+  ###
+  ### FourSquare
+  ###
+  foursquare_client = Ear::Client::FourSquare::WebClient.new
+  if foursquare_client.check_account_exists(account_name)
+    @task_logger.log "Found an account at: #{foursquare_client.account_uri_for(account_name)}"
+    obj = create_object Account, :account_name => account_name, 
+    :service_name => "foursquare", 
+    :uri => foursquare_client.account_uri_for(account_name)
+    #
+    # If we passed in a user, associate that with our new account object
+    #
+    if @object.kind_of? User
+      obj.user_id = @object.id
+      obj.save!
+    end
+  else 
+    @task_logger.log "No account found at: #{foursquare_client.account_uri_for(account_name)}"
+  end
+  
+  ###
+  ### Soundcloud
+  ###
+  soundcloud_client = Ear::Client::SoundCloud::WebClient.new
+  if soundcloud_client.check_account_exists(account_name)
+    @task_logger.log "Found an account at: #{soundcloud_client.account_uri_for(account_name)}"
+    obj = create_object Account, :account_name => account_name, 
+      :service_name => "soundcloud", 
+      :uri => soundcloud_client.account_uri_for(account_name)
+    #
+    # If we passed in a user, associate that with our new account object
+    #
+    if @object.kind_of? User
+      obj.user_id = @object.id
+      obj.save!
+    end
+  else 
+    @task_logger.log "No account found at: #{soundcloud_client.account_uri_for(account_name)}"
+  end
+
+  ###
+  ### Google+
+  ###
+  google_client = Ear::Client::Google::WebClient.new
+  if google_client.check_account_exists(account_name)
+    @task_logger.log "Found an account at: #{google_client.account_uri_for(account_name)}"
+    obj = create_object Account, :account_name => account_name, 
+      :service_name => "google" , 
+      :uri => google_client.account_uri_for(account_name)
+    #
+    # If we passed in a user, associate that with our new account object
+    #
+    if @object.kind_of? User
+      obj.user_id = @object.id
+      obj.save!
+    end
+  else 
+    @task_logger.log "No account found at: #{google_client.account_uri_for(account_name)}"
+  end 
+  
+end
+
+def cleanup
+  super
+end
