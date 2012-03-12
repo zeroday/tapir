@@ -33,7 +33,7 @@ def run
 
     # Open page & parse
     @task_logger.log "Using Company URI: #{search_uri}"
-    doc = Nokogiri::HTML(open(search_uri, "User-Agent" => EAR::USER_AGENT_STRING))
+    doc = Nokogiri::HTML(open(search_uri, "User-Agent" => Ear::USER_AGENT_STRING))
 
     # Open the returned xhtml doc
     doc.xpath("//*[@class='company_name']").each do |xpath|

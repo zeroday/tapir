@@ -62,6 +62,14 @@ class InitialSchema < ActiveRecord::Migration
       t.timestamps
     end
 
+    create_table :accounts do |t|
+      t.string :account_name
+      t.string :service_name
+      t.string :uri
+      t.integer :user_id
+      t.timestamps
+    end
+    
     create_table      :domains do |t|
       t.integer       :metric
       t.string        :name

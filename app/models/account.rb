@@ -1,13 +1,13 @@
 class Account < ActiveRecord::Base
   belongs_to  :user
   after_save :log
-  validates_presence_of   :name, :service
-  validates_uniqueness_of :name, :scope => :service
+  validates_presence_of   :account_name, :service_name, :uri
+  validates_uniqueness_of :account_name, :scope => :service_name
 
   include ModelHelper
 
   def to_s
-    "#{self.class}: #{name} (#{service})"
+    "#{self.class}: #{account_name} (#{service_name} / #{uri})"
   end
 
 private

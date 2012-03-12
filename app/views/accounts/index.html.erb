@@ -2,8 +2,9 @@
 
 <table>
   <tr>
-    <th>Name</th>
-    <th>Service</th>
+    <th>Account Name</th>
+    <th>Service Name</th>
+    <th>URI</th>
     <th>User</th>
     <th></th>
     <th></th>
@@ -12,8 +13,9 @@
 
 <% @accounts.each do |account| %>
   <tr>
-    <td><%= account.name %></td>
-    <td><%= account.service %></td>
+    <td><%= account.account_name %></td>
+    <td><%= account.service_name %></td>
+    <td><%= account.uri %></td>
     <td><%= account.user_id %></td>
     <td><%= link_to 'Show', account %></td>
     <td><%= link_to 'Edit', edit_account_path(account) %></td>

@@ -153,16 +153,32 @@ class Task
   new_object
   end
 
+  #
+  # This method is used to locate a pre-existing object before we try to save a new 
+  # object. It is called by create_object in the Task class. The params object is a 
+  # set of things that will be used to create the object, so it's generally safe to 
+  # refer to the most common of parameters for the object (especially if they're 
+  # enforced by validation)
+  #
+  # takes a type, and a set of params
+  #
+  # returns the object if it is found, else false
+  #
+  # Will raise an error if it doesn't know how to find a type of object
+  #
   # ooh, this is dangerous metamagic. -- would need to be revisited if we do 
   # something weird with the models. for now, it should be sufficent to generally
   # send "name" and special case anything else.
+  #
   def find_object(type, params)
     if type == Host
       return Host.find_by_ip_address params[:ip_address]
+    elsif type == Account
+      return Account.find_by_account_name params[:account_name]
     else
       if params.has_key? :name
         return type.send(:find_by_name, params[:name])
-      else
+        else
         raise "Don't know how to find this object of type #{type}"
       end
     end

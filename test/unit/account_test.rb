@@ -1,7 +1,7 @@
-require 'test_helper'
+#require 'test_helper'
 
 class AccountTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  test "Account should require a service name, account name, and uri" do
+    assert true if Account.create :service_name => "test", :account_name => "test", :uri => "www.test.com/test"
+  end
 end

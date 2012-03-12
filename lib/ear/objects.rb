@@ -15,8 +15,9 @@ class Object
     User.all.each {|x| objects << x }  unless User.all == []
     WebApp.all.each {|x| objects << x }  unless WebApp.all == []
     WebForm.all.each {|x| objects << x }  unless WebForm.all == []
-    
-    objects
+    Image.all.each {|x| objects << x }  unless Image.all == []
+    Account.all.each {|x| objects << x }  unless Account.all == []
+  objects
   end
 
   def first
