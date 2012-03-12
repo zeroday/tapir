@@ -1,18 +1,23 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Name:</b>
-  <%= @account.name %>
+  <b>Account Name:</b>
+  <%= @account.account_name %>
 </p>
 
 <p>
-  <b>Service:</b>
-  <%= @account.service %>
+  <b>Service Name:</b>
+  <%= @account.service_name %>
+</p>
+
+<p>
+  <b>URI:</b>
+  <%= link_to @account.uri %>
 </p>
 
 <p>
   <b>User:</b>
-  <%= @account.user_id %>
+  <%= link_to @account.user_id, User.find_by_id @account.user_id %>
 </p>
 
 
