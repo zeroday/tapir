@@ -10,7 +10,7 @@ module SoundCloud
     end
     
     def account_uri_for(account_name)
-      "http://m.soundcloud.com/#{account_name}"
+      "http://m.soundcloud.com/_api/resolve?url=http://soundcloud.com/#{account_name}&client_id=2Kf29hhC5mgWf62708A&format=json"
     end
     
   end

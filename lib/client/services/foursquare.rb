@@ -7,11 +7,11 @@ module FourSquare
     
     def initialize
       @service_name = "foursquare"
-      @account_missing_strings = ["We couldn't find the page you're looking for."]
+      @account_missing_strings = ["404"]
     end
     
     def account_uri_for(account_name)
-      "http://www.foursquare.com/#{account_name}"
+      "https://www.foursquare.com/#{account_name}"
     end
     
   end

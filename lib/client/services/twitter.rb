@@ -10,7 +10,7 @@ module Twitter
     end
     
     def account_uri_for(account_name)    
-      "http://www.twitter.com/#{account_name}"
+      "http://m.twitter.com/#{account_name}"
     end
     
   end

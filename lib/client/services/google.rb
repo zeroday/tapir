@@ -29,8 +29,8 @@ module Google
   #  
   # Then, follow instructions from https://github.com/thoughtbot/capybara-webkit#readme   
   # and install the capybara-webkit gem and drivers:  
-  # $ sudo apt-get install libqt4-dev libqtwebkit-dev  
-  # $ gem install capybara-webkit  
+  # $ sudo apt-get install libqt4-dev
+  # $ gem install capybara-webkit
   ############################  
 
   class SearchScraper

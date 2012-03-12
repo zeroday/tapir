@@ -1,7 +1,7 @@
-$:.unshift(File.dirname(__FILE__))
+# Rails Environment
+$:.unshift(File.join( File.expand_path(File.dirname(__FILE__)), "..", "..", "..", "config"))
 
-require '../../../config/environment'
-#require '../corpwatch'
+require 'environment'
 require 'test/unit'
 
 class TestCorpwatchService < Test::Unit::TestCase
@@ -9,7 +9,7 @@ class TestCorpwatchService < Test::Unit::TestCase
   def test_corpwatch_search_acme
     x = Ear::Client::Corpwatch::CorpwatchService.new
     corps = x.search "acme"
-    assert corps.count == 61, "Wrong count, should be 61, is #{corps.count}"
+    assert corps.count == 64, "Wrong count, should be 61, is #{corps.count}"
     assert corps.first.company_name == "ACME COMMUNICATIONS INC", "Failed: #{corps[0].company_name} was not ACME COMMUNICATIONS INC"
   end
 

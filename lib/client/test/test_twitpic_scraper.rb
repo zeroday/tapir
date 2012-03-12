@@ -1,6 +1,7 @@
-$:.unshift(File.dirname(__FILE__))
+# Rails Environment
+$:.unshift(File.join( File.expand_path(File.dirname(__FILE__)), "..", "..", "..", "config"))
 
-require '../../../config/environment'
+require 'environment'
 require 'test/unit'
 
 class TestTwitPicScraper < Test::Unit::TestCase
