@@ -12,12 +12,13 @@
 
 <p>
   <b>URI:</b>
-  <%= link_to @account.uri %>
+  <%= link_to @account.uri, @account.uri %>
 </p>
 
 <p>
   <b>User:</b>
-  <%= link_to @account.user_id, User.find_by_id @account.user_id %>
+  <% user = User.find_by_id @account.user_id %>
+  <%= link_to user,user_path(user) %>
 </p>
 
 

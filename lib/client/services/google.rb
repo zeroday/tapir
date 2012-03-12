@@ -11,7 +11,7 @@ module Google
   
     def initialize 
       @service_name = "google_profile"
-      @account_missing_strings = ["The requested URL was not found on this server."]
+      @account_missing_strings = ["The requested URL was not found on this server"]
     end
     
     def account_uri_for(account_name)

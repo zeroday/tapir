@@ -27,8 +27,14 @@ def check_account_exists(account_name)
   #  
   rescue OpenURI::HTTPError => e 
     EarLogger.instance.log "Error, couldn't open #{self.account_uri_for(account_name)}"
+    return false
   rescue RuntimeError => e
     EarLogger.instance.log "Redirection? #{e}"
+    return false
+
+    # TODO - retry on the redirection url
+    #check_account_exists
+
   end
 
 #
