@@ -23,9 +23,18 @@ ActiveRecord::Schema.define(:version => 20111217213719) do
   end
 
   create_table "domains", :force => true do |t|
-    t.integer  "metric"
     t.string   "name"
     t.string   "status"
+    t.date     "record_created_on"
+    t.date     "record_updated_on"
+    t.date     "record_expires_on"
+    t.string   "disclaimer"
+    t.string   "registrar_name"
+    t.string   "registrar_org"
+    t.string   "registrar_url"
+    t.string   "referral_whois"
+    t.boolean  "registered"
+    t.boolean  "available"
     t.integer  "organization_id"
     t.integer  "host_id"
     t.datetime "created_at"
@@ -40,7 +49,6 @@ ActiveRecord::Schema.define(:version => 20111217213719) do
   end
 
   create_table "hosts", :force => true do |t|
-    t.integer  "metric"
     t.string   "ip_address"
     t.integer  "domain_id"
     t.datetime "created_at"
@@ -58,6 +66,7 @@ ActiveRecord::Schema.define(:version => 20111217213719) do
   create_table "net_blocks", :force => true do |t|
     t.integer  "domain_id"
     t.string   "range"
+    t.string   "handle"
     t.string   "description"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -65,7 +74,6 @@ ActiveRecord::Schema.define(:version => 20111217213719) do
 
   create_table "net_svcs", :force => true do |t|
     t.string   "name"
-    t.integer  "metric"
     t.integer  "host_id"
     t.string   "fingerprint"
     t.string   "proto"
@@ -85,7 +93,6 @@ ActiveRecord::Schema.define(:version => 20111217213719) do
   end
 
   create_table "organizations", :force => true do |t|
-    t.integer  "metric"
     t.string   "name"
     t.text     "description"
     t.datetime "created_at"
@@ -93,7 +100,6 @@ ActiveRecord::Schema.define(:version => 20111217213719) do
   end
 
   create_table "physical_locations", :force => true do |t|
-    t.integer  "metric"
     t.string   "name"
     t.string   "address"
     t.string   "city"
@@ -111,7 +117,6 @@ ActiveRecord::Schema.define(:version => 20111217213719) do
   end
 
   create_table "search_strings", :force => true do |t|
-    t.integer  "metric"
     t.string   "name"
     t.string   "description"
     t.datetime "created_at"
@@ -133,12 +138,13 @@ ActiveRecord::Schema.define(:version => 20111217213719) do
     t.integer  "web_app_id"
     t.integer  "web_form_id"
     t.integer  "image_id"
+    t.integer  "account_id"
+    t.integer  "net_block_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "users", :force => true do |t|
-    t.integer  "metric"
     t.string   "username"
     t.string   "first_name"
     t.string   "last_name"
@@ -149,7 +155,6 @@ ActiveRecord::Schema.define(:version => 20111217213719) do
   end
 
   create_table "web_apps", :force => true do |t|
-    t.integer  "metric"
     t.integer  "net_svc_id"
     t.string   "name"
     t.string   "url"

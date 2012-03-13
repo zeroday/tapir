@@ -1,7 +1,7 @@
 class InitialSchema < ActiveRecord::Migration
 
   def change
-    create_table      :object_mappings do |t|
+    create_table :object_mappings do |t|
       t.integer       :child_id
       t.string        :child_type
       t.integer       :parent_id
@@ -10,7 +10,7 @@ class InitialSchema < ActiveRecord::Migration
       t.timestamps
     end
 
-    create_table      :task_runs do |t|
+    create_table  :task_runs do |t|
       t.string        :task_name
       t.integer       :task_object_id
       t.string        :task_object_type
@@ -25,18 +25,18 @@ class InitialSchema < ActiveRecord::Migration
       t.integer       :web_app_id
       t.integer       :web_form_id
       t.integer       :image_id
+      t.integer       :account_id
+      t.integer       :net_block_id
       t.timestamps
     end
 
-    create_table      :organizations do |t|
-      t.integer       :metric
+    create_table  :organizations do |t|
       t.string        :name
       t.text          :description
       t.timestamps
     end
 
-    create_table      :physical_locations do |t|
-      t.integer       :metric
+    create_table  :physical_locations do |t|
       t.string        :name
       t.string        :address
       t.string        :city
@@ -52,8 +52,7 @@ class InitialSchema < ActiveRecord::Migration
       t.timestamps
     end
 
-    create_table      :users do |t|
-      t.integer       :metric
+    create_table  :users do |t|
       t.string        :username
       t.string        :first_name
       t.string        :last_name
@@ -63,46 +62,53 @@ class InitialSchema < ActiveRecord::Migration
     end
 
     create_table :accounts do |t|
-      t.string :account_name
-      t.string :service_name
-      t.string :uri
-      t.integer :user_id
+      t.string        :account_name
+      t.string        :service_name
+      t.string        :uri
+      t.integer       :user_id
       t.timestamps
     end
     
-    create_table      :domains do |t|
-      t.integer       :metric
+    create_table  :domains do |t|
       t.string        :name
       t.string        :status
+      t.date          :record_created_on
+      t.date          :record_updated_on
+      t.date          :record_expires_on
+      t.string        :disclaimer
+      t.string        :registrar_name
+      t.string        :registrar_org
+      t.string        :registrar_url
+      t.string        :referral_whois
+      t.boolean       :registered
+      t.boolean       :available
       t.integer       :organization_id
       t.integer       :host_id
       t.timestamps
     end
 
-    create_table :net_blocks do |t|
-      t.integer :domain_id
-      t.string :range
-      t.string :description
+    create_table  :net_blocks do |t|
+      t.integer       :domain_id
+      t.string        :range
+      t.string        :handle
+      t.string        :description
       t.timestamps
     end
 
-    create_table      :hosts do |t|
-      t.integer       :metric
+    create_table  :hosts do |t|
       t.string        :ip_address
       t.integer       :domain_id
       t.timestamps
     end
 
-    create_table      :search_strings do |t|
-      t.integer       :metric
+    create_table  :search_strings do |t|
       t.string        :name
       t.string        :description
       t.timestamps
     end
 
-    create_table :net_svcs do |t|
+    create_table  :net_svcs do |t|
       t.string        :name
-      t.integer       :metric
       t.integer       :host_id
       t.string        :fingerprint
       t.string        :proto
@@ -110,8 +116,7 @@ class InitialSchema < ActiveRecord::Migration
       t.timestamps
     end
 
-    create_table :web_apps do |t|
-      t.integer       :metric
+    create_table  :web_apps do |t|
       t.integer       :net_svc_id
       t.string        :name
       t.string        :url
@@ -121,7 +126,7 @@ class InitialSchema < ActiveRecord::Migration
       t.timestamps
     end
 
-    create_table :web_forms do |t|
+    create_table  :web_forms do |t|
       t.integer       :metric
       t.integer       :web_app_id
       t.string        :name

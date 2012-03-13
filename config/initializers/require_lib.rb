@@ -6,9 +6,6 @@ end
 #
 # Require all clients 
 #
-# TODO - should we require all individual clients as a backup? (currently client.rb must be 
-# manually modified to include a new client)
-#
 Dir[Rails.root + 'lib/client.rb'].each do |file|
   require file
 end
