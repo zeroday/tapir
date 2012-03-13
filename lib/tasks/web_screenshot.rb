@@ -48,7 +48,7 @@ def run
     if @options['save_directory']
       save_location = "#{@options['save_directory']}/#{@object.name}.png" 
     else
-      save_location = "#{EAR::TEMP_DIRECTORY}/#{@object.name}.png"
+      save_location = "#{Ear::TEMP_DIRECTORY}/#{@object.name}.png"
     end
 
     browse_location = "http://#{@object.name}"
