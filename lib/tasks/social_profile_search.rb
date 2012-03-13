@@ -31,14 +31,14 @@ def run
   end
   
   ###
-  ### Twitter
+  ### Facebook
   ###
-  twitter_client = Ear::Client::Twitter::WebClient.new
-  if twitter_client.check_account_exists(account_name)
-    @task_logger.log "Found an account at: #{twitter_client.account_uri_for(account_name)}"
+  facebook_client = Ear::Client::Facebook::WebClient.new
+  if facebook_client.check_account_exists(account_name)
+    @task_logger.log "Found an account at: #{facebook_client.account_uri_for(account_name)}"
     obj = create_object Account, :account_name => account_name, 
-    :service_name => "twitter", 
-    :uri => twitter_client.account_uri_for(account_name)
+    :service_name => "facebook", 
+    :uri => facebook_client.account_uri_for(account_name)
     #
     # If we passed in a user, associate that with our new account object
     #
@@ -47,29 +47,9 @@ def run
       obj.save!
     end
   else 
-    @task_logger.log "No account found at: #{twitter_client.account_uri_for(account_name)}"
+    @task_logger.log "No account found at: #{facebook_client.account_uri_for(account_name)}"
   end
-
-  ###
-  ### TwitPic
-  ###
-  twitpic_client = Ear::Client::TwitPic::WebClient.new
-  if twitpic_client.check_account_exists(account_name)
-    @task_logger.log "Found an account at: #{twitpic_client.account_uri_for(account_name)}"
-    obj = create_object Account, :account_name => account_name, 
-    :service_name => "twitpic", 
-    :uri => twitpic_client.account_uri_for(account_name)
-    #
-    # If we passed in a user, associate that with our new account object
-    #
-    if @object.kind_of? User
-      obj.user_id = @object.id
-      obj.save!
-    end
-  else 
-    @task_logger.log "No account found at: #{twitpic_client.account_uri_for(account_name)}"
-  end
-
+  
   ###
   ### FourSquare
   ###
@@ -89,6 +69,26 @@ def run
   else 
     @task_logger.log "No account found at: #{foursquare_client.account_uri_for(account_name)}"
   end
+    
+  ###
+  ### Myspace
+  ###
+  myspace_client = Ear::Client::Myspace::WebClient.new
+  if myspace_client.check_account_exists(account_name)
+    @task_logger.log "Found an account at: #{myspace_client.account_uri_for(account_name)}"
+    obj = create_object Account, :account_name => account_name, 
+      :service_name => "myspace" , 
+      :uri => myspace_client.account_uri_for(account_name)
+    #
+    # If we passed in a user, associate that with our new account object
+    #
+    if @object.kind_of? User
+      obj.user_id = @object.id
+      obj.save!
+    end
+  else 
+    @task_logger.log "No account found at: #{myspace_client.account_uri_for(account_name)}"
+  end 
   
   ###
   ### Soundcloud
@@ -109,7 +109,47 @@ def run
   else 
     @task_logger.log "No account found at: #{soundcloud_client.account_uri_for(account_name)}"
   end
-
+  
+  ###
+  ### TwitPic
+  ###
+  twitpic_client = Ear::Client::TwitPic::WebClient.new
+  if twitpic_client.check_account_exists(account_name)
+    @task_logger.log "Found an account at: #{twitpic_client.account_uri_for(account_name)}"
+    obj = create_object Account, :account_name => account_name, 
+    :service_name => "twitpic", 
+    :uri => twitpic_client.account_uri_for(account_name)
+    #
+    # If we passed in a user, associate that with our new account object
+    #
+    if @object.kind_of? User
+      obj.user_id = @object.id
+      obj.save!
+    end
+  else 
+    @task_logger.log "No account found at: #{twitpic_client.account_uri_for(account_name)}"
+  end
+  
+  ###
+  ### Twitter
+  ###
+  twitter_client = Ear::Client::Twitter::WebClient.new
+  if twitter_client.check_account_exists(account_name)
+    @task_logger.log "Found an account at: #{twitter_client.account_uri_for(account_name)}"
+    obj = create_object Account, :account_name => account_name, 
+    :service_name => "twitter", 
+    :uri => twitter_client.account_uri_for(account_name)
+    #
+    # If we passed in a user, associate that with our new account object
+    #
+    if @object.kind_of? User
+      obj.user_id = @object.id
+      obj.save!
+    end
+  else 
+    @task_logger.log "No account found at: #{twitter_client.account_uri_for(account_name)}"
+  end
+  
   ###
   ### Google+
   ###

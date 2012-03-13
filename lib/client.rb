@@ -10,6 +10,7 @@ require 'client/social'
 #
 require 'client/services/bing'
 require 'client/services/corpwatch'
+require 'client/services/facebook'
 require 'client/services/foursquare'
 require 'client/services/google'
 require 'client/services/hoovers'
