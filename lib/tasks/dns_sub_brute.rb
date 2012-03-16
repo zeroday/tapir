@@ -31,7 +31,7 @@ def run
     subdomain_list = @options['subdomain_list']
   else
     # Add a builtin domain list  
-    subdomain_list = ["www", "ww2", "ns1", "ns2", "ns3", "test", "mail", "owa", "vpn", "admin",
+    subdomain_list = ["mx", "mx1", "mx2", "www", "ww2", "ns1", "ns2", "ns3", "test", "mail", "owa", "vpn", "admin",
       "gateway", "secure", "admin", "service", "tools", "doc", "docs", "network", "help", "en" ]
   end
 

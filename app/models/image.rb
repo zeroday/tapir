@@ -6,7 +6,7 @@ class Image < ActiveRecord::Base
   include ModelHelper
 
   def to_s
-    "#{self.class}: #{self.remote_path}:#{self.local_path}"
+    "#{self.class}: #{self.id}"
   end
 
   def filename

@@ -17,7 +17,13 @@ module ModelHelper
          call_parent = true
          TaskManager.instance.get_tasks_for(self).each do |task|
           #puts "checking task #{task}"
-          if method =~ Regexp.new(task.name)
+          
+          #
+          # Match the called method to our task names. LOL - don't 
+          # regex this unless you want tasks being called at ~arb 
+          # times
+          #
+          if method == task.name #Regexp.new(task.name)
             #
             # Run the task, and mark calling super as unnecessary.
             #

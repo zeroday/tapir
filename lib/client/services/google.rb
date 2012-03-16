@@ -11,7 +11,7 @@ module Google
   
     def initialize 
       @service_name = "google_profile"
-      @account_missing_strings = ["The requested URL was not found on this server."]
+      @account_missing_strings = ["The requested URL was not found on this server"]
     end
     
     def account_uri_for(account_name)
@@ -29,8 +29,8 @@ module Google
   #  
   # Then, follow instructions from https://github.com/thoughtbot/capybara-webkit#readme   
   # and install the capybara-webkit gem and drivers:  
-  # $ sudo apt-get install libqt4-dev libqtwebkit-dev  
-  # $ gem install capybara-webkit  
+  # $ sudo apt-get install libqt4-dev
+  # $ gem install capybara-webkit
   ############################  
 
   class SearchScraper

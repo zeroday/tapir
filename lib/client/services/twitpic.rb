@@ -48,7 +48,7 @@ module TwitPic
         image_link = "http://twitpic.com/#{path}"
 
         # grabe the page
-        doc = Nokogiri::HTML(open(image_link, {"User-Agent" => EAR::USER_AGENT_STRING})) do |config|
+        doc = Nokogiri::HTML(open(image_link, {"User-Agent" => Ear::USER_AGENT_STRING})) do |config|
            config.noblanks
         end
 
@@ -71,7 +71,7 @@ module TwitPic
     def initialize(link, do_download=true)
           # grab the image & store locally
           @remote_path = link
-          @local_path = "/#{EAR::TEMP_DIRECTORY}/twitpic_file_#{rand(1000000)}"
+          @local_path = "/#{Ear::TEMP_DIRECTORY}/twitpic_file_#{rand(1000000)}"
           download_remote_file if do_download
     end
 

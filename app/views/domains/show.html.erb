@@ -11,6 +11,46 @@
 </p>
 
 <p>
+  <b>Registered:</b>
+  <%= @domain.registered %>
+</p>
+
+<p>
+  <b>Available:</b>
+  <%= @domain.available %>
+</p>
+
+<p>
+  <b>Referral Whois:</b>
+  <ul>
+  <% @domain_referral_whois_array.each do |x| %>
+    <li><%= x %> </li>
+   <% end %>
+  </ul>
+</p>
+
+<p>
+  <b>Registrar Name:</b>
+  <%= link_to @domain.registrar_name, @domain.registrar_url %>
+</p>
+
+<p>
+  <b>Created On:</b>
+  <%= @domain.record_created_on %>
+</p>
+
+<p>
+  <b>Updated On:</b>
+  <%= @domain.record_updated_on %>
+</p>
+
+<p>
+  <b>Expires On:</b>
+  <%= @domain.record_expires_on %>
+</p>
+
+
+<p>
   <b>Organization:</b>
   <%= @domain.organization_id %>
 </p>
@@ -38,6 +78,15 @@
   <ul>
   <% @domain.tasks.each {|t|%>
     <li><%= link_to t, eval("#{t.underscore}_path(t.name)")  %></li>
+  <% } %>
+  </ul>
+</p>
+
+<p>
+<b>Task Runs:</b>
+  <ul>
+  <% @domain.task_runs.each {|r|%>
+    <li><%= link_to r, task_run_path(r.id)  %></li>
   <% } %>
   </ul>
 </p>

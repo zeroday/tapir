@@ -11,6 +11,11 @@ class NetSvc < ActiveRecord::Base
     "#{self.class}: #{proto}/#{port_num} #{fingerprint}"
   end
 
+  def capitalize 
+    "NetService"
+  end
+
+
 private
   def log
     EarLogger.instance.log self.to_s

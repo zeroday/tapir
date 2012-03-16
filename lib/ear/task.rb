@@ -128,11 +128,12 @@ class Task
   #  new_object keeps track of the new object
   #
   def create_object(type, params, current_object=@object)
-    @task_logger.log "Creating new object of type: #{type}"
+    @task_logger.log "Attempting to create new object of type: #{type}"
     #
     # Call the create method for this type
     #
     new_object = type.send(:create, params)
+
     #
     # Check for dupes & return right away if this doesn't save a new
     # object. This should prevent the object mapping from getting created.
@@ -146,10 +147,17 @@ class Task
     #
     # If we have a new object, then we should keep track of the information
     # that created this object
-    #    
-    @task_logger.log "Associating #{current_object} with #{new_object}"
-    current_object.associate_child({:child => new_object, :task_run => @task_run})
-
+    #
+    # TODO - this currently prevents objects from being mapped as children twice (with different task runs)
+    # this might not be desired behavior in some cases
+    #
+    if current_object.children.include? new_object
+      @task_logger.log "Skipping association of #{current_object} and #{new_object}. It's already a child."
+    else
+      @task_logger.log "Associating #{current_object} with #{new_object}"
+      current_object.associate_child({:child => new_object, :task_run => @task_run}) 
+    end
+    
   new_object
   end
 
@@ -174,7 +182,7 @@ class Task
     if type == Host
       return Host.find_by_ip_address params[:ip_address]
     elsif type == Account
-      return Account.find_by_account_name params[:account_name]
+      return Account.find_by_account_name_and_service_name params[:account_name],params[:service_name]
     else
       if params.has_key? :name
         return type.send(:find_by_name, params[:name])

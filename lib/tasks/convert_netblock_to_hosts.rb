@@ -1,5 +1,3 @@
-require 'rex'
-
 def name
   "convert_netblock_to_hosts"
 end
@@ -21,7 +19,7 @@ end
 ## Default method, subclasses must override this
 def run
   super
-  r = Rex::Socket::Rangewalker @object.addresses
+  r = Rex::Socket::Rangewalker @object.range
   r.each do|address|
     create_object(Host, {:ip_address => address})
   end

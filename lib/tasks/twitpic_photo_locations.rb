@@ -43,7 +43,14 @@ def run
         else
           @task_logger.log "no gps_latitude_ref / gps_longitude_ref. not adjusting"
         end
-        @object.physical_locations << create_object(PhysicalLocation, {:latitude => "#{lat}",  :longitude => "#{long}"})
+        
+        #
+        # Don't create them if they're useless
+        #
+        unless lat == 0 and long == 0
+          @object.physical_locations << create_object(PhysicalLocation, {:latitude => "#{lat}",  :longitude => "#{long}"})
+        end
+        
       else
         @task_logger.log "no gps_latitude / gps_longitude. no exif data to parse"
       end

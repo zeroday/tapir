@@ -15,6 +15,20 @@ class DomainsController < ApplicationController
   def show
     @domain = Domain.find(params[:id])
 
+    #
+    # Special case - this is serialized automatically
+    # 
+    if @domain.referral_whois
+      @domain_referral_whois_array = YAML::load(@domain.referral_whois)
+      #
+      # this may still be a string
+      #
+      @domain_referral_whois_array = [@domain_referral_whois_array] if 
+        @domain_referral_whois_array.kind_of? String
+    else
+      @domain_referral_whois_array = []
+    end
+    
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @domain }

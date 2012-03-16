@@ -26,7 +26,7 @@ function check(field) {
   <input type="hidden" name="task_name" id="task_name" value="<%=@task.name%>"><br/>
   <input type="checkbox" name="Toggle" value="Toggle" onClick="check(document.task_runner)"><br/>
   <% @task.candidates.each do |o|
-     r = "#{o.class.to_s.downcase}##{o.id}"
+     r = "#{o.underscore}##{o.id}"
    %>
 
     <input id="<%=r%>" type="checkbox" name="objects[<%=r%>]" /><%=o%><br/>

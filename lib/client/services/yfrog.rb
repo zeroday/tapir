@@ -1,16 +1,16 @@
 module Ear
 module Client
-module Twitter
+module Yfrog
   class WebClient
     include Ear::Client::Social
 
     def initialize
-      @service_name = "twitter"
-      @account_missing_strings = ["Not found"]
+      @service_name = "yfrog"
+      @account_missing_strings = ["Something went wrong"]
     end
     
     def account_uri_for(account_name)    
-      "http://api.twitter.com/1/users/show/#{account_name}.xml"
+      "http://yfrog.com/user/#{account_name}/profile"
     end
     
   end

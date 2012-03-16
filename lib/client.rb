@@ -6,14 +6,10 @@ $:.unshift(File.join(File.expand_path(File.dirname(__FILE__), "client")))
 require 'client/social'
 
 #
-# Individual clients
+# Individual service clients
 #
-require 'client/services/bing'
-require 'client/services/corpwatch'
-require 'client/services/foursquare'
-require 'client/services/google'
-require 'client/services/hoovers'
-require 'client/services/myspace'
-require 'client/services/soundcloud'
-require 'client/services/twitpic'
-require 'client/services/twitter'
+service_clients = File.join(File.expand_path(File.dirname(__FILE__)),"client","services")
+Dir[service_clients + "/" + "*.rb"].each do |file|
+  require file
+end
+

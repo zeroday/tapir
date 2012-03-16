@@ -34,7 +34,7 @@ module Bing
       # Check for successful result
       return false unless doc
 
-      binding.pry
+      #binding.pry
 
       #each result, create a SearchResult
       result_xml = doc.xpath("//web:Results", 
@@ -67,7 +67,7 @@ module Bing
     #  Returns: Nothing
     #
     def parse_xml(result)
-      puts "getting title #{result['title']}"
+      #puts "getting title #{result['title']}"
       @title = result['title']
       @description = result['description']
       @url = result['url']
