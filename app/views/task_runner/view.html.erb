@@ -4,7 +4,7 @@
 
 <table>
   <tr>
-    <th>Input:</th>/
+    <th>Input:</th>
   </tr>
   <% @objects.each do |o| %>
   <tr>
@@ -25,7 +25,7 @@
     <td>
       <ul>
       <% task_run.object_mappings.each do |x| %>
-        <li><%= link_to x.get_child.class, x.get_child %></li>
+        <li><%= link_to x.get_child.to_s, x.get_child %></li>
       <% end %>
       </ul>
     </td>

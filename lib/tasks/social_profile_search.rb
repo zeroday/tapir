@@ -25,14 +25,18 @@ def run
   # Store the account name, depending on the object we passed in.
   #
   if @object.kind_of? User
-    account_name = @object.username
+    account_name = @object.username || @object.first_name + @object.last_name 
   else
-    account_name = @object.name
+    account_name = @object.first_name
   end
   
+  @task_logger.log "Setting account name to #{account_name}"
+  
+
   ###
   ### Facebook
   ###
+=begin
   facebook_client = Ear::Client::Facebook::WebClient.new
   if facebook_client.check_account_exists(account_name)
     @task_logger.log "Found an account at: #{facebook_client.account_uri_for(account_name)}"
@@ -49,6 +53,7 @@ def run
   else 
     @task_logger.log "No account found at: #{facebook_client.account_uri_for(account_name)}"
   end
+=end
   
   ###
   ### FourSquare

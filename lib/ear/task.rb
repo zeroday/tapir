@@ -138,12 +138,20 @@ class Task
     # Check for dupes & return right away if this doesn't save a new
     # object. This should prevent the object mapping from getting created.
     #
+    
+    
+    #
+    # DEBUG
+    #
+    #binding.pry
+    
     if new_object.save
       @task_logger.log_good "Created new object: #{new_object}"
     else
       @task_logger.log "Could not save object, are you sure it's valid & doesn't already exist?"
       new_object = find_object type, params
     end
+    
     #
     # If we have a new object, then we should keep track of the information
     # that created this object
@@ -183,6 +191,8 @@ class Task
       return Host.find_by_ip_address params[:ip_address]
     elsif type == Account
       return Account.find_by_account_name_and_service_name params[:account_name],params[:service_name]
+    elsif type == NetBlock
+      return NetBlock.find_by_range params[:range]
     else
       if params.has_key? :name
         return type.send(:find_by_name, params[:name])
