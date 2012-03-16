@@ -1,28 +1,18 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Child:</b>
-  <%= @object_mapping.child_id %>
-</p>
-
-<p>
-  <b>Child type:</b>
-  <%= @object_mapping.child_type %>
-</p>
-
-<p>
   <b>Parent:</b>
-  <%= @object_mapping.parent_id %>
+  <%= link_to @object_mapping.get_parent.class, @object_mapping.get_parent %>
 </p>
 
 <p>
-  <b>Parent type:</b>
-  <%= @object_mapping.parent_type %>
+  <b>Child:</b>
+  <%= link_to @object_mapping.get_child.class, @object_mapping.get_child %>
 </p>
 
 <p>
   <b>Task run:</b>
-  <%= @object_mapping.task_run_id %>
+  <%= link_to TaskRun, TaskRun.find_by_id(@object_mapping.task_run_id) %>
 </p>
 
 
