@@ -3,14 +3,6 @@
 # make sure this file is in the root of the ear directory
 require "#{File.expand_path(File.dirname(__FILE__))}/../config/environment"
 
-# open up a list of users
-#users = ["mubix","egyp7","stephenfewer","hdmoore","todb","jduck1337",
-#"d1n","chrisjohnriley","etlow","msfbannedit","scriptjunkie1","carnal0wnage",
-#"carlos_perez","druidian","joernchen","minorcrash","trancer00t","jcran","jabra",
-#"dave_rel1k","threatagent","corelanc0der","manils","_sinn3r","attackresearch",
-#"techpeace","armitagehacker","kernelsmith","rsmudge","thelightcosine",
-#"metasploit","rapid7","natronkeltner","_mc_"]
-
 users=  ["ladygaga","justinbieber","katyperry","shakira","KimKardashian","britneyspears",
 "rihanna","BarackObama","taylorswift13","selenagomez","aplusk","TheEllenShow","Oprah",
 "YouTube","NICKIMINAJ","Eminem","KAKA","jtimberlake","twitter_es","twitter","chrisbrown",
@@ -35,8 +27,7 @@ users.each do |user|
   begin 
 
     # create the user object
-    u = User.create :username => user
-
+    u = User.create :usernames => [user]
     u.run_task "twitpic_photo_locations"
 
   rescue Exception => e

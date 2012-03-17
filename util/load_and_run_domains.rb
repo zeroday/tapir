@@ -18,15 +18,14 @@ f.each do |line|
     # Screenshot task. -- add more tasks here.
     #d.run_task "web_screenshot", { :timeout => "20" }
     #d.run_task "web_grab", { :timeout => "20" }
-    d.run_task "dns_srv_brute"
+    #d.run_task "dns_srv_brute"
 
     # Print the contents of the page (from the grab task)
     #puts d.records.first.content 
 
     # Or by relationship
     #puts d.children.first.content
-
-    # basically ignore any problems, just print'm - EAR should handle most exceptions.
+    
   rescue Exception => e
     puts "ohnoes! #{e}"
   end

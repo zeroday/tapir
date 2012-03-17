@@ -9,10 +9,13 @@ require "#{current_dir}/../config/environment"
 f = File.open(ARGV[0], "r")
 
 puts "Running..."
+twitter = Ear::Client::Twitter::WebClient.new
 f.each do |line| 
   begin 
-    h = Host.create :ip_address => line.strip
+    account = line.chomp!
+    puts "line: #{account} - (#{twitter.account_uri_for account })"  unless twitter.check_account_exists account
   rescue Exception => e
     puts "ohnoes! #{e}"
   end
 end
+puts "Done."
