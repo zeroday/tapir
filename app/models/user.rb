@@ -3,6 +3,8 @@ class User < ActiveRecord::Base
   has_many    :physical_locations
   has_many    :task_runs
   has_many    :accounts
+
+  validates_uniqueness_of :first_name, :last_name, :scope => :username
   
   serialize :usernames
   

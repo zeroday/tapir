@@ -21,15 +21,15 @@
 </p>
 
 <p>
-  <b>Task log:</b>
-  <%= @task_run.task_log %>
+  <b>Task log:</b><br/>
+  <%= @task_run.task_log.gsub("\n","<br>").html_safe %>
 </p>
 
 <p>
   <b>Associated Objects :</b>
   <ul>
     <% @task_run.object_mappings.each {|o|%>
-      <li><%= link_to o, o.to_s %></li>
+      <li><%= link_to o, o %></li>
     <% } %>
   </ul>
 </p>

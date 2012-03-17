@@ -16,12 +16,20 @@
 <table>
   <tr>
     <th>Task Name:</th>
-    <th>Task Log:</th>
+    <th>Result:</th>
+	<th>Task Log:</th>
   </tr>
   <% @task_runs.each do |task_run| %>
   <tr>
-	<td><%= task_run.task_name %></td>
-	<td><%= task_run.task_log.gsub("\n", "<br/>").html_safe %></td>
+    <td><%= task_run.task_name %></td>
+    <td>
+      <ul>
+      <% task_run.object_mappings.each do |x| %>
+        <li><%= link_to x.get_child.to_s, x.get_child %></li>
+      <% end %>
+      </ul>
+    </td>
+    <td><%= task_run.task_log.gsub("\n", "<br/>").html_safe %></td>
   </tr>
   <% end %>
 </table>

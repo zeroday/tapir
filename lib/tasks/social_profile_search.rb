@@ -20,17 +20,22 @@ end
 def run
   super
   
-  
   #
   # Store the account name, depending on the object we passed in.
   #
   if @object.kind_of? User
-    account_names = @object.usernames
+    account_names = @object.usernames || ["#{@object.first_name}_#{@object.last_name}"]
   else
-    account_names = [] << @object.name
+    account_names = [@object.name]
   end
   
+  #
+  # Iterate through all account names!
+  #
   account_names.each do |account_name|
+
+    @task_logger.log "Looking for account name: #{account_name}"
+    
     ###
     ### Facebook
     ###

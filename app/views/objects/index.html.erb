@@ -1,13 +1,51 @@
-<h1>Listing objects</h1>
+<html>
+<h1>EAR</h1>
+<body>
+<div id="tasks">
 <table>
   <tr>
-    <th>Object</th>
+    <th>Types</th>    
   </tr>
-  
-  <% @objects.each do |o| %>
   <tr>
-    <td><a href="<%=request.url%>/../../<%=o.underscore%>s/<%=o.id%>"> <%=o.to_s%></a><br/></td>
+    <td>
+      <ul>
+        <li><a href="<%=request.url%>../../organizations">Organizations</a></li>
+        <li><a href="<%=request.url%>../../domains">Domains</a></li>
+        <li><a href="<%=request.url%>../../hosts">Hosts</a></li>
+        <li><a href="<%=request.url%>../../users">Users</a></li>
+        <li><a href="<%=request.url%>../../net_blocks">NetBlocks</a></li>
+      </ul>
+    </td>
   </tr>
-  <% end %>
 </table>
-
+<table>
+  <tr>
+    <th>Tasks</th>
+  </tr>
+  <tr>
+    <td>
+      <ul>
+        <% TaskManager.instance.tasks.each do |t| %>
+          <li><a href="<%=request.url%>../../tasks/<%=t.name%>"> <%=t.name%></a><br/></li>
+        <% end %>
+      </ul>
+    <td>
+  </tr>
+</table>
+<table>
+  <tr>
+    <th>Objects</th>    
+  </tr>
+  <tr>
+    <td>
+      <ul>
+        <% @objects.each do |o| %>
+          <li><a href="<%=request.url%>../../<%=o.underscore%>s/<%=o.id%>"> <%=o.to_s%></a><br/></li>
+        <% end %>
+      </ul>
+    <td>
+  </tr>
+</table>
+</div>
+</body>
+</thml>

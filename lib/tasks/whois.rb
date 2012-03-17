@@ -69,9 +69,11 @@ def run
       @object.status = answer.status
       @object.registered = answer.registered?
       @object.available = answer.available?
-      @object.registrar_name = answer.registrar.name
-      @object.registrar_org = answer.registrar.organization
-      @object.registrar_url = answer.registrar.url
+      if answer.registrar
+        @object.registrar_name = answer.registrar.name
+        @object.registrar_org = answer.registrar.organization
+        @object.registrar_url = answer.registrar.url
+      end
       @object.record_created_on = answer.created_on
       @object.record_updated_on = answer.updated_on
       @object.record_expires_on = answer.expires_on
