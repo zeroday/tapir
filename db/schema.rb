@@ -95,6 +95,7 @@ ActiveRecord::Schema.define(:version => 20111217213719) do
   create_table "organizations", :force => true do |t|
     t.string   "name"
     t.text     "description"
+    t.text     "email_schemas"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -145,10 +146,10 @@ ActiveRecord::Schema.define(:version => 20111217213719) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "username"
     t.string   "first_name"
     t.string   "last_name"
-    t.string   "email_address"
+    t.text     "email_addresses"
+    t.text     "usernames"
     t.integer  "organization_id"
     t.datetime "created_at"
     t.datetime "updated_at"

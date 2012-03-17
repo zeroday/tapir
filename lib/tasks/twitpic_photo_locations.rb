@@ -25,43 +25,45 @@ def run
   super
 
   x = Ear::Client::TwitPic::TwitPicScraper.new
-  photos = x.search_by_user "#{@object.username}"
-    
-  photos.each do |photo|
+  @object.usernames.each do |username|
+    photos = x.search_by_user "#{username}"
+      
+    photos.each do |photo|
 
-    begin
-      # Analyze the photo
-      pic_data = EXIFR::JPEG.new(photo.local_path) #/tmp/twitpic_file_35193:
+      begin
+        # Analyze the photo
+        pic_data = EXIFR::JPEG.new(photo.local_path) #/tmp/twitpic_file_35193:
 
-      if pic_data.gps_latitude && pic_data.gps_longitude
-        @task_logger.log_good "Parsing exif data!"
-        lat = pic_data.gps_latitude[0].to_f + (pic_data.gps_latitude[1].to_f / 60) + (pic_data.gps_latitude[2].to_f / 3600)
-        long = pic_data.gps_longitude[0].to_f + (pic_data.gps_longitude[1].to_f / 60) + (pic_data.gps_longitude[2].to_f / 3600)
-        if pic_data.gps_longitude_ref && pic_data.gps_latitude_ref
-          long = long * -1 if pic_data.gps_longitude_ref == "W"   # (W is -, E is +)
-          lat = lat * -1 if pic_data.gps_latitude_ref == "S"      # (N is +, S is -)
+        if pic_data.gps_latitude && pic_data.gps_longitude
+          @task_logger.log_good "Parsing exif data!"
+          lat = pic_data.gps_latitude[0].to_f + (pic_data.gps_latitude[1].to_f / 60) + (pic_data.gps_latitude[2].to_f / 3600)
+          long = pic_data.gps_longitude[0].to_f + (pic_data.gps_longitude[1].to_f / 60) + (pic_data.gps_longitude[2].to_f / 3600)
+          if pic_data.gps_longitude_ref && pic_data.gps_latitude_ref
+            long = long * -1 if pic_data.gps_longitude_ref == "W"   # (W is -, E is +)
+            lat = lat * -1 if pic_data.gps_latitude_ref == "S"      # (N is +, S is -)
+          else
+            @task_logger.log "no gps_latitude_ref / gps_longitude_ref. not adjusting"
+          end
+          
+          #
+          # Don't create them if they're useless
+          #
+          unless lat == 0 and long == 0
+            @object.physical_locations << create_object(PhysicalLocation, {:latitude => "#{lat}",  :longitude => "#{long}"})
+          end
+          
         else
-          @task_logger.log "no gps_latitude_ref / gps_longitude_ref. not adjusting"
+          @task_logger.log "no gps_latitude / gps_longitude. no exif data to parse"
         end
-        
-        #
-        # Don't create them if they're useless
-        #
-        unless lat == 0 and long == 0
-          @object.physical_locations << create_object(PhysicalLocation, {:latitude => "#{lat}",  :longitude => "#{long}"})
-        end
-        
-      else
-        @task_logger.log "no gps_latitude / gps_longitude. no exif data to parse"
+      rescue EXIFR::MalformedJPEG => e
+        @task_logger.log_error "Unable to parse, malformed jpg"
       end
-    rescue EXIFR::MalformedJPEG => e
-      @task_logger.log_error "Unable to parse, malformed jpg"
-    end
 
-    create_object Image, 
-      :local_path => photo.local_path,
-      :remote_path => photo.remote_path, 
-      :description => "twitpic image"
+      create_object Image, 
+        :local_path => photo.local_path,
+        :remote_path => photo.remote_path, 
+        :description => "twitpic image"
+    end
   end
 end
 

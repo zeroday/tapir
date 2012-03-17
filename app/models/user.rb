@@ -4,12 +4,14 @@ class User < ActiveRecord::Base
   has_many    :task_runs
   has_many    :accounts
   
+  serialize :usernames
+  
   after_save :log
 
   include ModelHelper
 
   def to_s
-    "#{self.class}: #{self.last_name}, #{self.first_name} (#{self.username})"
+    "#{self.class}: #{self.last_name}, #{self.first_name})"
   end
 
   def full_name

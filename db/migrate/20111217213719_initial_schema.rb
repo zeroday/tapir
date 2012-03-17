@@ -33,6 +33,7 @@ class InitialSchema < ActiveRecord::Migration
     create_table  :organizations do |t|
       t.string        :name
       t.text          :description
+      t.text          :email_schemas
       t.timestamps
     end
 
@@ -53,10 +54,10 @@ class InitialSchema < ActiveRecord::Migration
     end
 
     create_table  :users do |t|
-      t.string        :username
       t.string        :first_name
       t.string        :last_name
-      t.string        :email_address
+      t.text          :email_addresses
+      t.text          :usernames
       t.integer       :organization_id
       t.timestamps
     end

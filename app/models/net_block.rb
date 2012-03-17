@@ -1,6 +1,8 @@
 class NetBlock < ActiveRecord::Base
   after_save   :log
   has_many    :task_runs
+  validates_uniqueness_of :range
+  validates_presence_of   :range
   
   include ModelHelper
 
