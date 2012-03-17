@@ -31,8 +31,11 @@ def run
 
   # doe
   @object.usernames << "#{@object.last_name}"
+  
+  # don't forget!
+  @object.save!
 end
-
+  
 def cleanup
   super
 end
