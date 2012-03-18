@@ -4,18 +4,24 @@
   <tr>
     <th>First name</th>
     <th>Last name</th>
-    <th>Username</th>
+    <th>Usernames</th>
     <th>Organization</th>
     <th></th>
     <th></th>
     <th></th>
   </tr>
 
-<% @users.each do |user| %>
+  <% @users.each do |user| %>
   <tr>
     <td><%= user.first_name %></td>
     <td><%= user.last_name %></td>
-    <td><%= user.username %></td>
+    <td>
+      <ul>
+      <% user.usernames.each do |u| %>
+        <li> <%= u %> </li>
+     <% end %>
+     </ul>
+   </td>
     <td><%= user.organization_id %></td>
     <td><%= link_to 'Show', user %></td>
     <td><%= link_to 'Edit', edit_user_path(user) %></td>

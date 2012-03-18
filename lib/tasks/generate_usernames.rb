@@ -27,7 +27,7 @@ def run
   @object.usernames << "#{@object.first_name}_#{@object.last_name}"
   
   # jdoe
-  @object.usernames << "#{@object.first_name.split("").first}.#{@object.last_name}"
+  @object.usernames << "#{@object.first_name.split("").first}#{@object.last_name}"
 
   # doe
   @object.usernames << "#{@object.last_name}"

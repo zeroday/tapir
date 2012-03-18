@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   
   serialize :usernames
   
-  before_save :uniq_usernames
+  before_save :cleanup_usernames
   after_save :log
   after_create :set_usernames_empty
 
@@ -28,7 +28,24 @@ private
     self.save!
   end
 
-  def uniq_usernames
+  #
+  # Do some basic cleanup on the usernames. Make sure they're unique, and
+  # that they've been created without spaces
+  #
+  def cleanup_usernames
+    #
+    # Handle a string of comma separated (coming from the webui
+    #
+    self.usernames = self.usernames.split(",") if self.usernames.kind_of? String
+
+    #
+    # Make sure there's no spaces in the usernames
+    #
+    self.usernames.each {|u| u.gsub!(/\s+/, "")}
+    
+    #
+    # Make sure we don't have multiple same usernames
+    #
     self.usernames.uniq!
   end
 

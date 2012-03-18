@@ -11,8 +11,12 @@
 </p>
 
 <p>
-  <b>Username:</b>
-  <%= @user.username %>
+  <b>Usernames:</b>
+    <ul>
+      <% @user.usernames.each do |u| %></td>
+        <li> <%= u %> </li>
+      <% end %>
+    </ul>
 </p>
 
 <p>

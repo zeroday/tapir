@@ -20,8 +20,8 @@
     <%= f.text_field :last_name %>
   </div>
   <div class="field">
-    <%= f.label :username %><br />
-    <%= f.text_field :username %>
+    <%= f.label :usernames %><br />
+    <%= f.text_field :usernames, :value => @user.usernames.join(",") %>
   </div>
   <div class="field">
     <%= f.label :organization_id %><br />
