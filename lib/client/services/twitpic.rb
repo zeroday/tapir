@@ -8,12 +8,12 @@ module TwitPic
   class WebClient
     include Ear::Client::Social
     def initialize 
-      @account_missing_strings = []
+      @account_missing_strings = ["User not found"]
       @service_name = "twitpic"
     end
     
     def account_uri_for(account_name)
-      "http://www.twitpic.com/photos/#{account_name}"
+      "http://api.twitpic.com/2/users/show.json?username=#{account_name}"
     end
   end
 
