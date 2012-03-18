@@ -16,7 +16,8 @@ ActiveRecord::Schema.define(:version => 20111217213719) do
   create_table "accounts", :force => true do |t|
     t.string   "account_name"
     t.string   "service_name"
-    t.string   "uri"
+    t.string   "web_uri"
+    t.string   "check_uri"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -147,6 +148,7 @@ ActiveRecord::Schema.define(:version => 20111217213719) do
 
   create_table "users", :force => true do |t|
     t.string   "first_name"
+    t.string   "middle_name"
     t.string   "last_name"
     t.text     "email_addresses"
     t.text     "usernames"

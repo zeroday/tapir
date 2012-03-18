@@ -4,7 +4,8 @@
   <tr>
     <th>Account Name</th>
     <th>Service Name</th>
-    <th>URI</th>
+    <th>Web URI</th>
+    <th>Check URI</th>
     <th>User</th>
     <th></th>
     <th></th>
@@ -15,7 +16,8 @@
   <tr>
     <td><%= account.account_name %></td>
     <td><%= account.service_name %></td>
-    <td><%= account.uri %></td>
+    <td><%= account.web_uri %></td>
+    <td><%= account.check_uri %></td>
     <td><%= account.user_id %></td>
     <td><%= link_to 'Show', account %></td>
     <td><%= link_to 'Edit', edit_account_path(account) %></td>

@@ -44,6 +44,11 @@ private
     self.usernames.each {|u| u.gsub!(/\s+/, "")}
     
     #
+    # Make sure all usernames are lowercase
+    #
+    self.usernames.each {|u| u.downcase!}
+    
+    #
     # Make sure we don't have multiple same usernames
     #
     self.usernames.uniq!

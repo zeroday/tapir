@@ -3,6 +3,7 @@
 <table>
   <tr>
     <th>First name</th>
+    <th>Middle name</th>
     <th>Last name</th>
     <th>Usernames</th>
     <th>Organization</th>
@@ -14,6 +15,7 @@
   <% @users.each do |user| %>
   <tr>
     <td><%= user.first_name %></td>
+    <td><%= user.middle_name %></td>
     <td><%= user.last_name %></td>
     <td>
       <ul>

@@ -55,6 +55,7 @@ class InitialSchema < ActiveRecord::Migration
 
     create_table  :users do |t|
       t.string        :first_name
+      t.string        :middle_name
       t.string        :last_name
       t.text          :email_addresses
       t.text          :usernames
@@ -65,7 +66,8 @@ class InitialSchema < ActiveRecord::Migration
     create_table :accounts do |t|
       t.string        :account_name
       t.string        :service_name
-      t.string        :uri
+      t.string        :web_uri
+      t.string        :check_uri
       t.integer       :user_id
       t.timestamps
     end

@@ -11,8 +11,13 @@
 </p>
 
 <p>
-  <b>URI:</b>
-  <%= link_to @account.uri, @account.uri %>
+  <b>Pretty URI:</b>
+  <%= link_to @account.web_uri, @account.web_uri %>
+</p>
+
+<p>
+  <b>Check URI:</b>
+  <%= link_to @account.check_uri, @account.check_uri %>
 </p>
 
 <p>

@@ -11,7 +11,7 @@ def check_account_exists(account_name)
     #
     # Request the uri specified as holding the account
     #
-    doc = Nokogiri::HTML(open(self.account_uri_for(account_name), "User-Agent" => Ear::USER_AGENT_STRING)) 
+    doc = Nokogiri::HTML(open(self.check_account_uri_for(account_name), "User-Agent" => Ear::USER_AGENT_STRING)) 
     #EarLogger.instance.log "Got doc: #{doc}"
     #
     # Check for each string that may indicate we didn't find the account
@@ -25,8 +25,9 @@ def check_account_exists(account_name)
   #
   # Rescue in the case of a 404 or a redirect
   #  
+  # TODO - this should really log into the task?
   rescue OpenURI::HTTPError => e 
-    EarLogger.instance.log "Error, couldn't open #{self.account_uri_for(account_name)}"
+    EarLogger.instance.log "Error, couldn't open #{self.check_account_uri_for(account_name)}"
     return false
   rescue RuntimeError => e
     EarLogger.instance.log "Redirection? #{e}"

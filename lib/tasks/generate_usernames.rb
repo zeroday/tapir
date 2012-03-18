@@ -20,9 +20,12 @@ end
 def run
   super
 
-  # john.doe
+  #johndoe
   @object.usernames << "#{@object.first_name}.#{@object.last_name}"
   
+  # john.doe
+  @object.usernames << "#{@object.first_name}.#{@object.last_name}"
+
   # john_doe 
   @object.usernames << "#{@object.first_name}_#{@object.last_name}"
   
@@ -32,7 +35,15 @@ def run
   # doe
   @object.usernames << "#{@object.last_name}"
   
-  # don't forget!
+  if @object.middle_name
+    #johneffingdoe
+    @object.usernames << "#{@object.first_name}#{@object.middle_name}#{@object.last_name}"
+
+    #jedoe
+    @object.usernames << "#{@object.first_name.split("").first}#{@object.middle_name.split("").first}#{@object.last_name}"
+  end
+
+  # don't forget
   @object.save!
 end
   

@@ -9,12 +9,18 @@ module Google
   
     include Ear::Client::Social
   
+    attr_accessor :service_name
+  
     def initialize 
       @service_name = "google_profile"
       @account_missing_strings = ["The requested URL was not found on this server"]
     end
-    
-    def account_uri_for(account_name)
+
+    def web_account_uri_for(account_name)
+      "https://profiles.google.com/u/0/#{account_name}/about"
+    end
+
+    def check_account_uri_for(account_name)
       "https://profiles.google.com/u/0/#{account_name}/about"
     end
     
