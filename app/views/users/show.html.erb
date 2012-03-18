@@ -55,7 +55,7 @@
 <p>
 <b>Task Runs:</b>
   <ul>
-  <% @host.task_runs.each {|r|%>
+  <% @user.task_runs.each {|r|%>
     <li><%= link_to r, task_run_path(r.id)  %></li>
   <% } %>
   </ul>
