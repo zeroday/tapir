@@ -25,6 +25,8 @@ class UsersController < ApplicationController
   # GET /users/new.json
   def new
     @user = User.new
+    @usernames_array_or_nil = []
+    @usernames_array_or_nil = @user.usernames.join(",") if @user.usernames
 
     respond_to do |format|
       format.html # new.html.erb
