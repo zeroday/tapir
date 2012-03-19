@@ -9,7 +9,6 @@ gem 'rails', '3.1.2'
 gem 'pry'
 
 # Rails / Database
-gem 'pg'
 gem 'sqlite3'
 gem 'therubyracer'
 
@@ -41,7 +40,11 @@ gem 'selenium-webdriver' # browser based scraping with capybara
 gem 'capybara'
 
 group :pain do
- 
+
+  # Postgres database
+  # apt-get install libpq-dev
+  gem 'pg'
+
   # Requires QTwebkit
   # https://github.com/thoughtbot/capybara-webkit#readme
   # apt-get install libqt4-dev

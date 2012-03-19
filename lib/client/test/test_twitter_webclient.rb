@@ -4,8 +4,6 @@ $:.unshift(File.join( File.expand_path(File.dirname(__FILE__)), "..", "..", ".."
 require 'environment'
 require 'test/unit'
 
-
-
 class TestTwitterWebClient < Test::Unit::TestCase
 
   def test_valid_account
