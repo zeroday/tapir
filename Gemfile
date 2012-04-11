@@ -39,6 +39,9 @@ gem 'nokogiri'
 gem 'selenium-webdriver' # browser based scraping with capybara
 gem 'capybara'
 
+# Infrastructure
+gem 'fog'
+
 group :pain do
 
   # Postgres database
