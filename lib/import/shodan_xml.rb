@@ -8,30 +8,29 @@
 #</host>
 #
 #
-
+module Ear
+module Import
 class ShodanXml < Nokogiri::XML::SAX::Document
 
   def start_element(name, attrs = [])
-    puts "starting: #{name}"
-    
     if name == "host"
     
       #
       # Stick all the elements in an array
       #
-      city = attrs['city']
-      country = attrs['country']
-      hostnames = attrs['hostnames']
-      ip_address = attrs['ip']
-      port = attrs['port']
-      updated = attrs['updated']
+      city = attrs[0].last
+      country = attrs[1].last
+      hostnames = attrs[2].last
+      ip_address = attrs[3].last
+      port = attrs[4].last
+      updated = attrs[5].last
       
       #
       # Create the objects
       #
-      d = Domain.create(:name => hostnames) if hostnames.kind_of? String
-      h = Host.create :ip_address => ip_address
-      p = NetService.create :proto => "tcp", :port_num => port, :fingerprint => "TODO"
+      d = ::Domain.create(:name => hostnames) if hostnames.kind_of? String
+      h = ::Host.create :ip_address => ip_address
+      p = ::NetSvc.create :proto => "tcp", :port_num => port, :fingerprint => "TODO"
     end
 
     if name == "data"
@@ -42,8 +41,9 @@ class ShodanXml < Nokogiri::XML::SAX::Document
     
   end
   
-  def end_element name
-    puts "ending: #{name}"
+  def end_element(name)
   end
     
+end
+end
 end

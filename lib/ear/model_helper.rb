@@ -16,7 +16,7 @@ module ModelHelper
       def method_missing(method, *args, &block)
          call_parent = true
          TaskManager.instance.get_tasks_for(self).each do |task|
-          #puts "checking task #{task}"
+          puts "checking task #{task}"
           
           #
           # Match the called method to our task names. LOL - don't 
@@ -52,7 +52,6 @@ module ModelHelper
       def underscore
         ActiveSupport::Inflector.underscore self.class
       end
-      
       
       #
       # This method lets you query the available tasks for this object type
@@ -126,17 +125,13 @@ module ModelHelper
       end
 
       def _map_child(params)
-        #begin
-          EarLogger.instance.log "Creating new child mapping #{self} => #{params[:child]}"
-          ObjectMapping.create(
-            :parent_id => self.id,
-            :parent_type => self.class.to_s,
-            :child_id => params[:child].id,
-            :child_type => params[:child].class.to_s,
-            :task_run_id => params[:task_run].id || nil)      
-        #rescue
-        #  EarLogger.instance.log_error "Could not create mapping from #{self} => #{params[:child]} - are you sure this object exists in the DB?"
-        #end
+        EarLogger.instance.log "Creating new child mapping #{self} => #{params[:child]}"
+        ObjectMapping.create(
+          :parent_id => self.id,
+          :parent_type => self.class.to_s,
+          :child_id => params[:child].id,
+          :child_type => params[:child].class.to_s,
+          :task_run_id => params[:task_run].id || nil)
       end
     end
   end

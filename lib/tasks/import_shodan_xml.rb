@@ -21,10 +21,11 @@ def run
   super
 
   # Create our parser
-  parser = Nokogiri::XML::SAX::Parser.new(ShodanXml.new)
+  parser = Nokogiri::XML::SAX::Parser.new(Ear::Import::ShodanXml.new)
 
   # Send some XML to the parser
   parser.parse(File.read(@object.path))
+  
 end
 
 def cleanup
