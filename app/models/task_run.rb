@@ -7,6 +7,7 @@ class TaskRun < ActiveRecord::Base
   belongs_to :net_svc
   belongs_to :web_app
   belongs_to :web_form
+  belongs_to :parsable_file
   has_many :object_mappings
   
   def to_s

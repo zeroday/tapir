@@ -26,6 +26,7 @@ class InitialSchema < ActiveRecord::Migration
       t.integer       :web_form_id
       t.integer       :image_id
       t.integer       :account_id
+      t.integer       :parsable_file_id
       t.integer       :net_block_id
       t.timestamps
     end
@@ -151,6 +152,14 @@ class InitialSchema < ActiveRecord::Migration
       t.string        :description
       t.timestamps
     end
+
+    create_table :parsable_files do |t|
+      t.string :name
+      t.string :type
+      t.string :path
+      t.timestamps
+    end
+
 
   end
 end
