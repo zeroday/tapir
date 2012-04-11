@@ -1,17 +1,26 @@
-# This script simply requires all files in the lib directory. 
+#
+# This script simply requires all core EAR files
+#
 Dir[Rails.root + 'lib/ear/*.rb'].each do |file|
   require file
 end
 
 #
-# Require all clients 
+# Require all client libs
 #
-Dir[Rails.root + 'lib/client.rb'].each do |file|
-  require file
-end
+require Rails.root + 'lib/client.rb'
 
-# Intialize the API database
+#
+# Require import libs
+#
+require Rails.root + 'lib/import.rb'
+
+#
+# Initialize the API database
+#
 require Rails.root + 'lib/ear/ear_api_keys.rb'
 
+#
 # Task Manager Setup
+#
 TaskManager.instance.load_tasks

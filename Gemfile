@@ -14,7 +14,7 @@ gem 'therubyracer'
 
 # EAR Data manipulation
 gem 'fastercsv'
-gem 'rex'
+gem 'librex'
 gem 'nmap-parser'
 gem 'json'
 

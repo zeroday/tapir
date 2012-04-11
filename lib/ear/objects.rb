@@ -17,6 +17,7 @@ class Object
     WebForm.all.each {|x| objects << x }  unless WebForm.all == []
     Image.all.each {|x| objects << x }  unless Image.all == []
     Account.all.each {|x| objects << x }  unless Account.all == []
+    ParsableFile.all.each {|x| objects << x }  unless Account.all == []
   objects
   end
 

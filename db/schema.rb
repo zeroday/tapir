@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111217213719) do
+ActiveRecord::Schema.define(:version => 20120411021200) do
 
   create_table "accounts", :force => true do |t|
     t.string   "account_name"
@@ -97,6 +97,14 @@ ActiveRecord::Schema.define(:version => 20111217213719) do
     t.string   "name"
     t.text     "description"
     t.text     "email_schemas"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "parsable_files", :force => true do |t|
+    t.string   "name"
+    t.string   "type"
+    t.string   "path"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -1,5 +1,7 @@
 Ear::Application.routes.draw do
   
+  resources :parsable_files
+
   resources :accounts
 
   resources :images
