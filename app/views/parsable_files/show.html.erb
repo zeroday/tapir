@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @parsable_file.name %>
+</p>
+
+<p>
+  <b>Type:</b>
+  <%= @parsable_file.type %>
+</p>
+
+<p>
+  <b>Path:</b>
+  <%= @parsable_file.path %>
+</p>
+
+
+<%= link_to 'Edit', edit_parsable_file_path(@parsable_file) %> |
+<%= link_to 'Back', parsable_files_path %>
