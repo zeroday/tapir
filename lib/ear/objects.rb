@@ -2,6 +2,11 @@
 
 class Object
 
+
+  #
+  # TODO - this is used to find candidates for a task - this will need optimization
+  #  or a better approach sooner rather than later
+  #
   def all
     objects = []
     Domain.all.each {|x| objects << x } unless Domain.all == [] 
@@ -17,7 +22,8 @@ class Object
     WebForm.all.each {|x| objects << x }  unless WebForm.all == []
     Image.all.each {|x| objects << x }  unless Image.all == []
     Account.all.each {|x| objects << x }  unless Account.all == []
-    ParsableFile.all.each {|x| objects << x }  unless Account.all == []
+    ParsableFile.all.each {|x| objects << x }  unless ParsableFile.all == []
+    
   objects
   end
 

@@ -27,7 +27,7 @@ class Task
 
   def candidates
     x = []
-    Object.all.each {|o| x << o if self.allowed_types.include? o.class}
+    Object.all.each {|o| x << o if self.allowed_types.include? o.class }
   x
   end
 
@@ -114,6 +114,7 @@ class Task
     if command =~ /(\||\;)/
       raise "Illegal character"
     end
+
     
     `#{command}`
   end
@@ -193,6 +194,10 @@ class Task
       return Account.find_by_account_name_and_service_name params[:account_name],params[:service_name]
     elsif type == NetBlock
       return NetBlock.find_by_range params[:range]
+    elsif type == NetSvc
+      return NetSvc.find_by_host_and_port_num parasm[:host],params[:port_num]
+    elsif type == ParsableFile
+      return ParsableFile.find_by_path params[:path]
     else
       if params.has_key? :name
         return type.send(:find_by_name, params[:name])

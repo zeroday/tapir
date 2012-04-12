@@ -6,6 +6,7 @@ class Host < ActiveRecord::Base
   
   validates_uniqueness_of :ip_address
   validates_presence_of   :ip_address
+  validates_format_of :ip_address, :with => /^(\d+)\.(\d+)\.(\d+)\.(\d+)$/
 
   after_save   :log
 

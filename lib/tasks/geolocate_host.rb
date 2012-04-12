@@ -24,7 +24,12 @@ require 'iconv'
 
     begin
       @task_logger.log "looking up location for #{@object.ip_address}"
+
+      #
+      # This call attempts to do a lookup
+      #
       loc = @db.city(@object.ip_address)
+      
       if loc
         @task_logger.log "adding location for #{@object.ip_address}"
         create_object(PhysicalLocation, { 
