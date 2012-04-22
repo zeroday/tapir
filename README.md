@@ -69,14 +69,12 @@ The ear_api_keys.yml file documents which API keys are required for effective AP
 The database.yml file can be configured with the following databases:
 
 	* SQLite3 - For light / small scale test database operations and development.
-	* Postgres - For heavier / long term operations and development.
-	* MySQL - Recommended for production deployments. 
+	* MySQL / Postgres - For heavier / long term operations and development.
 
 Once you have a database.yml is configured correctly, execute the following within the EAR root directory:
 
     $ rake db:create && rake db:migrate
     $ data/geolitecity/get_latest.sh 
-
 
 Once you have a database, simply run `$ util/console.rb` - this will give you access to a pry shell from which you can create objects and run tasks. 
 
@@ -89,7 +87,6 @@ Creating a host object & running tasks:
 
 You can also access the interface on the web, by running '`$ rails s' in the root of the EAR directory. This will set up a server on :3000 - Note that this is extremely alpha, and is currently not supported. 
 
-
 ### Usage
 
 TODO
@@ -99,5 +96,7 @@ TODO
 The EAR ships with a few utilities which you may find of use:
 
  - util/sniff.rb: This utility sets up a packet sniffer on the local machine, which automatically creates Host objects within the EAR's database. These host objects are then available to you within the EAR. This is a fun & easy way to find out more information about the systems your host is communicating with.
+
+ - util/load_*.rb: Use these utilities to load a list of hosts into the system. Optionally, you can run modules against the objects you import. It's likely you'll want to take a look at the code before running them. 
 
 Check out the utils/ directory for more utils.
