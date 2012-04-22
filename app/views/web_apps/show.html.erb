@@ -43,4 +43,5 @@
 </p>
 
 <%= link_to 'Edit', edit_web_app_path(@web_app) %> |
+<%= link_to "Destroy", @web_app, :confirm => 'Are you sure?', :method => :delete %> |
 <%= link_to 'Back', web_apps_path %>

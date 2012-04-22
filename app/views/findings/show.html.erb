@@ -34,4 +34,5 @@
 
 
 <%= link_to 'Edit', edit_finding_path(@finding) %> |
+<%= link_to "Destroy", @finding, :confirm => 'Are you sure?', :method => :delete %>
 <%= link_to 'Back', findings_path %>

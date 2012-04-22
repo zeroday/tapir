@@ -8,42 +8,86 @@
 #</host>
 #
 #
+
+#
+# Sax parsing sucks. TODO - rewrite this with the Reader API
+# http://stackoverflow.com/questions/9984621/sax-parsing-strange-element-with-nokogiri
+#
+
 module Ear
 module Import
+
 class ShodanXml < Nokogiri::XML::SAX::Document
 
-  def start_element(name, attrs = [])
-    if name == "host"
-    
-      #
-      # Stick all the elements in an array
-      #
-      city = attrs[0].last
-      country = attrs[1].last
-      hostnames = attrs[2].last
-      ip_address = attrs[3].last
-      port = attrs[4].last
-      updated = attrs[5].last
-      
-      #
-      # Create the objects
-      #
-      d = ::Domain.create(:name => hostnames) if hostnames.kind_of? String
-      h = ::Host.create :ip_address => ip_address
-      p = ::NetSvc.create :proto => "tcp", :port_num => port, :fingerprint => "TODO"
-    end
+  attr_accessor :shodan_hosts
+  def initialize
+    @shodan_hosts = []
+  end
 
-    if name == "data"
-      # 
-      # Skip this for now
+  def start_element(name, attrs = [])
+    @content = ""
+    @attrs = attrs
+    
+    if name == "host"
       #
+      # create a host object & set the vars
+      #
+      @current_host = ShodanHost.new
+      @current_host.city = @attrs[0].last
+      @current_host.country = @attrs[1].last
+      @current_host.hostnames = @attrs[2].last
+      @current_host.ip_address = @attrs[3].last
+      @current_port = @attrs[4].last
+      @current_host.updated = @attrs[5].last
+      @shodan_hosts << @current_host
     end
     
+  end
+
+  def characters(string)
+    @content << string if @content
   end
   
-  def end_element(name)
+  def cdata_block(string)
+    characters(string)
   end
-    
+
+  def end_element(name)
+    if name == "data"
+      #
+      # This always follows a host object, so let's add the port & associate 
+      #
+      @shodan_hosts.last.services << ShodanService.new(@current_port, @content) unless @shodan_hosts = []
+      @current_port=nil
+    end
+
+    # Reset this so we don't grab content accidentally
+
+    @content = nil
+  end
+  
+end
+
+class ShodanHost
+    attr_accessor :city, :country, :hostnames, :ip_address, :services, :updated
+    def initialize(city=nil, country=nil, hostnames=[], ip_address=nil, services=[], updated=nil)
+      @city = city
+      @country = country
+      @hostnames = hostnames
+      @ip_address = ip_address
+      @services = services
+      @updated = updated
+    end
+end
+
+class ShodanService
+  attr_accessor :num, :data
+  def initialize(num=nil,data=nil)
+    @num = num
+    @data = data
+  end
+end
+
 end
 end
-end
+

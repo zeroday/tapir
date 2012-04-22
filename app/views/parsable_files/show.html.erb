@@ -53,4 +53,5 @@
 
 
 <%= link_to 'Edit', edit_parsable_file_path(@parsable_file) %> |
+<%= link_to "Destroy", @parsable_file, :confirm => 'Are you sure?', :method => :delete %> |
 <%= link_to 'Back', parsable_files_path %>

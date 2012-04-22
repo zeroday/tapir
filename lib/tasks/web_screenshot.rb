@@ -24,9 +24,6 @@ def run
   super
   
   begin
-
-    puts @options.class
-    puts @options.inspect 
     
     #
     # Create a browser opbject if we didn't pass one in

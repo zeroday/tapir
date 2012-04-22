@@ -4,11 +4,11 @@ class User < ActiveRecord::Base
   has_many    :task_runs
   has_many    :accounts
 
-  validates_presence_of :usernames
+  #validates_presence_of :usernames
   
   serialize :usernames
   
-  before_save :cleanup_usernames
+  before_save :default_values, :cleanup_usernames 
   after_save :log
   after_create :set_usernames_empty
 
@@ -21,8 +21,17 @@ class User < ActiveRecord::Base
   def full_name
     "#{first_name} #{last_name}"
   end
+  
+  def name 
+    full_name
+  end
 
 private
+
+  def default_values
+    self.usernames ||= []
+  end
+  
   def set_usernames_empty
     self.usernames.uniq!
     self.save!
@@ -33,6 +42,7 @@ private
   # that they've been created without spaces
   #
   def cleanup_usernames
+     
     #
     # Handle a string of comma separated (coming from the webui
     #

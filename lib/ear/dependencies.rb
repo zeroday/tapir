@@ -4,3 +4,5 @@ require 'cgi'
 require 'nokogiri'
 require 'nmap/parser'
 require 'rex'
+require 'gsearch-parser'
+

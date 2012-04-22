@@ -74,6 +74,8 @@ GEM
       ruby-hmac
     formatador (0.2.1)
     geoip (1.1.2)
+    gsearch-parser (0.2.2)
+      gsearch-parser
     hike (1.2.1)
     i18n (0.6.0)
     jquery-rails (1.0.19)
@@ -183,6 +185,7 @@ DEPENDENCIES
   flickr
   fog
   geoip
+  gsearch-parser
   jquery-rails
   json
   librex

@@ -34,6 +34,7 @@ gem 'flickr'
 
 # Scraping
 gem 'nokogiri'
+gem 'gsearch-parser'
 
 # Heavy-duty javascript scraping
 gem 'selenium-webdriver' # browser based scraping with capybara
@@ -46,7 +47,7 @@ group :pain do
 
   # Postgres database
   # apt-get install libpq-dev
-  gem 'pg'
+gem 'pg'
 
   # Requires QTwebkit
   # https://github.com/thoughtbot/capybara-webkit#readme

@@ -17,4 +17,5 @@
 
 
 <%= link_to 'Edit', edit_object_mapping_path(@object_mapping) %> |
+<%= link_to "Destroy", @object_mapping, :confirm => 'Are you sure?', :method => :delete %> |
 <%= link_to 'Back', object_mappings_path %>

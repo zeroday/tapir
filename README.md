@@ -24,13 +24,59 @@ The EAR is currently tested and working on:
 * OS X 10.5.x+
 * Ubuntu Linux 9.10+  
 
+### Prerequisites:
+
+The following Prerequisites are required for execution: 
+
+## Prerequisites (Debian / Ubuntu) 
+
+The following packages are required for successful execution::
+
+	sudo apt-get install qt4-qmake libnokogiri-ruby1.8 libxslt-dev libxml2-dev libqt4-dev libpcap-dev libpq-dev libsqlite3-dev 
+
+## Prerequisites (OSX using Brew)
+
+	brew install qt 
+
+## Prerequisites (platform independent): 
+
+Execute the bundle installer: 
+
+	$ gem install bundle 
+	$ bundle install #from within the ear application root
+
+The following additional applications are required:
+
+	Rails 
+	Firefox 
+	Nmap 
+
+## Known Issues
+
+Installation of therubyracer gem might fail due to an invalid GEM speficiation file, refer to the following link for details: 
+
+	https://github.com/cowboyd/therubyracer/issues/140#issuecomment-4707363
+
 ### Getting Started with the EAR
 
-You'll need to configure a database before you can use the app. Do this in ear/config/database.yml. A sample has been provided. - SQLite3 is fine for small databases. Use Postgres (homebrew makes this easy on OSX) or MySQL for anything that's not a test. 
+Prior to executing EAR, ensure all appropriate configuration files exist: 
 
-Once you have a database configuration, run the following:
+	$ cp ear/config/ear_api_keys.yml.sample config/ear_api_keys.yml
+	$ cp ear/config/database.yml.sample config/database.yml 
+
+The ear_api_keys.yml file documents which API keys are required for effective API operations and where they may be located. 
+
+The database.yml file can be configured with the following databases:
+
+	* SQLite3 - For light / small scale test database operations and development.
+	* Postgres - For heavier / long term operations and development.
+	* MySQL - Recommended for production deployments. 
+
+Once you have a database.yml is configured correctly, execute the following within the EAR root directory:
 
     $ rake db:create && rake db:migrate
+    $ data/geolitecity/get_latest.sh 
+
 
 Once you have a database, simply run `$ util/console.rb` - this will give you access to a pry shell from which you can create objects and run tasks. 
 

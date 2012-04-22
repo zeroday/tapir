@@ -33,4 +33,5 @@
 </p>
 
 <%= link_to 'Edit', edit_search_string_path(@search_string) %> |
+<%= link_to "Destroy", @search_string, :confirm => 'Are you sure?', :method => :delete %> |
 <%= link_to 'Back', search_strings_path %>
