@@ -19,8 +19,8 @@ ActiveRecord::Schema.define(:version => 20111217213719) do
     t.string   "web_uri"
     t.string   "check_uri"
     t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
   create_table "domains", :force => true do |t|
@@ -38,30 +38,30 @@ ActiveRecord::Schema.define(:version => 20111217213719) do
     t.boolean  "available"
     t.integer  "organization_id"
     t.integer  "host_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
   end
 
   create_table "findings", :force => true do |t|
     t.string   "name"
     t.string   "content"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "hosts", :force => true do |t|
     t.string   "ip_address"
     t.integer  "domain_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "images", :force => true do |t|
     t.string   "local_path"
     t.string   "remote_path"
     t.string   "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "net_blocks", :force => true do |t|
@@ -69,8 +69,8 @@ ActiveRecord::Schema.define(:version => 20111217213719) do
     t.string   "range"
     t.string   "handle"
     t.string   "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "net_svcs", :force => true do |t|
@@ -79,8 +79,8 @@ ActiveRecord::Schema.define(:version => 20111217213719) do
     t.string   "fingerprint"
     t.string   "proto"
     t.integer  "port_num"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "object_mappings", :force => true do |t|
@@ -89,24 +89,24 @@ ActiveRecord::Schema.define(:version => 20111217213719) do
     t.integer  "parent_id"
     t.string   "parent_type"
     t.integer  "task_run_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "organizations", :force => true do |t|
     t.string   "name"
     t.text     "description"
     t.text     "email_schemas"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
   create_table "parsable_files", :force => true do |t|
     t.string   "name"
     t.string   "type"
     t.string   "path"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "physical_locations", :force => true do |t|
@@ -122,15 +122,15 @@ ActiveRecord::Schema.define(:version => 20111217213719) do
     t.integer  "user_id"
     t.integer  "host_id"
     t.integer  "image_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
   end
 
   create_table "search_strings", :force => true do |t|
     t.string   "name"
     t.string   "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "task_runs", :force => true do |t|
@@ -151,8 +151,8 @@ ActiveRecord::Schema.define(:version => 20111217213719) do
     t.integer  "account_id"
     t.integer  "parsable_file_id"
     t.integer  "net_block_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
   end
 
   create_table "users", :force => true do |t|
@@ -162,8 +162,8 @@ ActiveRecord::Schema.define(:version => 20111217213719) do
     t.text     "email_addresses"
     t.text     "usernames"
     t.integer  "organization_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
   end
 
   create_table "web_apps", :force => true do |t|
@@ -173,8 +173,8 @@ ActiveRecord::Schema.define(:version => 20111217213719) do
     t.string   "fingerprint"
     t.text     "description"
     t.string   "techology"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "web_forms", :force => true do |t|
@@ -184,8 +184,8 @@ ActiveRecord::Schema.define(:version => 20111217213719) do
     t.string   "url"
     t.string   "action"
     t.text     "fields"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
 end

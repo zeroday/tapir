@@ -21,7 +21,8 @@ Ear::Application.routes.draw do
   resources :object_mappings
 
   match "/" => "objects#index"
-  
+  root :to => redirect("/")
+
   # handle maps
   match "/maps" => "maps#index"
   match "/maps/google_default"
