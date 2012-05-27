@@ -146,6 +146,12 @@ class InitialSchema < ActiveRecord::Migration
       t.timestamps
     end
 
+    create_table :notes do |t|
+      t.string :name
+      t.string :description
+      t.timestamps
+    end
+
     create_table :images do |t|
       t.string        :local_path
       t.string        :remote_path

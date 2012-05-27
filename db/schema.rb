@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111217213719) do
+ActiveRecord::Schema.define(:version => 20120527141635) do
 
   create_table "accounts", :force => true do |t|
     t.string   "account_name"
@@ -19,9 +19,25 @@ ActiveRecord::Schema.define(:version => 20111217213719) do
     t.string   "web_uri"
     t.string   "check_uri"
     t.integer  "user_id"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
+
+  create_table "delayed_jobs", :force => true do |t|
+    t.integer  "priority",   :default => 0
+    t.integer  "attempts",   :default => 0
+    t.text     "handler"
+    t.text     "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string   "locked_by"
+    t.string   "queue"
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+  end
+
+  add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
 
   create_table "domains", :force => true do |t|
     t.string   "name"
@@ -38,30 +54,30 @@ ActiveRecord::Schema.define(:version => 20111217213719) do
     t.boolean  "available"
     t.integer  "organization_id"
     t.integer  "host_id"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "findings", :force => true do |t|
     t.string   "name"
     t.string   "content"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "hosts", :force => true do |t|
     t.string   "ip_address"
     t.integer  "domain_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "images", :force => true do |t|
     t.string   "local_path"
     t.string   "remote_path"
     t.string   "description"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "net_blocks", :force => true do |t|
@@ -69,8 +85,8 @@ ActiveRecord::Schema.define(:version => 20111217213719) do
     t.string   "range"
     t.string   "handle"
     t.string   "description"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "net_svcs", :force => true do |t|
@@ -79,6 +95,13 @@ ActiveRecord::Schema.define(:version => 20111217213719) do
     t.string   "fingerprint"
     t.string   "proto"
     t.integer  "port_num"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "notes", :force => true do |t|
+    t.string   "name"
+    t.string   "description"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end
@@ -89,24 +112,24 @@ ActiveRecord::Schema.define(:version => 20111217213719) do
     t.integer  "parent_id"
     t.string   "parent_type"
     t.integer  "task_run_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "organizations", :force => true do |t|
     t.string   "name"
     t.text     "description"
     t.text     "email_schemas"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "parsable_files", :force => true do |t|
     t.string   "name"
     t.string   "type"
     t.string   "path"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "physical_locations", :force => true do |t|
@@ -122,15 +145,15 @@ ActiveRecord::Schema.define(:version => 20111217213719) do
     t.integer  "user_id"
     t.integer  "host_id"
     t.integer  "image_id"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "search_strings", :force => true do |t|
     t.string   "name"
     t.string   "description"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "task_runs", :force => true do |t|
@@ -151,8 +174,8 @@ ActiveRecord::Schema.define(:version => 20111217213719) do
     t.integer  "account_id"
     t.integer  "parsable_file_id"
     t.integer  "net_block_id"
-    t.datetime "created_at",           :null => false
-    t.datetime "updated_at",           :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", :force => true do |t|
@@ -162,8 +185,8 @@ ActiveRecord::Schema.define(:version => 20111217213719) do
     t.text     "email_addresses"
     t.text     "usernames"
     t.integer  "organization_id"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "web_apps", :force => true do |t|
@@ -173,8 +196,8 @@ ActiveRecord::Schema.define(:version => 20111217213719) do
     t.string   "fingerprint"
     t.text     "description"
     t.string   "techology"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "web_forms", :force => true do |t|
@@ -184,8 +207,8 @@ ActiveRecord::Schema.define(:version => 20111217213719) do
     t.string   "url"
     t.string   "action"
     t.text     "fields"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end

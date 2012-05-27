@@ -17,6 +17,10 @@ gem 'formtastic-bootstrap', :git => 'https://github.com/cgunther/formtastic-boot
 gem 'tabulous' 
 gem 'datatables'
 
+# Background Processing
+gem 'delayed_job_active_record'
+gem 'daemons'
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -24,10 +28,10 @@ group :assets do
   gem 'coffee-rails', '~> 3.2.1'
   gem 'uglifier', '>= 1.0.3'
   gem 'bootstrap-sass', '~> 2.0.0'
-  gem 'jquery-datatables-rails', github: 'rweng/jquery-datatables-rails'
 end
 
 gem 'jquery-rails'
+gem 'jquery-datatables-rails', github: 'rweng/jquery-datatables-rails'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
