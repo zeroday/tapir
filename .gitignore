@@ -4,12 +4,15 @@
 # or operating system, you probably want to add a global ignore instead:
 #   git config --global core.excludesfile ~/.gitignore_global
 
+# Ignore rvmrc
+.rvmrc
+
 # Ignore bundler config
 .bundle
 
 # Ignore configuration files
 config/database.yml
-config/ear_api_keys.yml
+config/api_keys.yml
 
 # Ignore the default SQLite database.
 db/*.sqlite3
@@ -20,4 +23,4 @@ data/geolitecity/latest.dat
 # Ignore all logfiles and tempfiles.
 log/*.log
 tmp
-public/ear/*
+public/tapir/*
