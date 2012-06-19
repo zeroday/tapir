@@ -10,11 +10,11 @@ namespace :setup  do
 
     # Copy database.yml
     puts "Copying database.yml into place..."
-    FileUtils.cp_r("#{Rails.root}/config/database.yml.sample", "#{Rails.root}/config/database.yml")    
+    FileUtils.cp("#{Rails.root}/config/database.yml.sample", "#{Rails.root}/config/database.yml")    
 
     # Copy api_keys.yml
     puts "Copying api_keys.yml into place..."
-    FileUtils.cp_r("#{Rails.root}/config/api_keys.yml.sample", "#{Rails.root}/config/api_keys.yml")    
+    FileUtils.cp("#{Rails.root}/config/api_keys.yml.sample", "#{Rails.root}/config/api_keys.yml")    
 
     # rake db:migrate
     Rake::Task["db:drop"].invoke
