@@ -9,12 +9,12 @@ namespace :setup  do
     `#{Rails.root}/data/get_latest.sh`
 
     # Copy database.yml
-    puts "Copying database.yml into place..."
-    FileUtils.cp("#{Rails.root}/config/database.yml.sample", "#{Rails.root}/config/")    
+    # puts "Copying database.yml into place..."
+    # FileUtils.cp("#{Rails.root}/config/database.yml.sample", "#{Rails.root}/config/")    
 
     # Copy api_keys.yml
-    puts "Copying api_keys.yml into place..."
-    FileUtils.cp("#{Rails.root}/config/api_keys.yml.sample", "#{Rails.root}/config/")    
+    #puts "Copying api_keys.yml into place..."
+    #FileUtils.cp("#{Rails.root}/config/api_keys.yml.sample", "#{Rails.root}/config/")    
 
     # rake db:migrate
     Rake::Task["db:drop"].invoke
