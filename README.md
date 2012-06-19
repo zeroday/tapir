@@ -10,6 +10,7 @@ EAR keeps track of newly generated data by maintaining the relationship between 
 
 ### News
 
+* 06/18/2012 - Cleaned up Web UI and background tasks! Now with less stupid!
 * 02/25/2012 - The EAR Project has a stubbed out web UI, and is on its way to v1.0
 * 12/16/2011 - The EAR Project has been updated to Rails 3!
 
@@ -43,39 +44,31 @@ The following packages are required for successful execution::
 Execute the bundle installer: 
 
 	$ gem install bundle 
-	$ bundle install #from within the ear application root
+	$ bundle install --without pain #from within the ear application root
 
 The following additional applications are required:
 
-	Rails 
-	Firefox 
 	Nmap 
 
 ## Known Issues
 
-Installation of therubyracer gem might fail due to an invalid GEM speficiation file, refer to the following link for details: 
+Installation of therubyracer gem might fail due to an invalid GEM specification file, refer to the following link for details: 
 
 	https://github.com/cowboyd/therubyracer/issues/140#issuecomment-4707363
 
 ### Getting Started with the EAR
 
-Prior to executing EAR, ensure all appropriate configuration files exist: 
+Prior to executing EAR, run the following command to ensure all appropriate configuration files exist: 
 
-	$ cp ear/config/ear_api_keys.yml.sample config/ear_api_keys.yml
-	$ cp ear/config/database.yml.sample config/database.yml 
+ $ rake setup:initial
 
-The ear_api_keys.yml file documents which API keys are required for effective API operations and where they may be located. 
+### Usage
 
-The database.yml file can be configured with the following databases:
+## Web Access (Start Here!)
 
-	* SQLite3 - For light / small scale test database operations and development.
-	* MySQL / Postgres - For heavier / long term operations and development.
+Simply browse to http://localhost:3000 on the system running EAR, and create objects / run tasks!
 
-Once you have a database.yml is configured correctly, execute the following within the EAR root directory:
-
-    $ rake db:create && rake db:migrate
-    $ data/geolitecity/get_latest.sh 
-
+## Console Access (Advanced)
 Once you have a database, simply run `$ util/console.rb` - this will give you access to a pry shell from which you can create objects and run tasks. 
 
 Creating a host object & running tasks: 
@@ -87,11 +80,22 @@ Creating a host object & running tasks:
 
 You can also access the interface on the web, by running '`$ rails s' in the root of the EAR directory. This will set up a server on :3000 - Note that this is extremely alpha, and is currently not supported. 
 
-### Usage
-
-TODO
-
 ### Advanced
+
+## Configuration files
+
+The ear_api_keys.yml file configures API key required for API operations and where they may be located. 
+
+The database.yml file can also be configured with the following databases:
+
+	* SQLite3 - For light / small scale test database operations and development. **Used by default
+	* MySQL / Postgres - For heavier / long term operations and development.
+    
+The latest geolitecity data cand be pulled by running: 
+
+  $ data/geolitecity/get_latest.sh 
+
+## Additional Utilities
 
 The EAR ships with a few utilities which you may find of use:
 
