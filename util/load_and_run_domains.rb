@@ -1,6 +1,4 @@
 #!/usr/bin/ruby
-
-# make sure this file is in the root of the ear directory
 require "#{File.expand_path(File.dirname(__FILE__))}/../config/environment"
 
 # open up a list of domains

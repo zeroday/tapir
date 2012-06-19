@@ -27,7 +27,7 @@ class Host < ActiveRecord::Base
 private
 
   def log
-    EarLogger.instance.log self.to_s
+    TapirLogger.instance.log self.to_s
   end
 
 end

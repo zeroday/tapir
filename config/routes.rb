@@ -1,4 +1,4 @@
-Ear::Application.routes.draw do
+Tapir::Application.routes.draw do
   
   resources :parsable_files
 

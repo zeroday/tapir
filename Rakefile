@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Ear::Application.load_tasks
+Tapir::Application.load_tasks
