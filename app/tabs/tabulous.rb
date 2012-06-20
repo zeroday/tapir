@@ -57,13 +57,13 @@ Tabulous.setup do |config|
       #------------------------------------------------------------------------------------------------------------------------------------------------------------#
       #    TAB NAME                   |    DISPLAY TEXT            |    PATH                                                     |    VISIBLE?    |    ENABLED?    #
       #------------------------------------------------------------------------------------------------------------------------------------------------------------#
-      [    :maps_tab                  ,    'Maps'                  ,    maps_path                                                ,    true        ,    true        ],
       [    :organizations_tab         ,    'Organizations'         ,    organizations_path                                       ,    true        ,    true        ],
       [    :domains_tab               ,    'Domains'               ,    domains_path                                             ,    true        ,    true        ],
       [    :hosts_tab                 ,    'Hosts'                 ,    hosts_path                                               ,    true        ,    true        ],
       [    :users_tab                 ,    'Users'                 ,    users_path                                               ,    true        ,    true        ],
       [    :tasks_tab                 ,    'Tasks'                 ,    tasks_path                                               ,    true        ,    true        ],
       [    :task_runs_tab             ,    'Task runs'             ,    task_runs_path                                           ,    true        ,    true        ],
+      [    :reports_tab               ,    'Reports'               ,    reports_path                                             ,    true        ,    true        ],
       #------------------------------------------------------------------------------------------------------------------------------------------------------------#
       #    TAB NAME                   |    DISPLAY TEXT            |    PATH                                                     |    VISIBLE?    |    ENABLED?    #
       #------------------------------------------------------------------------------------------------------------------------------------------------------------#
@@ -89,13 +89,13 @@ Tabulous.setup do |config|
       #--------------------------------------------------------------------------------#
       #    CONTROLLER             |    ACTION          |    TAB                        #
       #--------------------------------------------------------------------------------#
-      [    :maps                  ,    :all_actions    ,    :maps_tab                  ],
       [    :organizations         ,    :all_actions    ,    :organizations_tab         ],
       [    :domains               ,    :all_actions    ,    :domains_tab               ],
       [    :hosts                 ,    :all_actions    ,    :hosts_tab                 ],
       [    :users                 ,    :all_actions    ,    :users_tab                 ],
       [    :tasks                 ,    :all_actions    ,    :tasks_tab                 ],
       [    :task_runs             ,    :all_actions    ,    :task_runs_tab             ],
+      [    :reports               ,    :all_actions    ,    :reports_tab               ],
       #--------------------------------------------------------------------------------#
       #    CONTROLLER             |    ACTION          |    TAB                        #
       #--------------------------------------------------------------------------------#

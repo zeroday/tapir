@@ -45,7 +45,7 @@ class MapsController < ApplicationController
   end
 
   def index
-    # query a list of all maps
+    # query a list of all reports
   end
 
 end

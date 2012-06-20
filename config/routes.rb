@@ -24,8 +24,8 @@ Tapir::Application.routes.draw do
   root :to => redirect("/")
 
   # handle maps
-  match "/maps" => "maps#index"
-  match "/maps/google_default"
+  match "/reports" => "reports#index"
+  match "/reports/google_default"
 
   # running tasks
   post "task_runner/run"

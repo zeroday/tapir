@@ -1,35 +1,5 @@
 <div id="tasks">
-<table>
-  <tr>
-    <th>Types</th>    
-  </tr>
-  <tr>
-    <td>
-      <ul>
-        <li><a href="<%=request.url%>../../organizations">Organizations</a></li>
-        <li><a href="<%=request.url%>../../domains">Domains</a></li>
-        <li><a href="<%=request.url%>../../hosts">Hosts</a></li>
-        <li><a href="<%=request.url%>../../users">Users</a></li>
-        <li><a href="<%=request.url%>../../net_blocks">NetBlocks</a></li>
-      </ul>
-    </td>
-  </tr>
-</table>
-<table>
-  <tr>
-    <th>Tasks</th>
-  </tr>
-  <tr>
-    <td>
-      <ul>
-        <% TaskManager.instance.tasks.each do |t| %>
-          <li><a href="<%=request.url%>../../tasks/<%=t.name%>"> <%=t.name%></a><br/></li>
-        <% end %>
-      </ul>
-    <td>
-  </tr>
-</table>
-<table>
+  <table>
   <tr>
     <th>Objects</th>    
   </tr>
