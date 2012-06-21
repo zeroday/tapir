@@ -1,10 +1,10 @@
 def name
-  "generate_usernames"
+  "usernames_guess"
 end
 
 ## Returns a string which describes what this task does
 def description
-  "This task can be used to generate usernames, given a user."
+  "This task can be used to guess usernames, given a user."
 end
 
 ## Returns an array of types that are allowed to call this task

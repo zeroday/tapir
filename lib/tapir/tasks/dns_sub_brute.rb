@@ -15,6 +15,7 @@ def allowed_types
 end
 
 def setup(object, options={})
+  puts "CALLING SUPER!"
   super(object, options)
   self
 end
@@ -25,7 +26,6 @@ def run
 
     # :subdomain_list => list of subdomains to brute
     # :mashed_domains => try domain names w/o a dot, see if anyone's hijacked a common "subdomain"
-
 
   if @options[:subdomain_list]
     subdomain_list = @options['subdomain_list']

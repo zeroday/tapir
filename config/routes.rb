@@ -1,9 +1,7 @@
 Tapir::Application.routes.draw do
-  
+  resources :task_run_sets
   resources :parsable_files
-
   resources :accounts
-
   resources :images
   resources :net_blocks
   resources :findings
@@ -20,16 +18,20 @@ Tapir::Application.routes.draw do
   resources :task_runs 
   resources :object_mappings
 
-  match "/" => "objects#index"
+
+
+  # Welcome page
+  match "/" => "welcome#index"
+  match "/welcome" => "welcome#index"
   root :to => redirect("/")
 
-  # handle maps
+  # Task Runner
+  match "/task_runner" => "task_run_sets#run"
+  
+  # handle reports
   match "/reports" => "reports#index"
+  match "/reports/list_all"
   match "/reports/google_default"
-
-  # running tasks
-  post "task_runner/run"
-  get "task_runner/view"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

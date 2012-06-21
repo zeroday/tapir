@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<table>
+  <tr>
+    <th>Task Name:</th>
+    <th>Result:</th>
+    <th>Task Log:</th>
+  </tr>
+  <% @task_run_set.task_runs.each do |task_run| %>
+  <tr>
+    <td><%= task_run.task_name %></td>
+    <td>
+      <ul>
+      <% task_run.object_mappings.each do |x| %>
+        <li><%= link_to(x.get_child.to_s, x.get_child) %></li>
+      <% end %>
+      </ul>
+    </td>
+    <td><%= simple_format task_run.task_log %></td>
+  </tr>
+  <% end %>
+</table>
+
+<%= link_to 'Edit', edit_task_run_set_path(@task_run_set) %> |
+<%= link_to 'Back', task_run_sets_path %>

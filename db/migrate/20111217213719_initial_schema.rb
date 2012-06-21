@@ -10,24 +10,31 @@ class InitialSchema < ActiveRecord::Migration
       t.timestamps
     end
 
+      create_table :task_run_sets do |t|
+        t.timestamps
+      end
+
     create_table  :task_runs do |t|
       t.string        :task_name
       t.integer       :task_object_id
       t.string        :task_object_type
       t.text          :task_options_hash
       t.text          :task_log
-      t.integer       :organization_id
-      t.integer       :physical_location_id
-      t.integer       :user_id
+      t.integer       :task_run_set_id
+      t.integer       :account_id
       t.integer       :domain_id
+      t.integer       :finding_id
       t.integer       :host_id
+      t.integer       :image_id
+      t.integer       :net_block_id
       t.integer       :net_svc_id
+      t.integer       :organization_id
+      t.integer       :parsable_file_id
+      t.integer       :physical_location_id
+      t.integer       :search_string_id
+      t.integer       :user_id
       t.integer       :web_app_id
       t.integer       :web_form_id
-      t.integer       :image_id
-      t.integer       :account_id
-      t.integer       :parsable_file_id
-      t.integer       :net_block_id
       t.timestamps
     end
 

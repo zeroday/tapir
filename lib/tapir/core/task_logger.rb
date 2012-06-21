@@ -4,7 +4,7 @@ class TaskLogger
   attr_accessor :name
   attr_accessor :out
 
-  def initialize(id,name="anonymous", write_file=false)
+  def initialize(id, name="anonymous", write_file=false)
     @name = name
     @out = StringIO.new
     @write_file = write_file

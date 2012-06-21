@@ -1,12 +1,19 @@
-class MapsController < ApplicationController
-  # GET /maps/google_default
-  # GET /maps/google_default.json
+class ReportsController < ApplicationController
+
+  def list_all
+    @objects = Object.all
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @objects }
+    end
+  end
+
+  # GET /reports/google_default
+  # GET /reports/google_default.json
   def google_default
     @loc = PhysicalLocation.all
     
-    #f = File.open("#{File.dirname(__FILE__)}/../../public/listing.js","w")
     @json =  "var sweetObj = {\'locations\': ["
-
     @loc.each do |loc|
       display  = ""
 
@@ -39,7 +46,7 @@ class MapsController < ApplicationController
     @json << "]}"
   
     respond_to do |format|
-      format.html # index.html.erb
+      format.html
       format.json { render json: @json }
     end
   end

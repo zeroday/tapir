@@ -15,7 +15,6 @@ class NetSvc < ActiveRecord::Base
     "NetService"
   end
 
-
 private
   def log
     TapirLogger.instance.log self.to_s

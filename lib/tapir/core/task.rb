@@ -47,6 +47,10 @@ class Task
     "Generic Task"
   end
   
+  def task_name
+    name
+  end
+  
   def description
     "This is a generic task"
   end
@@ -55,37 +59,25 @@ class Task
   # Override me
   #
   def setup(object, options={})
-
+    
     @object = object # the object we're operating on
     @options = options # the options for this task
     @results = [] # temporary collection of all created objects
-        
-    #
-    # Create a new task run to record the fact that we've begun running
-    # this task.
-    #
-    @task_run = TaskRun.create(
-      :task_name => self.name,
-      :type => nil,
+
+    # Create a task run for each one of our objects
+    @task_run = TaskRun.create :task_name => self.name, 
+      :task_object_id => @object.id,
       :task_object_type => @object.class.to_s,
-      :task_object_id => @object.id, 
-      :task_options_hash => @options )
-    
+      :task_options_hash => @options
+
     @task_logger = TaskLogger.new(@task_run.id, self.name, true)
-
+     
     #
-    # This is an AR relationship, so we can go back and access all tasks for 
-    # a particular object.
-    #
-    @object.task_runs << @task_run
-
-    #
-    # Do a little logging. do it for the children.
+    # Do a little logging. do it for the kids.
     #
     @task_logger.log "Setup called."
     @task_logger.log "Task object: #{@object}"
-    @task_logger.log "Task options: #{@options}"
-    @task_logger.log "Task run: #{@task_run}"
+    @task_logger.log "Task options: #{@options.inspect}"
   end
   
   #
@@ -115,7 +107,6 @@ class Task
       raise "Illegal character"
     end
 
-    
     `#{command}`
   end
 
@@ -163,7 +154,7 @@ class Task
     if current_object.children.include? new_object
       @task_logger.log "Skipping association of #{current_object} and #{new_object}. It's already a child."
     else
-      @task_logger.log "Associating #{current_object} with #{new_object}"
+      @task_logger.log "Associating #{current_object} with #{new_object} and task run #{@task_run}"
       current_object.associate_child({:child => new_object, :task_run => @task_run}) 
     end
     
@@ -210,7 +201,7 @@ class Task
   # 
   # Run the task. Convenience method. Do not override
   #
-  def execute(object, options={})
+  def execute(object, options={}, task_run_set_id)
     
     #
     # Do some logging in the main Tapir log
@@ -224,6 +215,14 @@ class Task
     # been passed into this task
     #
     self.setup(object, options)
+    
+    #
+    # UGH. This is so we can keep track of which tasks were run together.
+    #
+    TapirLogger.instance.log "Associating task run #{@task_run} with set #{task_run_set_id}"
+    @task_run.task_run_set_id = task_run_set_id
+    @task_run.save
+    
     self.run
     self.cleanup 
     
@@ -237,21 +236,12 @@ class Task
     #
     @task_logger.log "done recording"
     # End recording of results
-
+    
     #
-    # Set the log in the task_run
+    # return the log
     #
     @task_run.task_log = @task_logger.text
-
-    #
-    # Save our task run object
-    #
     @task_run.save
-
-  #
-  #  Return result
-  #
-  @task_run
   end
-
+  
 end

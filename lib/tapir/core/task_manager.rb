@@ -10,7 +10,6 @@ class TaskManager
     @tasks_dir = path || File.join(File.dirname(__FILE__), "..", "tasks")
     @task_files = []
     @tasks = []
-    @queue = RunnableTaskQueue.new
   end
 
   def create_all_tasks
@@ -87,16 +86,42 @@ class TaskManager
   end
 
   # This method will be called by the objects 
-  def queue_task_run(task_name, object, options)
+  def queue_task_run(task_name, task_run_set_id, object, options)
 
     # Make note of the fact that we're shipping this off to the queue
     TapirLogger.instance.log "Task manager queueing task: #{task_name} for object #{object} with options #{options}"
     
     # Create the task 
-    task =  _create_task_by_name(task_name)
+    task = _create_task_by_name(task_name)
     
-    # Add it to the run queue
-    return @queue.add_task_run(object, task , options)
+    ## TODO - THREADING!
+=begin
+    max_threads = 16
+    cur_threads = []
+
+    queue   = [*(1 .. 1000)]
+    results = []
+
+    while(queue.length > 0)
+
+      while(cur_threads.length > max_threads)
+        item = queue.shift
+        break if not item
+        t = Thread.new do
+          task.execute(object, options, task_run_set_id)
+        end
+        cur_threads << t
+      end
+
+      dead_threads = cur_threads.reject{|x| x.alive? }
+      cur_threads.delete(dead_threads)
+       ::IO.select(nil, nil, nil, 0.25)  
+    end
+=end
+    
+    # CURRENTLY NOT THREADED!
+    task.execute(object, options, task_run_set_id)
+    
   end
 
 private

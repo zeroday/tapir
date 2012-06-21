@@ -1,0 +1,8 @@
+<p>
+<b>Objects:</b>
+  <ul>
+  <% @objects.all.each {|t|%>
+    <li><%= link_to t, eval("#{t.underscore}_path(t)")  %></li>
+  <% } %>
+  </ul>
+</p>

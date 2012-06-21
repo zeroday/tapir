@@ -64,9 +64,9 @@ module ModelHelper
       #
       # This method lets you run a task on this object
       #
-      def run_task(task_name, options={})
-        TapirLogger.instance.log "Asking task manager to queue task #{task_name} run on #{self} with options: #{options}"
-        TaskManager.instance.queue_task_run(task_name, self, options)
+      def run_task(task_name, task_run_set_id, options={})
+        TapirLogger.instance.log "Asking task manager to queue task #{task_name} run on #{self} with options: #{options} - part of taskrun set: #{task_run_set_id}"
+        TaskManager.instance.queue_task_run(task_name, task_run_set_id, self, options)
       end
 
       #
