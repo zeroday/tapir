@@ -30,7 +30,7 @@ class ShodanXml < Nokogiri::XML::SAX::Document
     
     if name == "host"
       #
-      # create a host object & set the vars
+      # create a host entity & set the vars
       #
       @current_host = ShodanHost.new
       @current_host.city = @attrs[0].last
@@ -55,7 +55,7 @@ class ShodanXml < Nokogiri::XML::SAX::Document
   def end_element(name)
     if name == "data"
       #
-      # This always follows a host object, so let's add the port & associate 
+      # This always follows a host entity, so let's add the port & associate 
       #
       @shodan_hosts.last.services << ShodanService.new(@current_port, @content) unless @shodan_hosts = []
       @current_port=nil

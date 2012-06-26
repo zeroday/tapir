@@ -14,32 +14,32 @@ def allowed_types
   [Domain]
 end
 
-def setup(object, options={})
-  super(object, options)
+def setup(entity, options={})
+  super(entity, options)
 end
 
 def run
   super
 
-  @task_logger.log "Running TXT lookup on #{@object}"
+  @task_logger.log "Running TXT lookup on #{@entity}"
 
   begin
     res = Dnsruby::Resolver.new(
       :recurse => true, 
       :query_timeout => 5)
 
-    res_answer = res.query(@object.name, Dnsruby::Types.TXT)
+    res_answer = res.query(@entity.name, Dnsruby::Types.TXT)
 
     # If we got a success to the query.
     if res_answer
-      @task_logger.log_good "TXT lookup succeeded on #{@object.name}:\n #{res_answer.answer}"
+      @task_logger.log_good "TXT lookup succeeded on #{@entity.name}:\n #{res_answer.answer}"
 
       # TODO - Parse for netbocks and hostnames
 
 #     res_answer.downcase.split("ipv4").
-#     create_object NetBlock, :range
+#     create_entity NetBlock, :range
 
-      create_object Finding, :name => "dns_txt_lookup", :content => res_answer.answer
+      create_entity Finding, :name => "dns_txt_lookup", :content => res_answer.answer
 
       # save the raw result
       #@task_run.save_raw_result res_answer.to_s
@@ -49,13 +49,13 @@ def run
     
     
   rescue Dnsruby::Refused
-    @task_logger.log "Zone Transfer against #{@object.name} refused."
+    @task_logger.log "Zone Transfer against #{@entity.name} refused."
 
   rescue Dnsruby::ResolvError
-    @task_logger.log "Unable to resolve #{@object.name}"
+    @task_logger.log "Unable to resolve #{@entity.name}"
 
   rescue Dnsruby::ResolvTimeout
-    @task_logger.log "Timed out while querying #{@object.name}."
+    @task_logger.log "Timed out while querying #{@entity.name}."
 
   rescue Exception => e
     @task_logger.log "Unknown exception: #{e}"

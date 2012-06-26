@@ -14,9 +14,9 @@ class TaskRun < ActiveRecord::Base
   belongs_to :user
   belongs_to :web_app
   belongs_to :web_form
-  has_many :object_mappings
+  has_many :entity_mappings
   
   def to_s
-    "#{task_name} task -> #{task_object_type}:#{task_object_id} (#{object_mappings.count})"
+    "#{task_name} task -> #{task_entity_type}:#{task_entity_id} (#{entity_mappings.count})"
   end
 end

@@ -12,16 +12,16 @@ def allowed_types
   [Domain, Host]
 end
 
-def setup(object, options={})
-  super(object, options)
+def setup(entity, options={})
+  super(entity, options)
 
-  if @object.kind_of? Host
-    url = "http://#{@object.ip_address}"
+  if @entity.kind_of? Host
+    url = "http://#{@entity.ip_address}"
   else
-    url = "http://www.#{@object.name}"
+    url = "http://www.#{@entity.name}"
   end
 
-    @task_logger.log "Connecting to #{url} for #{@object}" 
+    @task_logger.log "Connecting to #{url} for #{@entity}" 
 
     begin
 

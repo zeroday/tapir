@@ -12,8 +12,8 @@ def allowed_types
   [User]
 end
 
-def setup(object, options={})
-  super(object, options)
+def setup(entity, options={})
+  super(entity, options)
 end
 
 ## Default method, subclasses must override this
@@ -21,30 +21,30 @@ def run
   super
 
   #johndoe
-  @object.usernames << "#{@object.first_name}.#{@object.last_name}"
+  @entity.usernames << "#{@entity.first_name}.#{@entity.last_name}"
   
   # john.doe
-  @object.usernames << "#{@object.first_name}.#{@object.last_name}"
+  @entity.usernames << "#{@entity.first_name}.#{@entity.last_name}"
 
   # john_doe 
-  @object.usernames << "#{@object.first_name}_#{@object.last_name}"
+  @entity.usernames << "#{@entity.first_name}_#{@entity.last_name}"
   
   # jdoe
-  @object.usernames << "#{@object.first_name.split("").first}#{@object.last_name}"
+  @entity.usernames << "#{@entity.first_name.split("").first}#{@entity.last_name}"
 
   # doe
-  @object.usernames << "#{@object.last_name}"
+  @entity.usernames << "#{@entity.last_name}"
   
-  if @object.middle_name
+  if @entity.middle_name
     #johneffingdoe
-    @object.usernames << "#{@object.first_name}#{@object.middle_name}#{@object.last_name}"
+    @entity.usernames << "#{@entity.first_name}#{@entity.middle_name}#{@entity.last_name}"
 
     #jedoe
-    @object.usernames << "#{@object.first_name.split("").first}#{@object.middle_name.split("").first}#{@object.last_name}"
+    @entity.usernames << "#{@entity.first_name.split("").first}#{@entity.middle_name.split("").first}#{@entity.last_name}"
   end
 
   # don't forget
-  @object.save!
+  @entity.save!
 end
   
 def cleanup

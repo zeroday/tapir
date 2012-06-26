@@ -58,6 +58,16 @@ ActiveRecord::Schema.define(:version => 20120527141635) do
     t.datetime "updated_at",        :null => false
   end
 
+  create_table "entity_mappings", :force => true do |t|
+    t.integer  "child_id"
+    t.string   "child_type"
+    t.integer  "parent_id"
+    t.string   "parent_type"
+    t.integer  "task_run_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
   create_table "findings", :force => true do |t|
     t.string   "name"
     t.string   "content"
@@ -102,16 +112,6 @@ ActiveRecord::Schema.define(:version => 20120527141635) do
   create_table "notes", :force => true do |t|
     t.string   "name"
     t.string   "description"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-  end
-
-  create_table "object_mappings", :force => true do |t|
-    t.integer  "child_id"
-    t.string   "child_type"
-    t.integer  "parent_id"
-    t.string   "parent_type"
-    t.integer  "task_run_id"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end
@@ -163,8 +163,8 @@ ActiveRecord::Schema.define(:version => 20120527141635) do
 
   create_table "task_runs", :force => true do |t|
     t.string   "task_name"
-    t.integer  "task_object_id"
-    t.string   "task_object_type"
+    t.integer  "task_entity_id"
+    t.string   "task_entity_type"
     t.text     "task_options_hash"
     t.text     "task_log"
     t.integer  "task_run_set_id"

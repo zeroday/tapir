@@ -15,8 +15,8 @@ def allowed_types
   [Domain, Host]
 end
 
-def setup(object, options={})
-  super(object, options)
+def setup(entity, options={})
+  super(entity, options)
 end
 
 ## Default method, subclasses must override this
@@ -43,23 +43,23 @@ def run
     # Allow the user to set a save directory
     #
     if @options['save_directory']
-      save_location = "#{@options['save_directory']}/#{@object.name}.png" 
+      save_location = "#{@options['save_directory']}/#{@entity.name}.png" 
     else
-      save_location = "#{Tapir::TEMP_DIRECTORY}/#{@object.name}.png"
+      save_location = "#{Tapir::TEMP_DIRECTORY}/#{@entity.name}.png"
     end
 
-    browse_location = "http://#{@object.name}"
+    browse_location = "http://#{@entity.name}"
 
 
     status = Timeout.timeout timeout do
       #
       # Navigate & do the screenshot
       # 
-      @task_logger.log "Navigating to & snapshotting http://www.#{@object.name}"  
+      @task_logger.log "Navigating to & snapshotting http://www.#{@entity.name}"  
       driver.navigate.to browse_location
       driver.save_screenshot save_location
 
-      create_object Image, 
+      create_entity Image, 
         :local_path => save_location,
         :remote_path => browse_location, 
         :description => "screenshot"

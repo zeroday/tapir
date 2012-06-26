@@ -12,8 +12,8 @@ def allowed_types
   [SearchString, User]
 end
 
-def setup(object, options={})
-  super(object, options)
+def setup(entity, options={})
+  super(entity, options)
 end
 
 ## Default method, subclasses must override this
@@ -21,12 +21,12 @@ def run
   super
   
   #
-  # Store the account name, depending on the object we passed in.
+  # Store the account name, depending on the entity we passed in.
   #
-  if @object.kind_of? User
-    account_names = @object.usernames || ["#{@object.first_name}_#{@object.last_name}"]
+  if @entity.kind_of? User
+    account_names = @entity.usernames || ["#{@entity.first_name}_#{@entity.last_name}"]
   else
-    account_names = [@object.name]
+    account_names = [@entity.name]
   end
   
   #
@@ -52,17 +52,17 @@ def run
         #
         # Create an account w/ the correct parameters
         #
-        obj = create_object Account, 
+        obj = create_entity Account, 
         :account_name => account_name, 
         :service_name => client.service_name, 
         :check_uri => client.check_account_uri_for(account_name),
         :web_uri => client.web_account_uri_for(account_name)
 
         #
-        # If we passed in a user, associate that with our new account object
+        # If we passed in a user, associate that with our new account entity
         #
-        if @object.kind_of? User
-          obj.user_id = @object.id
+        if @entity.kind_of? User
+          obj.user_id = @entity.id
           obj.save!
         end
       else 

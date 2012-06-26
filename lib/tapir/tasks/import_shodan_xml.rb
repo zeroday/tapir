@@ -12,8 +12,8 @@ def allowed_types
   [ParsableFile]
 end
 
-def setup(object, options={})
-  super(object, options)
+def setup(entity, options={})
+  super(entity, options)
 end
 
 ## Default method, subclasses must override this
@@ -24,21 +24,21 @@ def run
   xml = Tapir::Import::ShodanXml.new
   parser = Nokogiri::XML::SAX::Parser.new(xml)
   # Send some XML to the parser
-  parser.parse(File.read(@object.path))
+  parser.parse(File.read(@entity.path))
   
   xml.shodan_hosts.each do |shodan_host|
     #
-    # Create the host / loc / domain object for each host we know about
+    # Create the host / loc / domain entity for each host we know about
     #
-    domain = create_object(Domain, {:name => shodan_host.hostnames }) if shodan_host.hostnames.kind_of? String
-    host = create_object(Host, {:ip_address => shodan_host.ip_address })
-    loc = create_object(PhysicalLocation, {:city => shodan_host.city, :country => shodan_host.country})
+    domain = create_entity(Domain, {:name => shodan_host.hostnames }) if shodan_host.hostnames.kind_of? String
+    host = create_entity(Host, {:ip_address => shodan_host.ip_address })
+    loc = create_entity(PhysicalLocation, {:city => shodan_host.city, :country => shodan_host.country})
 
     shodan_host.services.each do |shodan_service|
       #
       # Create the service and associate it with our host above
       #
-      host.net_svcs << create_object(NetSvc, {
+      host.net_svcs << create_entity(NetSvc, {
         :port_num => shodan_service.port,
         :type => "tcp",
         :fingerprint => shodan_service.data })

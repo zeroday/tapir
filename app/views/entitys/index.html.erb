@@ -1,12 +1,12 @@
 <div id="tasks">
   <table>
   <tr>
-    <th>Objects</th>    
+    <th>Entities</th>    
   </tr>
   <tr>
     <td>
       <ul>
-        <% @objects.each do |o| %>
+        <% @entitys.each do |o| %>
           <li><a href="<%=request.url%>../../<%=o.underscore%>s/<%=o.id%>"> <%=o.to_s%></a><br/></li>
         <% end %>
       </ul>

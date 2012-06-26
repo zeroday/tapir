@@ -5,7 +5,7 @@ end
 
 # Returns a string which describes this task.
 def description
-  "This task hits the Corpwatch API and creates an object for all found entities."
+  "This task hits the Corpwatch API and creates an entity for all found entities."
 end
 
 # Returns an array of valid types for this task
@@ -13,8 +13,8 @@ def allowed_types
   [SearchString]
 end
 
-def setup(object, options={})
-  super(object, options)
+def setup(entity, options={})
+  super(entity, options)
   self
 end
 
@@ -24,14 +24,14 @@ def run
 
   # Attach to the corpwatch service & search
   x = Tapir::Client::Corpwatch::CorpwatchService.new
-  corps = x.search @object.name
+  corps = x.search @entity.name
 
   corps.each do |corp|
-    # Create a new organization object & attach a record
-    o = create_object Organization, { 
+    # Create a new organization entity & attach a record
+    o = create_entity Organization, { 
       :name => corp.name, 
     }
-    o.physical_locations << create_object(PhysicalLocation, {
+    o.physical_locations << create_entity(PhysicalLocation, {
       :address => corps.first.address, 
       :state => corps.first.state,
       :country => corps.first.country }

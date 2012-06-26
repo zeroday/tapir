@@ -2,7 +2,7 @@ class AccountsController < ApplicationController
   # GET /accounts
   # GET /accounts.json
   def index
-    @accounts = Account.all
+    @accounts = Account.all #Account.page(params[:page]).order('created_at DESC')
 
     respond_to do |format|
       format.html # index.html.erb

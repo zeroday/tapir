@@ -3,8 +3,8 @@ corpwatch_api_key: ""
 # Google Loader - http://code.google.com/apis/loader/signup.html
 google_api_key: ""
 # LinkedIn - https://developer.linkedin.com
-linkedin_api_key: ""
-linkedin_secret_key: "" 
+linkedin_api_key: "gbvyptlz16vt"
+linkedin_secret_key: "qV3jlrNcGa3c6Vgw" 
 # Bing API key
 bing_api_key: ""
 # Pipl API key

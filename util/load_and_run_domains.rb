@@ -10,7 +10,7 @@ f.each do |line|
   puts "trying #{line}"
   begin 
 
-    # create the domain object
+    # create the domain entity
     d = Domain.create :name => line.strip
   
     # Screenshot task. -- add more tasks here.

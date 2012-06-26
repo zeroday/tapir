@@ -1,4 +1,4 @@
-class ObjectMapping < ActiveRecord::Base
+class EntityMapping < ActiveRecord::Base
     belongs_to :task_run
     
     def get_child

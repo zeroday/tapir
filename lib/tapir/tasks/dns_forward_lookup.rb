@@ -12,28 +12,28 @@ def allowed_types
   [Domain]
 end
 
-def setup(object, options={})
-  super(object, options)
+def setup(entity, options={})
+  super(entity, options)
 end
 
 def run
   super
 
     begin
-      resolved_address = Resolv.new.getaddress(@object.name)
+      resolved_address = Resolv.new.getaddress(@entity.name)
       
       if resolved_address
-        @task_logger.log_good "Creating host object for #{resolved_address}"
-        h = create_object(Host, {:ip_address => resolved_address})
+        @task_logger.log_good "Creating host entity for #{resolved_address}"
+        h = create_entity(Host, {:ip_address => resolved_address})
         
-        @object.hosts << h
-        h.domains << @object
+        @entity.hosts << h
+        h.domains << @entity
         
         # save the raw data
         #@task_run.save_raw_result resolved_address
 
       else
-        @task_logger.log "Unable to find address for #{@object.name}"
+        @task_logger.log "Unable to find address for #{@entity.name}"
       end
 
     rescue Exception => e

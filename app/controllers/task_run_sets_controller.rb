@@ -86,7 +86,7 @@ class TaskRunSetsController < ApplicationController
     #
     # Get our params
     #
-    object_set = params['objects']
+    entity_set = params['entitys']
     task_name = params['task_name']
     options = params['options'] || {}
     task_run_set = TaskRunSet.create
@@ -95,23 +95,23 @@ class TaskRunSetsController < ApplicationController
     # If we don't have reasonable input, return
     #
     # TODO - flash error?
-    return unless task_name
-    return unless object_set
+    redirect_to :action => "show" unless task_name
+    redirect_to :action => "show" unless entity_set
 
     #
-    # Create the objects based on the params
+    # Create the entitys based on the params
     #
-    objects = []
-    object_set.each do |object_and_id|
-      object,id = object_and_id.first.split("#")
-        x = eval(object.titleize.gsub(" ","")) ## Pretty gangster (rails) magic here
-        objects << x.find(id) if x
+    entitys = []
+    entity_set.each do |entity_and_id|
+      entity,id = entity_and_id.first.split("#")
+        x = eval(entity.titleize.gsub(" ","")) ## Pretty gangster (rails) magic here
+        entitys << x.find(id) if x
     end
 
     #
-    # Run the task on each object
+    # Run the task on each entity
     #
-    objects.each do |o|
+    entitys.each do |o|
       # and run the task  
       o.run_task(task_name, task_run_set.id, options)
     end

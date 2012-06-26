@@ -11,8 +11,8 @@ def allowed_types
   [Host]
 end
 
-def setup(object, options={})
-  super(object, options)
+def setup(entity, options={})
+  super(entity, options)
 end
 
 def run
@@ -20,23 +20,23 @@ def run
 
   begin
 
-    resolved_name = Resolv.new.getname(@object.ip_address).to_s
+    resolved_name = Resolv.new.getname(@entity.ip_address).to_s
 
     if resolved_name
       @task_logger.log_good "Creating domain #{name}"
       
-      # Create our new domain object with the resolved name
-      d = create_object(Domain, {:name => resolved_name})
+      # Create our new domain entity with the resolved name
+      d = create_entity(Domain, {:name => resolved_name})
 
       # Assocate the resolved name with the host
-      @object.domains << d # add a domain name for this host
-      d.hosts << @object # add this host as an address
+      @entity.domains << d # add a domain name for this host
+      d.hosts << @entity # add this host as an address
 
       # Save the raw data
       #@task_run.save_raw_result resolved_name.to_s
 
     else
-      @task_logger.log "Unable to find a name for #{@object.ip_address}"
+      @task_logger.log "Unable to find a name for #{@entity.ip_address}"
     end
 
   rescue Exception => e

@@ -18,8 +18,8 @@ def allowed_types
   [Domain, SearchString, Organization]
 end
 
-def setup(object, options={})
-  super(object, options)
+def setup(entity, options={})
+  super(entity, options)
   self
 end
 
@@ -72,11 +72,11 @@ def run
     gtld_list.each do |tld|
       begin
 
-        if @object.class == Domain
+        if @entity.class == Domain
           # get only the basename
-          basename = @object.name.split(".")[0..-2].join(".").gsub(" ","")
+          basename = @entity.name.split(".")[0..-2].join(".").gsub(" ","")
         else
-          basename = @object.name.gsub(" ", "")
+          basename = @entity.name.gsub(" ", "")
         end
         
         # Calculate the domain name
@@ -86,16 +86,16 @@ def run
         resolved_address = Resolv.new.getaddress(domain)
         @task_logger.log_good "Resolved Address #{resolved_address} for #{domain}" if resolved_address
 
-        # If we resolved, create the right objects
+        # If we resolved, create the right entitys
         if resolved_address
-          @task_logger.log_good "Creating domain and host objects..."
-          d = create_object(Domain, {:name => domain})
-          h = create_object(Host, {:ip_address => resolved_address})
+          @task_logger.log_good "Creating domain and host entitys..."
+          d = create_entity(Domain, {:name => domain})
+          h = create_entity(Host, {:ip_address => resolved_address})
           
-          # Associate our host and domain objects.
+          # Associate our host and domain entitys.
           d.hosts << h
           h.domains << d
-          d.organization = @object if @object.kind_of? Organization
+          d.organization = @entity if @entity.kind_of? Organization
         end
 
         #@task_run.save_raw_result "#{domain}: resolved_address"

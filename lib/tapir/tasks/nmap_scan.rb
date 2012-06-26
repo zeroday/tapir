@@ -12,8 +12,8 @@ def allowed_types
   [Domain, Host, NetBlock]
 end
 
-def setup(object, options={})
-  super(object, options)
+def setup(entity, options={})
+  super(entity, options)
 end
 
 ## Default method, subclasses must override this
@@ -22,14 +22,14 @@ def run
   
   nmap_options = @options['nmap_options']
   
-  if @object.kind_of? Host
-    to_scan = @object.ip_address
-  elsif @object.kind_of? NetBlock
-    to_scan = @object.range
-  elsif @object.kind_of? Domain
-    to_scan = @object.name
+  if @entity.kind_of? Host
+    to_scan = @entity.ip_address
+  elsif @entity.kind_of? NetBlock
+    to_scan = @entity.range
+  elsif @entity.kind_of? Domain
+    to_scan = @entity.name
   else
-    raise ArgumentError, "Unknown object type"
+    raise ArgumentError, "Unknown entity type"
   end
   
   rand_file_path = "#{Dir::tmpdir}/nmap_scan_#{to_scan}_#{rand(100000000)}.xml"
@@ -44,28 +44,28 @@ def run
   @task_logger.log "Parsing #{rand_file_path}"
   parser = Nmap::Parser.parsefile(rand_file_path)
 
-  # Create objects for each discovered service
+  # Create entitys for each discovered service
   parser.hosts("up") do |host|
 
     @task_logger.log "Handling nmap data for #{host.addr}"
 
-    # Handle the case of a netblock or domain - where we will need to create host object(s)
-    master_object = @object
-    if @object.kind_of? NetBlock or @object.kind_of? Domain
-      @object = create_object(Host, {:ip_address => host.addr })
+    # Handle the case of a netblock or domain - where we will need to create host entity(s)
+    master_entity = @entity
+    if @entity.kind_of? NetBlock or @entity.kind_of? Domain
+      @entity = create_entity(Host, {:ip_address => host.addr })
     end
 
     [:tcp, :udp].each do |proto_type|
       host.getports(proto_type, "open") do |port|
       @task_logger.log "Creating Service: #{port}"
-      create_object(NetSvc, {
-        :host_id => @object.id,
+      create_entity(NetSvc, {
+        :host_id => @entity.id,
         :port_num => port.num,
         :proto => port.proto,
         :fingerprint => "#{port.service.name} #{port.service.product} #{port.service.version}"})
       end
-      # reset this back to the main task object & loop
-      @object = master_object
+      # reset this back to the main task entity & loop
+      @entity = master_entity
     end
   
   end

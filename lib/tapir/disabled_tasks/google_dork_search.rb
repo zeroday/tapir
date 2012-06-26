@@ -13,8 +13,8 @@ def allowed_types
   [SearchString, Organization, Domain, Host]
 end
 
-def setup(object, options={})
-  super(object, options)
+def setup(entity, options={})
+  super(entity, options)
   self
 end
 
@@ -30,10 +30,10 @@ def run
   dork_strings.each do |dork|
 
     # do the actual search - dependent on the type
-    if @object.kind_of?(Organization)
-      results = x.search "#{dork} inurl:#{@object.name}"
-    elsif @object.kind_of?(Domain)
-      results = x.search "#{dork} site:#{@object.name}"
+    if @entity.kind_of?(Organization)
+      results = x.search "#{dork} inurl:#{@entity.name}"
+    elsif @entity.kind_of?(Domain)
+      results = x.search "#{dork} site:#{@entity.name}"
     else
       results = x.search "#{dork}"
     end

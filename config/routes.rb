@@ -16,7 +16,7 @@ Tapir::Application.routes.draw do
   resources :organizations
   resources :tasks
   resources :task_runs 
-  resources :object_mappings
+  resources :entity_mappings
 
 
 

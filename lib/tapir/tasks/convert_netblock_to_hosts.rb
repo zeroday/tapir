@@ -14,16 +14,16 @@ def allowed_types
   [NetBlock]
 end
 
-def setup(object, options={})
-  super(object, options)
+def setup(entity, options={})
+  super(entity, options)
 end
 
 ## Default method, subclasses must override this
 def run
   super
-  r = Rex::Socket::RangeWalker.new @object.range
+  r = Rex::Socket::RangeWalker.new @entity.range
   r.each do|address|
-    create_object(Host, {:ip_address => address})
+    create_entity(Host, {:ip_address => address})
   end
 end
 

@@ -6,7 +6,7 @@ end
 # Returns a string which describes what this task does
 #
 def description
-  "This task simply attaches a note object to the current object."
+  "This task simply attaches a note entity to the current entity."
 end
 
 #
@@ -16,16 +16,16 @@ def allowed_types
   [Domain, Host, Organization, User]
 end
 
-def setup(object, options={})
-  super(object, options)
+def setup(entity, options={})
+  super(entity, options)
 end
 
 def run
   super
   #
-  # Create the attached note object
+  # Create the attached note entity
   # 
-  x = create_object Note, { :name => @options[:name], :description => @options[:description] }
+  x = create_entity Note, { :name => @options[:name], :description => @options[:description] }
 end
 
 def cleanup

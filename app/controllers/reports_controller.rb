@@ -1,10 +1,10 @@
 class ReportsController < ApplicationController
 
   def list_all
-    @objects = Object.all
+    @entitys = Entity.instance.all
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @objects }
+      format.json { render json: @entitys }
     end
   end
 

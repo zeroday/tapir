@@ -1,10 +1,10 @@
-<%= form_for(@object_mapping) do |f| %>
-  <% if @object_mapping.errors.any? %>
+<%= form_for(@entity_mapping) do |f| %>
+  <% if @entity_mapping.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@object_mapping.errors.count, "error") %> prohibited this object_mapping from being saved:</h2>
+      <h2><%= pluralize(@entity_mapping.errors.count, "error") %> prohibited this entity_mapping from being saved:</h2>
 
       <ul>
-      <% @object_mapping.errors.full_messages.each do |msg| %>
+      <% @entity_mapping.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
       </ul>

@@ -35,7 +35,7 @@ class Importer
   def import_file(file)
     f = File.open(file, "r")
 
-    # Open the file and create objects for each line
+    # Open the file and create entities for each line
     f.each_line do |line| 
       begin
         if line

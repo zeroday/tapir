@@ -24,7 +24,7 @@ users.each do |user|
   puts "trying #{user}"
   begin 
 
-    # create the user object
+    # create the user entity
     u = User.create :usernames => [user]
     u.run_task "twitpic_photo_locations"
 

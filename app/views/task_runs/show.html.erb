@@ -6,13 +6,13 @@
 </p>
 
 <p>
-  <b>Task object:</b>
-  <%= @task_run.task_object_id %>
+  <b>Task entity:</b>
+  <%= @task_run.task_entity_id %>
 </p>
 
 <p>
-  <b>Task object type:</b>
-  <%= @task_run.task_object_type %>
+  <b>Task entity type:</b>
+  <%= @task_run.task_entity_type %>
 </p>
 
 <p>
@@ -28,7 +28,7 @@
 <p>
   <b>Associated Objects :</b>
   <ul>
-    <% @task_run.object_mappings.each {|o|%>
+    <% @task_run.entity_mappings.each {|o|%>
       <li><%= link_to o, o %></li>
     <% } %>
   </ul>

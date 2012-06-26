@@ -12,17 +12,17 @@ def allowed_types
   [WebApp]
 end
 
-def setup(object, options={})
-  super(object, options)
+def setup(entity, options={})
+  super(entity, options)
 
-  if @object.kind_of? Host
-    url = "http://#{@object.ip_address}/robots.txt"
+  if @entity.kind_of? Host
+    url = "http://#{@entity.ip_address}/robots.txt"
   else
-    url = "http://www.#{@object.name}/robots.txt"
+    url = "http://www.#{@entity.name}/robots.txt"
   end
   
   begin
-    @task_logger.log "Connecting to #{url} for #{@object}" 
+    @task_logger.log "Connecting to #{url} for #{@entity}" 
 
     # Prevent encoding errors
     contents = open("#{url}").read.force_encoding('UTF-8')

@@ -14,9 +14,9 @@ def allowed_types
   [Domain]
 end
 
-def setup(object, options={})
+def setup(entity, options={})
   puts "CALLING SUPER!"
-  super(object, options)
+  super(entity, options)
   self
 end
 
@@ -47,25 +47,25 @@ def run
       
         # blatently stolen from HDM's webinar on password stealing, try without a dot to see
         # if this domain has been hijacked by someone - great for finding phishing attempts
-        domain = "#{sub}#{@object.name}"
+        domain = "#{sub}#{@entity.name}"
       else  
-        domain = "#{sub}.#{@object.name}"
+        domain = "#{sub}.#{@entity.name}"
       end
 
       # Try to resolve
       resolved_address = Resolv.new.getaddress(domain)
       @task_logger.log_good "Resolved Address #{resolved_address} for #{domain}" if resolved_address
       
-      # If we resolved, create the right objects
+      # If we resolved, create the right entitys
       if resolved_address
  
-        @task_logger.log_good "Creating domain and host objects..."
+        @task_logger.log_good "Creating domain and host entitys..."
 
-        # create new host and domain objects
-        d = create_object(Domain, {:name => domain, :organization => @object.organization })
-        h = create_object(Host, {:ip_address => resolved_address})
+        # create new host and domain entitys
+        d = create_entity(Domain, {:name => domain, :organization => @entity.organization })
+        h = create_entity(Host, {:ip_address => resolved_address})
 
-        # Associate our host and domain objects. 
+        # Associate our host and domain entitys. 
         d.hosts << h
         h.domains << d
 

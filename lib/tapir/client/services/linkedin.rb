@@ -56,19 +56,19 @@ class SearchService
 
   def initialize
     
-    client = LinkedIn::Client.new(Tapir::ApiKeys.instance.keys['linkedin_api_key'], Tapir::ApiKeys.instance.keys['linkedin_secret_key'])
+    @client = LinkedIn::Client.new(Tapir::ApiKeys.instance.keys['linkedin_api_key'], Tapir::ApiKeys.instance.keys['linkedin_secret_key'])
     rtoken = client.request_token.token
     rsecret = client.request_token.secret
 
     # to test from your desktop, open the following url in your browser
     # and record the pin it gives you
-    client.request_token.authorize_url
+    @client.request_token.authorize_url
 
     # then fetch your access keys
-    access_keys = client.authorize_from_request(rtoken, rsecret, pin)
+    access_keys = @client.authorize_from_request(rtoken, rsecret, pin)
 
     # or authorize from previously fetched access keys
-    c.authorize_from_access(access_keys.first, access_keys.last)
+    @client.authorize_from_access(access_keys.first, access_keys.last)
   end
 
   # 
@@ -76,16 +76,14 @@ class SearchService
   # 
   # Ruturns: An array of search results 
   #
-  def search(search_string)
-
-    # Convert to a get-paramenter
-    search_string = CGI.escapeHTML search_string
-    search_string.gsub!(" ", "&nbsp;")
-
-    results = []
-    
-    return results
+  def search_company(company_name)
+    @client.search(company_name, :company)
   end
+
+  def search_person(person_name)
+    @client.search person_name, :person
+  end
+
 end
 
 # This class represents a corporation as returned by the Linkedin service. 

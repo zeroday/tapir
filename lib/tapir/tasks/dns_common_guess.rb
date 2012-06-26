@@ -14,16 +14,16 @@ def allowed_types
   [Organization]
 end
 
-def setup(object, options={})
-  super(object, options)
+def setup(entity, options={})
+  super(entity, options)
 end
 
 def run
   super
 
-  @task_logger.log "Running DNS name guess on #{@object}"
+  @task_logger.log "Running DNS name guess on #{@entity}"
 
-  guess_name = @object.name.gsub(" ", "")
+  guess_name = @entity.name.gsub(" ", "")
 
   domains = ["#{guess_name}.com", "#{guess_name}.net", "#{guess_name}.org"]
 
@@ -36,11 +36,11 @@ def run
         #@task_run.save_raw_result "domain: #{res_answer}"
 
         # We know the domain is ~valid, and the ip address too
-        d = create_object(Domain, :name => domain)
-        h = create_object(Host, :ip_address => res_answer)
+        d = create_entity(Domain, :name => domain)
+        h = create_entity(Host, :ip_address => res_answer)
 
         # Associate
-        @object.domains << d if d
+        @entity.domains << d if d
         d.hosts << h if h
 
     end

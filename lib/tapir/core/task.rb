@@ -27,7 +27,7 @@ class Task
 
   def candidates
     x = []
-    Object.all.each {|o| x << o if self.allowed_types.include? o.class }
+    Entity.instance.all.each {|o| x << o if self.allowed_types.include? o.class }
   x
   end
 
@@ -58,16 +58,16 @@ class Task
   #
   # Override me
   #
-  def setup(object, options={})
+  def setup(entity, options={})
     
-    @object = object # the object we're operating on
+    @entity = entity # the entity we're operating on
     @options = options # the options for this task
-    @results = [] # temporary collection of all created objects
+    @results = [] # temporary collection of all created entitys
 
-    # Create a task run for each one of our objects
+    # Create a task run for each one of our entitys
     @task_run = TaskRun.create :task_name => self.name, 
-      :task_object_id => @object.id,
-      :task_object_type => @object.class.to_s,
+      :task_entity_id => @entity.id,
+      :task_entity_type => @entity.class.to_s,
       :task_options_hash => @options
 
     @task_logger = TaskLogger.new(@task_run.id, self.name, true)
@@ -76,7 +76,7 @@ class Task
     # Do a little logging. do it for the kids.
     #
     @task_logger.log "Setup called."
-    @task_logger.log "Task object: #{@object}"
+    @task_logger.log "Task entity: #{@entity}"
     @task_logger.log "Task options: #{@options.inspect}"
   end
   
@@ -112,23 +112,23 @@ class Task
 
   #
   # Convenience method that makes it easy to create
-  # objects from within a task. designed to simplify the 
+  # entitys from within a task. designed to simplify the 
   # task api. do not override.
   #
-  # current_object keeps track of the current object which we're associating with
-  # params are params for creating the new object
-  #  new_object keeps track of the new object
+  # current_entity keeps track of the current entity which we're associating with
+  # params are params for creating the new entity
+  #  new_entity keeps track of the new entity
   #
-  def create_object(type, params, current_object=@object)
-    @task_logger.log "Attempting to create new object of type: #{type}"
+  def create_entity(type, params, current_entity=@entity)
+    @task_logger.log "Attempting to create new entity of type: #{type}"
     #
     # Call the create method for this type
     #
-    new_object = type.send(:create, params)
+    new_entity = type.send(:create, params)
 
     #
     # Check for dupes & return right away if this doesn't save a new
-    # object. This should prevent the object mapping from getting created.
+    # entity. This should prevent the entity mapping from getting created.
     #
     
     
@@ -137,48 +137,48 @@ class Task
     #
     #binding.pry
     
-    if new_object.save
-      @task_logger.log_good "Created new object: #{new_object}"
+    if new_entity.save
+      @task_logger.log_good "Created new entity: #{new_entity}"
     else
-      @task_logger.log "Could not save object, are you sure it's valid & doesn't already exist?"
-      new_object = find_object type, params
+      @task_logger.log "Could not save entity, are you sure it's valid & doesn't already exist?"
+      new_entity = find_entity type, params
     end
     
     #
-    # If we have a new object, then we should keep track of the information
-    # that created this object
+    # If we have a new entity, then we should keep track of the information
+    # that created this entity
     #
-    # TODO - this currently prevents objects from being mapped as children twice (with different task runs)
+    # TODO - this currently prevents entitys from being mapped as children twice (with different task runs)
     # this might not be desired behavior in some cases
     #
-    if current_object.children.include? new_object
-      @task_logger.log "Skipping association of #{current_object} and #{new_object}. It's already a child."
+    if current_entity.children.include? new_entity
+      @task_logger.log "Skipping association of #{current_entity} and #{new_entity}. It's already a child."
     else
-      @task_logger.log "Associating #{current_object} with #{new_object} and task run #{@task_run}"
-      current_object.associate_child({:child => new_object, :task_run => @task_run}) 
+      @task_logger.log "Associating #{current_entity} with #{new_entity} and task run #{@task_run}"
+      current_entity.associate_child({:child => new_entity, :task_run => @task_run}) 
     end
     
-  new_object
+  new_entity
   end
 
   #
-  # This method is used to locate a pre-existing object before we try to save a new 
-  # object. It is called by create_object in the Task class. The params object is a 
-  # set of things that will be used to create the object, so it's generally safe to 
-  # refer to the most common of parameters for the object (especially if they're 
+  # This method is used to locate a pre-existing entity before we try to save a new 
+  # entity. It is called by create_entity in the Task class. The params entity is a 
+  # set of things that will be used to create the entity, so it's generally safe to 
+  # refer to the most common of parameters for the entity (especially if they're 
   # enforced by validation)
   #
   # takes a type, and a set of params
   #
-  # returns the object if it is found, else false
+  # returns the entity if it is found, else false
   #
-  # Will raise an error if it doesn't know how to find a type of object
+  # Will raise an error if it doesn't know how to find a type of entity
   #
   # ooh, this is dangerous metamagic. -- would need to be revisited if we do 
   # something weird with the models. for now, it should be sufficent to generally
   # send "name" and special case anything else.
   #
-  def find_object(type, params)
+  def find_entity(type, params)
     if type == Host
       return Host.find_by_ip_address params[:ip_address]
     elsif type == Account
@@ -193,7 +193,7 @@ class Task
       if params.has_key? :name
         return type.send(:find_by_name, params[:name])
         else
-        raise "Don't know how to find this object of type #{type}"
+        raise "Don't know how to find this entity of type #{type}"
       end
     end
   end
@@ -201,20 +201,20 @@ class Task
   # 
   # Run the task. Convenience method. Do not override
   #
-  def execute(object, options={}, task_run_set_id)
+  def execute(entity, options={}, task_run_set_id)
     
     #
     # Do some logging in the main Tapir log
     # 
     TapirLogger.instance.log "Running task: #{self.name}"
-    TapirLogger.instance.log "Object: #{object}"
+    TapirLogger.instance.log "entity: #{entity}"
     TapirLogger.instance.log "Options: #{options}"
 
     #
-    # Call the methods to actually do something with the objects that have
+    # Call the methods to actually do something with the entitys that have
     # been passed into this task
     #
-    self.setup(object, options)
+    self.setup(entity, options)
     
     #
     # UGH. This is so we can keep track of which tasks were run together.

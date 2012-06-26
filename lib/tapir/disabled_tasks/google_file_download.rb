@@ -13,8 +13,8 @@ def allowed_types
   [SearchString, Domain]
 end
 
-def setup(object, options={})
-  super(object, options)
+def setup(entity, options={})
+  super(entity, options)
   self
 end
 
@@ -26,7 +26,7 @@ def run
   x = Tapir::Client::Google::SearchService.new
 
   file_type_list.each do |file_type|
-    results = x.search("#{@object.name} filetype:#{file_type}")
+    results = x.search("#{@entity.name} filetype:#{file_type}")
 
     results.each do |result|
       puts result.title

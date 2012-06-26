@@ -1,0 +1,21 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Parent:</b>
+  <%= link_to @entity_mapping.get_parent.class, @entity_mapping.get_parent %>
+</p>
+
+<p>
+  <b>Child:</b>
+  <%= link_to @entity_mapping.get_child.class, @entity_mapping.get_child %>
+</p>
+
+<p>
+  <b>Task run:</b>
+  <%= link_to TaskRun, TaskRun.find_by_id(@entity_mapping.task_run_id) %>
+</p>
+
+
+<%= link_to 'Edit', edit_entity_mapping_path(@entity_mapping) %> |
+<%= link_to "Destroy", @entity_mapping, :confirm => 'Are you sure?', :method => :delete %> |
+<%= link_to 'Back', entity_mappings_path %>

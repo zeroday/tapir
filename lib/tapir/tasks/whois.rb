@@ -12,8 +12,8 @@ def allowed_types
   [Host, Domain]
 end
 
-def setup(object, options={})
-  super(object, options)
+def setup(entity, options={})
+  super(entity, options)
 end
 
 def run
@@ -24,7 +24,7 @@ def run
   #
   begin 
     whois = Whois::Client.new(:timeout => 20)
-    answer = whois.query @object.name 
+    answer = whois.query @entity.name 
   rescue Whois::Error => e
     @task_logger.log "Unable to query whois: #{e}"
   rescue StandardError => e
@@ -41,7 +41,7 @@ def run
     #
     # if it was a domain, we've got a whole lot of shit we can scoop
     #
-    if @object.kind_of? Domain
+    if @entity.kind_of? Domain
       #
       # We're going to have nameservers either way?
       #
@@ -51,32 +51,32 @@ def run
           # If it's an ip address, let's create a host record
           #
           if nameserver.to_s =~ /\d\.\d\.\d\.\d/
-            new_object = create_object Host , :ip_address => nameserver.to_s
+            new_entity = create_entity Host , :ip_address => nameserver.to_s
           else
             #
             # Otherwise it's another domain, and we can't do much but add it
             #
-            new_object = create_object Domain, :name => nameserver.to_s
+            new_entity = create_entity Domain, :name => nameserver.to_s
           end
         end
       end
       #
       # Set the record properties
       #
-      @object.disclaimer = answer.disclaimer
-#      @object.domain = answer.domain
-      @object.referral_whois = answer.referral_whois
-      @object.status = answer.status
-      @object.registered = answer.registered?
-      @object.available = answer.available?
+      @entity.disclaimer = answer.disclaimer
+#      @entity.domain = answer.domain
+      @entity.referral_whois = answer.referral_whois
+      @entity.status = answer.status
+      @entity.registered = answer.registered?
+      @entity.available = answer.available?
       if answer.registrar
-        @object.registrar_name = answer.registrar.name
-        @object.registrar_org = answer.registrar.organization
-        @object.registrar_url = answer.registrar.url
+        @entity.registrar_name = answer.registrar.name
+        @entity.registrar_org = answer.registrar.organization
+        @entity.registrar_url = answer.registrar.url
       end
-      @object.record_created_on = answer.created_on
-      @object.record_updated_on = answer.updated_on
-      @object.record_expires_on = answer.expires_on
+      @entity.record_created_on = answer.created_on
+      @entity.record_updated_on = answer.updated_on
+      @entity.record_expires_on = answer.expires_on
       
       #
       # Create a user from the technical contact
@@ -85,7 +85,7 @@ def run
         if answer.technical_contact
           @task_logger.log "Creating user from technical contact"
           fname,lname = answer.technical_contact.name.split(" ")
-          create_object(User, {:first_name => fname, :last_name => lname})
+          create_entity(User, {:first_name => fname, :last_name => lname})
         end
       rescue Exception => e 
         @task_logger.log "Unable to grab technical contact" 
@@ -98,7 +98,7 @@ def run
         if answer.admin_contact
           @task_logger.log "Creating user from admin contact"
           fname,lname = answer.admin_contact.name.split(" ")
-          create_object(User, {:first_name => fname, :last_name => lname})
+          create_entity(User, {:first_name => fname, :last_name => lname})
         end
       rescue Exception => e 
         @task_logger.log "Unable to grab admin contact" 
@@ -111,22 +111,22 @@ def run
         if answer.registrant_contact
           @task_logger.log "Creating user from registrant contact"
           fname,lname = answer.registrant_contact.name.split(" ")
-          create_object(User, {:first_name => fname, :last_name => lname})
+          create_entity(User, {:first_name => fname, :last_name => lname})
         end
       rescue Exception => e 
         @task_logger.log "Unable to grab registrant contact" 
      end
 
-    @object.save!
+    @entity.save!
 
     #
-    # Otherwise our object must've been a host
+    # Otherwise our entity must've been a host
     #
     else 
       #
       # Parse out the netrange - WARNING SUPERGHETTONESS ABOUND
       #
-      doc = Nokogiri::XML(open ("http://whois.arin.net/rest/ip/#{@object.ip_address}"))
+      doc = Nokogiri::XML(open ("http://whois.arin.net/rest/ip/#{@entity.ip_address}"))
       start_address = doc.xpath("//xmlns:net/xmlns:startAddress").text
       end_address = doc.xpath("//xmlns:net/xmlns:endAddress").text
       handle = doc.xpath("//xmlns:net/xmlns:handle").text
@@ -134,7 +134,7 @@ def run
       #
       #
       #
-      create_object NetBlock, {
+      create_entity NetBlock, {
         :range => "#{start_address}-#{end_address}",
         :handle => handle, 
         :description => org_ref

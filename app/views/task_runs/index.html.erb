@@ -3,8 +3,8 @@
 <table>
   <tr>
     <th>Task Name</th>
-    <th>Task object</th>
-    <th>Task object type</th>
+    <th>Task entity</th>
+    <th>Task entity type</th>
     <th>Task options hash</th>
     <th></th>
     <th></th>
@@ -14,8 +14,8 @@
 <% @task_runs.each do |task_run| %>
   <tr>
     <td><%= task_run.task_name %></td>
-    <td><%= task_run.task_object_id %></td>
-    <td><%= task_run.task_object_type %></td>
+    <td><%= task_run.task_entity_id %></td>
+    <td><%= task_run.task_entity_type %></td>
     <td><%= task_run.task_options_hash %></td>
     <td><%= link_to 'Show', task_run %></td>
     <td><%= link_to 'Edit', edit_task_run_path(task_run) %></td>

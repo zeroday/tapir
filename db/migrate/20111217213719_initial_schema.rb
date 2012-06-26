@@ -1,7 +1,7 @@
 class InitialSchema < ActiveRecord::Migration
 
   def change
-    create_table :object_mappings do |t|
+    create_table :entity_mappings do |t|
       t.integer       :child_id
       t.string        :child_type
       t.integer       :parent_id
@@ -16,8 +16,8 @@ class InitialSchema < ActiveRecord::Migration
 
     create_table  :task_runs do |t|
       t.string        :task_name
-      t.integer       :task_object_id
-      t.string        :task_object_type
+      t.integer       :task_entity_id
+      t.string        :task_entity_type
       t.text          :task_options_hash
       t.text          :task_log
       t.integer       :task_run_set_id

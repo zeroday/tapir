@@ -17,8 +17,8 @@ def allowed_types
   [Organization]
 end
 
-def setup(object, options={})
-  super(object, options)
+def setup(entity, options={})
+  super(entity, options)
   self
 end
 
@@ -29,7 +29,7 @@ def run
   # underneath us. 
   begin
     # construct a searchable name - TODO urlencode?
-    temp_name = @object.name.gsub(" ","%20")
+    temp_name = @entity.name.gsub(" ","%20")
     
     # Search URI
     search_uri = "http://www.hoovers.com/search/company-search-results/100005142-1.html?type=company&term=#{temp_name}"
@@ -63,7 +63,7 @@ def run
         @task_logger.log_good "Got City & State: #{city_state}"
 
         # Set the City and State
-        @object.physical_locations << create_object(PhysicalLocation, {
+        @entity.physical_locations << create_entity(PhysicalLocation, {
           :address => street_address,
           :city => city_state.split(' ').first, 
           :state => city_state.split(' ').last })
@@ -78,9 +78,9 @@ def run
           # Split up the name
           first_name,last_name = full_name.split(' ')
 
-          # Create the user objects
-          @task_logger.log_good "Adding user object for: #{full_name}"
-          @object.users << create_object(User, { 
+          # Create the user entitys
+          @task_logger.log_good "Adding user entity for: #{full_name}"
+          @entity.users << create_entity(User, { 
             :first_name => first_name, 
             :last_name => last_name })
         end

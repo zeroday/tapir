@@ -31,7 +31,9 @@ group :assets do
 end
 
 gem 'jquery-rails'
+gem 'jquery-ui-rails'
 gem 'jquery-datatables-rails', github: 'rweng/jquery-datatables-rails'
+gem 'will_paginate'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
@@ -66,9 +68,15 @@ gem 'packetfu'
 gem 'linkedin'
 gem 'flickr'
 
+# Debugging 
+gem 'pry'
+gem 'pry-rails'
+gem 'pry-nav'
+
 # Scraping
+gem 'mechanize'
 gem 'nokogiri'
-gem 'gsearch-parser'
+#gem 'gsearch-parser'
 
 # Heavy-duty javascript scraping
 gem 'selenium-webdriver' # browser based scraping with capybara

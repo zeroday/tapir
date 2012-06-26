@@ -17,8 +17,8 @@ def allowed_types
   [SearchString]
 end
 
-def setup(object, options={})
-  super(object, options)
+def setup(entity, options={})
+  super(entity, options)
   self
 end
 
@@ -29,7 +29,7 @@ def run
   # Wrap the whole thing in a begin, we could have URI's switched beneath us. 
   begin
     # Search URI
-    search_uri = "http://www.hoovers.com/search/company-search-results/100005142-1.html?type=company&term=#{@object.name}"
+    search_uri = "http://www.hoovers.com/search/company-search-results/100005142-1.html?type=company&term=#{@entity.name}"
 
     # Open page & parse
     @task_logger.log "Using Company URI: #{search_uri}"
@@ -44,8 +44,8 @@ def run
       company_uri = "http://www.hoovers.com#{company_path}"
       @task_logger.log "Using Company search URI: #{company_uri}"
 
-      # Create a new organization object
-      o = create_object(Organization, { :name => company_name })
+      # Create a new organization entity
+      o = create_entity(Organization, { :name => company_name })
 
       # Queue a detailed search
       TaskManager.instance.queue_task_run("hoovers_company_detail",o, {})

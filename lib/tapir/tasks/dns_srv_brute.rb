@@ -14,8 +14,8 @@ def allowed_types
   [Domain]
 end
 
-def setup(object, options={})
-  super(object, options)
+def setup(entity, options={})
+  super(entity, options)
   
     @resolver  = Dnsruby::DNS.new # uses system default
   
@@ -55,7 +55,7 @@ def run
     begin
 
       # Calculate the domain name
-      domain = "#{srv}.#{@object.name}"
+      domain = "#{srv}.#{@entity.name}"
 
       # Try to resolve
       @resolver.getresources(domain, "SRV").collect do |rec|
@@ -68,22 +68,22 @@ def run
 
         @task_logger.log_good "Resolved Address #{resolved_address} for #{domain}" if resolved_address
 
-        # If we resolved, create the right objects
+        # If we resolved, create the right entitys
         if resolved_address
-          @task_logger.log_good "Creating domain and host objects..."
+          @task_logger.log_good "Creating domain and host entitys..."
 
           # Create a domain. pass down the organization if we have it.
-          d = create_object(Domain, {:name => domain, :organization => @object.organization })
+          d = create_entity(Domain, {:name => domain, :organization => @entity.organization })
 
           # Create a host to store the ip address
-          h = create_object(Host, {:ip_address => resolved_address})
+          h = create_entity(Host, {:ip_address => resolved_address})
 
           # associate the newly-created host with the domain
           d.hosts << h 
           h.domains << d
           
           # create a service, and also associate that with our host.
-          h.net_svcs << create_object(NetSvc, {:type => "tcp", :port => port, :host => h})
+          h.net_svcs << create_entity(NetSvc, {:type => "tcp", :port => port, :host => h})
 
           # Save the raw content of our query
           #@task_run.save_raw_result rec.to_s

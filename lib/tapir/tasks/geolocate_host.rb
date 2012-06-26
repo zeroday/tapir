@@ -13,8 +13,8 @@ require 'iconv'
     [Host]
   end
 
-  def setup(object, options={})
-    super(object, options)
+  def setup(entity, options={})
+    super(entity, options)
     @db = GeoIP.new(File.join(Rails.root, 'data', 'geolitecity', 'latest.dat'))
     self
   end
@@ -23,16 +23,16 @@ require 'iconv'
     super
 
     begin
-      @task_logger.log "looking up location for #{@object.ip_address}"
+      @task_logger.log "looking up location for #{@entity.ip_address}"
 
       #
       # This call attempts to do a lookup
       #
-      loc = @db.city(@object.ip_address)
+      loc = @db.city(@entity.ip_address)
       
       if loc
-        @task_logger.log "adding location for #{@object.ip_address}"
-        create_object(PhysicalLocation, { 
+        @task_logger.log "adding location for #{@entity.ip_address}"
+        create_entity(PhysicalLocation, { 
           :zip => loc.postal_code.encode('UTF-8', :invalid => :replace),
           :city => loc.city_name.encode('UTF-8', :invalid => :replace),
           :state => loc.region_name.encode('UTF-8', :invalid => :replace),

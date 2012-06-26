@@ -13,8 +13,8 @@ def allowed_types
   [Organization]
 end
 
-def setup(object, options={})
-  super(object, options)
+def setup(entity, options={})
+  super(entity, options)
   self
 end
 
@@ -23,10 +23,10 @@ def run
   super
 
   x = Tapir::Client::Corpwatch::CorpwatchService.new
-  corps = x.search @object.name
+  corps = x.search @entity.name
 
-  # Attach to the first object
-  @object.physical_locations << create_object(PhysicalLocation, {
+  # Attach to the first entity
+  @entity.physical_locations << create_entity(PhysicalLocation, {
     :address => corps.first.address, 
     :state => corps.first.state, 
     :country => corps.first.country })

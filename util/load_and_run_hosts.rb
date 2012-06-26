@@ -10,7 +10,7 @@ puts "Running..."
 # For each domain
 f.each do |line| 
   begin 
-    # create the domain object
+    # create the domain entity
     h = Host.create :ip_address => line.strip
   rescue Exception => e
     puts "ohnoes! #{e}"

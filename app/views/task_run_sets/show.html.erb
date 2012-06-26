@@ -11,7 +11,7 @@
     <td><%= task_run.task_name %></td>
     <td>
       <ul>
-      <% task_run.object_mappings.each do |x| %>
+      <% task_run.entity_mappings.each do |x| %>
         <li><%= link_to(x.get_child.to_s, x.get_child) %></li>
       <% end %>
       </ul>

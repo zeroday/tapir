@@ -54,7 +54,7 @@ module ModelHelper
       end
       
       #
-      # This method lets you query the available tasks for this object type
+      # This method lets you query the available tasks for this entity type
       #
       def tasks
         TapirLogger.instance.log "Getting tasks for #{self}"
@@ -62,7 +62,7 @@ module ModelHelper
       end
 
       #
-      # This method lets you run a task on this object
+      # This method lets you run a task on this entity
       #
       def run_task(task_name, task_run_set_id, options={})
         TapirLogger.instance.log "Asking task manager to queue task #{task_name} run on #{self} with options: #{options} - part of taskrun set: #{task_run_set_id}"
@@ -74,7 +74,7 @@ module ModelHelper
       #
       def children
         TapirLogger.instance.log "Finding children for #{self}"
-        ObjectManager.instance.find_children(self.id, self.class.to_s)
+        EntityManager.instance.find_children(self.id, self.class.to_s)
       end
 
       #
@@ -82,7 +82,7 @@ module ModelHelper
       #
       def parents
         TapirLogger.instance.log "Finding parents for #{self}"
-        ObjectManager.instance.find_parents(self.id, self.class.to_s)
+        EntityManager.instance.find_parents(self.id, self.class.to_s)
       end
 
       #
@@ -90,35 +90,35 @@ module ModelHelper
       #
       def parent_tasks
         TapirLogger.instance.log "Finding task runs for #{self}"
-        ObjectManager.instance.find_task_runs(self.id, self.class.to_s)
+        EntityManager.instance.find_task_runs(self.id, self.class.to_s)
       end
       
       #
-      # This method associates a child with this object
+      # This method associates a child with this entity
       #
       def associate_child(params)
         # Pull out the relevant parameters
-        new_object = params[:child]
+        new_entity = params[:child]
         task_run = params[:task_run]
 
-        # grab the object's class
-        class_name = new_object.class.to_s.downcase
+        # grab the entity's class
+        class_name = new_entity.class.to_s.downcase
         
-        # And set us up as a parent through an object_mapping
-        # new_object._map_parent(params)  
-         # And associate the object as a child through an object_mapping
-        TapirLogger.instance.log "Associating #{self} with child object #{new_object}"
+        # And set us up as a parent through an entity_mapping
+        # new_entity._map_parent(params)  
+         # And associate the entity as a child through an entity mapping
+        TapirLogger.instance.log "Associating #{self} with child entity #{new_entity}"
         _map_child(params)
       end
       
       # 
       # This method returns a pretty print version of the relationships
-      #  of this object
+      #  of this entity
       # 
       def to_graph(indent=nil)
         out = "Parents:\n"
         self.parents.each { |parent| out << " #{parent}" }
-        out << "\nObject: #{self.to_s}\n"
+        out << "\Entity: #{self.to_s}\n"
         out << "Children:\n"
         self.children.each { |child| out << " #{child}" }
         out
@@ -126,7 +126,7 @@ module ModelHelper
 
       def _map_child(params)
         TapirLogger.instance.log "Creating new child mapping #{self} => #{params[:child]}"
-        ObjectMapping.create(
+        EntityMapping.create(
           :parent_id => self.id,
           :parent_type => self.class.to_s,
           :child_id => params[:child].id,

@@ -71,13 +71,13 @@ class TaskManager
   end
   
   #
-  # Given an object, return all tasks that can operate on that object 
+  # Given an entity, return all tasks that can operate on that entity 
   #
-  def get_tasks_for(object)
+  def get_tasks_for(entity)
     tasks_for_type = []
 
     @tasks.each do |task|
-      if task.allowed_types.include?(object.class)
+      if task.allowed_types.include?(entity.class)
         tasks_for_type << task.clone
       end
     end
@@ -85,11 +85,11 @@ class TaskManager
     tasks_for_type
   end
 
-  # This method will be called by the objects 
-  def queue_task_run(task_name, task_run_set_id, object, options)
+  # This method will be called by the entitys 
+  def queue_task_run(task_name, task_run_set_id, entity, options)
 
     # Make note of the fact that we're shipping this off to the queue
-    TapirLogger.instance.log "Task manager queueing task: #{task_name} for object #{object} with options #{options}"
+    TapirLogger.instance.log "Task manager queueing task: #{task_name} for entity #{entity} with options #{options}"
     
     # Create the task 
     task = _create_task_by_name(task_name)
@@ -108,7 +108,7 @@ class TaskManager
         item = queue.shift
         break if not item
         t = Thread.new do
-          task.execute(object, options, task_run_set_id)
+          task.execute(entity, options, task_run_set_id)
         end
         cur_threads << t
       end
@@ -120,12 +120,12 @@ class TaskManager
 =end
     
     # CURRENTLY NOT THREADED!
-    task.execute(object, options, task_run_set_id)
+    task.execute(entity, options, task_run_set_id)
     
   end
 
 private
-  # This method is used to translate task names into task objects
+  # This method is used to translate task names into task entitys
   def _create_task_by_name(task_name)
     @tasks.each do |t|
       return t.clone if t.name == task_name

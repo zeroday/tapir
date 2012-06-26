@@ -16,8 +16,8 @@ def allowed_types
   [User]
 end
 
-def setup(object, options={})
-  super(object, options)
+def setup(entity, options={})
+  super(entity, options)
 end
 
 # Default method, subclasses must override this
@@ -25,7 +25,7 @@ def run
   super
 
   x = Tapir::Client::TwitPic::TwitPicScraper.new
-  @object.usernames.each do |username|
+  @entity.usernames.each do |username|
     photos = x.search_by_user "#{username}"
       
     photos.each do |photo|
@@ -49,7 +49,7 @@ def run
           # Don't create them if they're useless
           #
           unless lat == 0 and long == 0
-            @object.physical_locations << create_object(PhysicalLocation, {:latitude => "#{lat}",  :longitude => "#{long}"})
+            @entity.physical_locations << create_entity(PhysicalLocation, {:latitude => "#{lat}",  :longitude => "#{long}"})
           end
           
         else
@@ -59,7 +59,7 @@ def run
         @task_logger.log_error "Unable to parse, malformed jpg"
       end
 
-      create_object Image, 
+      create_entity Image, 
         :local_path => photo.local_path,
         :remote_path => photo.remote_path, 
         :description => "twitpic image"

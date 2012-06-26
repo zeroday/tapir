@@ -14,8 +14,8 @@ def allowed_types
   [Domain]
 end
 
-def setup(object, options={})
-  super(object, options)
+def setup(entity, options={})
+  super(entity, options)
 end
 
 def run
@@ -23,7 +23,7 @@ def run
 
   begin 
     # Get the authoritative nameservers & query each of them
-    answer = Whois::Client.new.query(@object.name)
+    answer = Whois::Client.new.query(@entity.name)
     resolved_list = nil
   rescue Exception => e
     @task_logger.log "Unable to query whois: #{e}"
@@ -34,7 +34,7 @@ def run
       # For each authoritive nameserver
       answer.nameservers.each do |nameserver|
         begin
-          @task_logger.log "Attempting Zone Transfer on #{@object} against nameserver #{nameserver}"
+          @task_logger.log "Attempting Zone Transfer on #{@entity} against nameserver #{nameserver}"
 
           res = Dnsruby::Resolver.new(
             :nameserver => nameserver.to_s, 
@@ -42,7 +42,7 @@ def run
             :use_tcp => true, 
             :query_timeout => 5)
 
-          axfr_answer = res.query(@object.name, Dnsruby::Types.AXFR)
+          axfr_answer = res.query(@entity.name, Dnsruby::Types.AXFR)
 
           # If we got a success to the AXFR query.
           if axfr_answer
@@ -51,13 +51,13 @@ def run
             zt = Dnsruby::ZoneTransfer.new
             zt.transfer_type = Dnsruby::Types.AXFR
             zt.server = nameserver
-            zone = zt.transfer(@object.name)
+            zone = zt.transfer(@entity.name)
 
             # Create host records for each item in the zone
             zone.each do |z|
               if z.type == "A"
-                h = create_object Host, { :ip_address => z.address.to_s }
-                d = create_object Domain, { :name => z.name.to_s }
+                h = create_entity Host, { :ip_address => z.address.to_s }
+                d = create_entity Domain, { :name => z.name.to_s }
                 # Associate them 
                 h.domains << d
                 d.hosts << h
@@ -74,19 +74,19 @@ def run
             end
 
             # Record keeping
-            @task_logger.log_good "Zone Tranfer Succeeded on #{@object.name}"
+            @task_logger.log_good "Zone Tranfer Succeeded on #{@entity.name}"
             #@task_run.save_raw_result zone.to_s
 
           end
 
         rescue Dnsruby::Refused
-          @task_logger.log "Zone Transfer against #{@object.name} refused."
+          @task_logger.log "Zone Transfer against #{@entity.name} refused."
 
         rescue Dnsruby::ResolvError
-          @task_logger.log "Unable to resolve #{@object.name} while querying #{nameserver}."
+          @task_logger.log "Unable to resolve #{@entity.name} while querying #{nameserver}."
 
         rescue Dnsruby::ResolvTimeout
-          @task_logger.log "Timed out while querying #{nameserver} for #{@object.name}."
+          @task_logger.log "Timed out while querying #{nameserver} for #{@entity.name}."
 
         rescue Exception => e
           @task_logger.log "Unknown exception: #{e}"
