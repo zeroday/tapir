@@ -2,17 +2,16 @@ module ModelHelper
 
   def self.included(base)
     base.class_eval do
+      
+      include ::MongoMapper::Document
+
+      # everybody deserves a name :)
+      key :name, String, :required => true
+
+
       #
       # gangster method_missing magic to automatically create tasks by name
       #
-
-      #def respond_to?(method,include_private = false)
-      #  TaskManager.instance.get_tasks_for(self).each do |task|
-      #    return true if method =~ Regexp.new(task.name)
-      #  end
-      #  return false
-      #end
-
       def method_missing(method, *args, &block)
          call_parent = true
          TaskManager.instance.get_tasks_for(self).each do |task|

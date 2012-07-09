@@ -1,18 +1,29 @@
 class User < ActiveRecord::Base
-  belongs_to  :organization
-  has_many    :physical_locations
-  has_many    :task_runs
-  has_many    :accounts
-
+  #belongs_to  :organization
+  #has_many    :physical_locations
+  #has_many    :task_runs
+  #has_many    :accounts
   #validates_presence_of :usernames
   
+  after_save :log
+
   serialize :usernames
   
   before_save :default_values, :cleanup_usernames 
   after_save :log
+
   after_create :set_usernames_empty
 
   include ModelHelper
+
+  key :first_name, String
+  key :last_name, String
+  key :middle_name, String
+  key :email_addresses, String
+  key :usernames, String
+  key :first_name, String
+  key :created_at, Time
+  key :updated_at, Time
 
   def to_s
     "#{self.class}: #{self.first_name} #{self.last_name}"

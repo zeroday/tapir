@@ -1,6 +1,17 @@
-class EntityMapping < ActiveRecord::Base
+class EntityMapping
+    #belongs_to :task_run
+    include MongoMapper::Document
+
     belongs_to :task_run
-    
+
+    key :child_id, Integer
+    key :child_type, String
+    key :parent_id, Integer
+    key :parent_type, String
+    key :task_run_id, Integer
+    key :created_at, Time
+    key :updated_at, Time
+
     def get_child
       TapirLogger.instance.log "Trying to find #{child_type}:#{child_id}"
       

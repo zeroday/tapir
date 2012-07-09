@@ -56,6 +56,9 @@ GEM
     ansi (1.4.2)
     arel (3.0.2)
     bootstrap-sass (2.0.3.1)
+    bson (1.6.4)
+    bson_ext (1.6.4)
+      bson (~> 1.6.4)
     builder (3.0.0)
     capybara (1.1.2)
       mime-types (>= 1.16)
@@ -78,15 +81,9 @@ GEM
       execjs
     coffee-script-source (1.3.3)
     colored (1.2)
-    daemons (1.1.8)
     datatables (1.0.0)
       jquery-rails
       rails (>= 3.0.3)
-    delayed_job (3.0.3)
-      activesupport (~> 3.0)
-    delayed_job_active_record (0.3.2)
-      activerecord (> 2.1.0)
-      delayed_job (~> 3.0.0)
     dnsruby (1.53)
     domain_name (0.5.3)
       unf (~> 0.0.3)
@@ -144,6 +141,12 @@ GEM
       webrobots (~> 0.0, >= 0.0.9)
     method_source (0.7.1)
     mime-types (1.18)
+    mongo (1.6.4)
+      bson (~> 1.6.4)
+    mongo_mapper (0.11.1)
+      activemodel (~> 3.0)
+      activesupport (~> 3.0)
+      plucky (~> 0.4.0)
     multi_json (1.3.6)
     net-http-digest_auth (1.2.1)
     net-http-persistent (2.7)
@@ -156,7 +159,8 @@ GEM
     oauth (0.4.6)
     packetfu (1.1.5)
     pcaprub (0.11.2)
-    pg (0.13.2)
+    plucky (0.4.4)
+      mongo (~> 1.5)
     polyglot (0.3.3)
     pry (0.9.9.6)
       coderay (~> 1.0.5)
@@ -209,7 +213,6 @@ GEM
       hike (~> 1.2)
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
-    sqlite3 (1.3.6)
     tabulous (1.3.0)
       colored (~> 1.2.0)
       rails (~> 3.0)
@@ -241,12 +244,11 @@ PLATFORMS
 
 DEPENDENCIES
   bootstrap-sass (~> 2.0.0)
+  bson_ext
   capybara
   capybara-webkit
   coffee-rails (~> 3.2.1)
-  daemons
   datatables
-  delayed_job_active_record
   dnsruby
   exifr
   fastercsv
@@ -262,18 +264,17 @@ DEPENDENCIES
   librex
   linkedin
   mechanize
+  mongo_mapper
   nmap-parser
   nokogiri
   packetfu
   pcaprub
-  pg
   pry
   pry-nav
   pry-rails
   rails (= 3.2.1)
   sass-rails (~> 3.2.3)
   selenium-webdriver
-  sqlite3
   tabulous
   therubyracer
   turn (= 0.8.2)

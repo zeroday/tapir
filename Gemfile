@@ -9,17 +9,15 @@ gem 'rails', '3.2.1'
 gem 'pry'
 
 # Rails / Database
-gem 'sqlite3'
 gem 'therubyracer'
-
 gem 'formtastic', :git => 'git://github.com/justinfrench/formtastic.git', :branch => '2.1-stable'
 gem 'formtastic-bootstrap', :git => 'https://github.com/cgunther/formtastic-bootstrap.git', :branch => 'bootstrap2-rails3-2-formtastic-2-1'
 gem 'tabulous' 
 gem 'datatables'
 
-# Background Processing
-gem 'delayed_job_active_record'
-gem 'daemons'
+# Mongo
+gem 'mongo_mapper'
+gem 'bson_ext'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -86,11 +84,6 @@ gem 'capybara'
 gem 'fog'
 
 group :pain do
-
-  # Postgres database
-  # If you're on ubuntu, you'll need to run: apt-get install libpq-dev
-  gem 'pg'
-
   # Requires QTwebkit
   # https://github.com/thoughtbot/capybara-webkit#readme
   # If you're on ubuntu, you'll need to run: apt-get install libqt4-dev
