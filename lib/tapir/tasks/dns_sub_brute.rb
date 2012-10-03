@@ -14,6 +14,11 @@ def allowed_types
   [Domain]
 end
 
+## Returns an array of valid options and their description/type for this task
+def allowed_options
+ []
+end
+
 def setup(entity, options={})
   puts "CALLING SUPER!"
   super(entity, options)

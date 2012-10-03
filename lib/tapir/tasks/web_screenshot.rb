@@ -15,6 +15,11 @@ def allowed_types
   [Domain, Host]
 end
 
+## Returns an array of valid options and their description/type for this task
+def allowed_options
+ []
+end
+
 def setup(entity, options={})
   super(entity, options)
 end

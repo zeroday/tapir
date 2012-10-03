@@ -4,11 +4,11 @@ class EntityMapping
 
   belongs_to :task_run
 
-  field :child_id, type: Integer
+  field :child_id, type: String
   field :child_type, type: String
-  field :parent_id, type: Integer
+  field :parent_id, type: String
   field :parent_type, type: String
-  field :task_run_id, type: Integer
+  field :task_run_id, type: String
   field :created_at, type: Time
   field :updated_at, type: Time
 

@@ -18,6 +18,11 @@ def allowed_types
   [Domain, SearchString, Organization]
 end
 
+## Returns an array of valid options and their description/type for this task
+def allowed_options
+ []
+end
+
 def setup(entity, options={})
   super(entity, options)
   self
