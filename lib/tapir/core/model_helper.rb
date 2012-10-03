@@ -3,12 +3,6 @@ module ModelHelper
   def self.included(base)
     base.class_eval do
       
-      include ::MongoMapper::Document
-
-      # everybody deserves a name :)
-      key :name, String, :required => true
-
-
       #
       # gangster method_missing magic to automatically create tasks by name
       #
@@ -92,6 +86,10 @@ module ModelHelper
         EntityManager.instance.find_task_runs(self.id, self.class.to_s)
       end
       
+      def task_runs
+        TapirLogger.instance.log "Finding task runs for #{self}"
+        EntityManager.instance.find_task_runs(self.id, self.class.to_s)
+      end
       #
       # This method associates a child with this entity
       #

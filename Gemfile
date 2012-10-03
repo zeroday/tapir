@@ -3,21 +3,16 @@ source 'http://rubygems.org'
 # Require recent Rails:
 gem 'rails', '3.2.1'
 # Use edge Rails instead:
-# gem 'rails',     :git => 'git://github.com/rails/rails.git'
-
-# Console
-gem 'pry'
+#gem 'rails',     :git => 'git://github.com/rails/rails.git'
 
 # Rails / Database
 gem 'therubyracer'
 gem 'formtastic', :git => 'git://github.com/justinfrench/formtastic.git', :branch => '2.1-stable'
 gem 'formtastic-bootstrap', :git => 'https://github.com/cgunther/formtastic-bootstrap.git', :branch => 'bootstrap2-rails3-2-formtastic-2-1'
 gem 'tabulous' 
-gem 'datatables'
 
-# Mongo
-gem 'mongo_mapper'
-gem 'bson_ext'
+# Mongo Database
+gem "mongoid", "~> 3.0.0"
 
 # Gems used only for assets and not required
 # in production environments by default.

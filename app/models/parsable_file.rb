@@ -5,12 +5,16 @@ class ParsableFile
   #validates_uniqueness_of :path
   #has_many :task_runs
   
+  include Mongoid::Document
   include ModelHelper
 
-  key :path, String
-  key :type, String
-  key :created_at, Time
-  key :updated_at, Time
+  field :name, type: String
+  field :status, type: String
+  field :confidence, type: Integer  
+  field :path, type: String
+  field :type, type: String
+  field :created_at, type: Time
+  field :updated_at, type: Time
 
 
   def to_s

@@ -1,6 +1,8 @@
-class TaskRunSet < ActiveRecord::Base
+class TaskRunSet
   #has_many :task_runs
 
-  key :created_at, Time
-  key :updated_at, Time
+  include Mongoid::Document
+
+  field :created_at, type: Time
+  field :updated_at, type: Time
 end

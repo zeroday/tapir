@@ -1,29 +1,34 @@
-class User < ActiveRecord::Base
+class User
   #belongs_to  :organization
   #has_many    :physical_locations
   #has_many    :task_runs
   #has_many    :accounts
   #validates_presence_of :usernames
   
-  after_save :log
+  #after_save :log
 
-  serialize :usernames
+  include Mongoid::Document
+  include ModelHelper
+
+  #serialize :usernames
   
   before_save :default_values, :cleanup_usernames 
-  after_save :log
+  #after_save :log
 
   after_create :set_usernames_empty
 
   include ModelHelper
 
-  key :first_name, String
-  key :last_name, String
-  key :middle_name, String
-  key :email_addresses, String
-  key :usernames, String
-  key :first_name, String
-  key :created_at, Time
-  key :updated_at, Time
+  field :status, type: String
+  field :confidence, type: Integer  
+  field :first_name, type: String
+  field :last_name, type: String
+  field :middle_name, type: String
+  field :email_addresses, type: String
+  field :usernames, type: String
+  field :first_name, type: String
+  field :created_at, type: Time
+  field :updated_at, type: Time
 
   def to_s
     "#{self.class}: #{self.first_name} #{self.last_name}"

@@ -4,13 +4,17 @@ class NetSvc
   #has_many    :task_runs
   #after_save   :log
 
+  include Mongoid::Document
   include ModelHelper
 
-  key :fingerprint, String
-  key :proto, String
-  key :port_num, Integer
-  key :created_at, Time
-  key :updated_at, Time
+  field :name, type: String
+  field :status, type: String
+  field :confidence, type: Integer  
+  field :fingerprint, type: String
+  field :proto, type: String
+  field :port_num, type: Integer
+  field :created_at, type: Time
+  field :updated_at, type: Time
 
   def to_s
     "#{self.class}: #{proto}/#{port_num} #{fingerprint}"

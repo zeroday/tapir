@@ -1,14 +1,17 @@
-class WebForm < ActiveRecord::Base
+class WebForm
   #belongs_to :web_app
   #has_many    :task_runs
   #after_save :log
 
+  include Mongoid::Document
   include ModelHelper
 
-  key :metric, Integer
-  key :url, String
-  key :action, String
-  key :fields, String
+  field :name, type: String
+  field :status, type: String
+  field :confidence, type: Integer  
+  field :url, type: String
+  field :action, type: String
+  field :fields, type: String
 
   def to_s
     "#{self.class}: #{self.name} - #{self.url} -> #{self.action}"

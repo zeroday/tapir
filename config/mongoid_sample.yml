@@ -1,0 +1,6 @@
+development:
+  sessions:
+    default:
+      database: tapir
+      hosts:
+        - localhost:27017

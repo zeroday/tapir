@@ -1,4 +1,4 @@
-class TaskRun < ActiveRecord::Base
+class TaskRun
   #belongs_to :task_run_set
   #belongs_to :account
   #belongs_to :domain
@@ -16,13 +16,15 @@ class TaskRun < ActiveRecord::Base
   #belongs_to :web_form
   #has_many :entity_mappings
 
+  include Mongoid::Document
+
   many :entity_mappings
 
-  key :task_name, String
-  key :task_entity_id, Integer
-  key :task_entity_type, String
-  key :task_options_hash, String
-  key :task_log, String
+  field :task_name, type: String
+  field :task_entity_id, type: Integer
+  field :task_entity_type, type: String
+  field :task_options_hash, type: String
+  field :task_log, type: String
 
   def to_s
     "#{task_name} task -> #{task_entity_type}:#{task_entity_id} (#{entity_mappings.count})"

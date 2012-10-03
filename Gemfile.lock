@@ -8,9 +8,9 @@ GIT
 
 GIT
   remote: git://github.com/rweng/jquery-datatables-rails.git
-  revision: ba12807aad9e1519b49e0244eefdd1e744dad618
+  revision: be3586b729e778a4b822e07494683387646b2b4b
   specs:
-    jquery-datatables-rails (1.10.0)
+    jquery-datatables-rails (1.11.1)
       jquery-rails
 
 GIT
@@ -52,14 +52,11 @@ GEM
     activesupport (3.2.1)
       i18n (~> 0.6)
       multi_json (~> 1.0)
-    addressable (2.2.8)
-    ansi (1.4.2)
+    addressable (2.3.2)
+    ansi (1.4.3)
     arel (3.0.2)
-    bootstrap-sass (2.0.3.1)
-    bson (1.6.4)
-    bson_ext (1.6.4)
-      bson (~> 1.6.4)
-    builder (3.0.0)
+    bootstrap-sass (2.0.4.2)
+    builder (3.0.3)
     capybara (1.1.2)
       mime-types (>= 1.16)
       nokogiri (>= 1.3.3)
@@ -70,9 +67,9 @@ GEM
     capybara-webkit (0.12.1)
       capybara (>= 1.0.0, < 1.2)
       json
-    childprocess (0.3.2)
-      ffi (~> 1.0.6)
-    coderay (1.0.6)
+    childprocess (0.3.5)
+      ffi (~> 1.0, >= 1.0.6)
+    coderay (1.0.7)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
       railties (~> 3.2.0)
@@ -81,24 +78,21 @@ GEM
       execjs
     coffee-script-source (1.3.3)
     colored (1.2)
-    datatables (1.0.0)
-      jquery-rails
-      rails (>= 3.0.3)
     dnsruby (1.53)
-    domain_name (0.5.3)
+    domain_name (0.5.4)
       unf (~> 0.0.3)
     erubis (2.7.0)
-    excon (0.13.4)
+    excon (0.16.4)
     execjs (1.4.0)
       multi_json (~> 1.0)
     exifr (1.1.3)
     fastercsv (1.5.5)
-    ffi (1.0.11)
+    ffi (1.1.5)
     flickr (1.0.2)
       xml-simple (>= 1.0.7)
-    fog (1.3.1)
+    fog (1.6.0)
       builder
-      excon (~> 0.13.0)
+      excon (~> 0.14)
       formatador (~> 0.2.0)
       mime-types
       multi_json (~> 1.0)
@@ -110,18 +104,19 @@ GEM
     geoip (1.1.2)
     hashie (1.2.0)
     hike (1.2.1)
-    i18n (0.6.0)
+    i18n (0.6.1)
     journey (1.0.4)
-    jquery-rails (2.0.2)
-      railties (>= 3.2.0, < 5.0)
+    jquery-rails (2.1.3)
+      railties (>= 3.1.0, < 5.0)
       thor (~> 0.14)
-    jquery-ui-rails (1.0.0)
+    jquery-ui-rails (2.0.2)
       jquery-rails
       railties (>= 3.1.0)
-    json (1.7.3)
-    librex (0.0.65)
+    jruby-pageant (1.1.1)
+    json (1.7.5)
+    librex (0.0.68)
     libv8 (3.3.10.4)
-    libwebsocket (0.1.3)
+    libwebsocket (0.1.5)
       addressable
     linkedin (0.3.7)
       hashie (~> 1.2)
@@ -139,43 +134,43 @@ GEM
       nokogiri (~> 1.4)
       ntlm-http (~> 0.1, >= 0.1.1)
       webrobots (~> 0.0, >= 0.0.9)
-    method_source (0.7.1)
-    mime-types (1.18)
-    mongo (1.6.4)
-      bson (~> 1.6.4)
-    mongo_mapper (0.11.1)
-      activemodel (~> 3.0)
-      activesupport (~> 3.0)
-      plucky (~> 0.4.0)
+    method_source (0.8)
+    mime-types (1.19)
+    mongoid (3.0.6)
+      activemodel (~> 3.1)
+      moped (~> 1.1)
+      origin (~> 1.0)
+      tzinfo (~> 0.3.22)
+    moped (1.2.5)
     multi_json (1.3.6)
     net-http-digest_auth (1.2.1)
     net-http-persistent (2.7)
     net-scp (1.0.4)
       net-ssh (>= 1.99.1)
-    net-ssh (2.5.2)
+    net-ssh (2.6.0)
+      jruby-pageant (>= 1.1.1)
     nmap-parser (0.3.5)
-    nokogiri (1.5.4)
+    nokogiri (1.5.5)
     ntlm-http (0.1.1)
-    oauth (0.4.6)
+    oauth (0.4.7)
+    origin (1.0.9)
     packetfu (1.1.5)
     pcaprub (0.11.2)
-    plucky (0.4.4)
-      mongo (~> 1.5)
     polyglot (0.3.3)
-    pry (0.9.9.6)
+    pry (0.9.10)
       coderay (~> 1.0.5)
-      method_source (~> 0.7.1)
-      slop (>= 2.4.4, < 3)
-    pry-nav (0.2.1)
-      pry (~> 0.9.9)
-    pry-rails (0.1.6)
-      pry
+      method_source (~> 0.8)
+      slop (~> 3.3.1)
+    pry-nav (0.2.2)
+      pry (~> 0.9.10)
+    pry-rails (0.2.2)
+      pry (>= 0.9.10)
     rack (1.4.1)
     rack-cache (1.2)
       rack (>= 0.4)
     rack-ssl (1.3.2)
       rack
-    rack-test (0.6.1)
+    rack-test (0.6.2)
       rack (>= 1.0)
     rails (3.2.1)
       actionmailer (= 3.2.1)
@@ -197,18 +192,17 @@ GEM
       json (~> 1.4)
     ruby-hmac (0.4.0)
     rubyzip (0.9.9)
-    sass (3.1.19)
+    sass (3.2.1)
     sass-rails (3.2.5)
       railties (~> 3.2.0)
       sass (>= 3.1.10)
       tilt (~> 1.3)
-    selenium-webdriver (2.22.2)
+    selenium-webdriver (2.25.0)
       childprocess (>= 0.2.5)
-      ffi (~> 1.0)
       libwebsocket (~> 0.1.3)
       multi_json (~> 1.0)
       rubyzip
-    slop (2.4.4)
+    slop (3.3.3)
     sprockets (2.1.3)
       hike (~> 1.2)
       rack (~> 1.0)
@@ -216,7 +210,7 @@ GEM
     tabulous (1.3.0)
       colored (~> 1.2.0)
       rails (~> 3.0)
-    therubyracer (0.10.1)
+    therubyracer (0.10.2)
       libv8 (~> 3.3.10)
     thor (0.14.6)
     tilt (1.3.3)
@@ -226,14 +220,14 @@ GEM
     turn (0.8.2)
       ansi (>= 1.2.2)
     tzinfo (0.3.33)
-    uglifier (1.2.4)
+    uglifier (1.3.0)
       execjs (>= 0.3.0)
-      multi_json (>= 1.0.2)
+      multi_json (~> 1.0, >= 1.0.2)
     unf (0.0.5)
       unf_ext
     unf_ext (0.0.5)
     webrobots (0.0.13)
-    whois (2.6.2)
+    whois (2.7.0)
     will_paginate (3.0.3)
     xml-simple (1.1.1)
     xpath (0.1.4)
@@ -244,11 +238,9 @@ PLATFORMS
 
 DEPENDENCIES
   bootstrap-sass (~> 2.0.0)
-  bson_ext
   capybara
   capybara-webkit
   coffee-rails (~> 3.2.1)
-  datatables
   dnsruby
   exifr
   fastercsv
@@ -264,7 +256,7 @@ DEPENDENCIES
   librex
   linkedin
   mechanize
-  mongo_mapper
+  mongoid (~> 3.0.0)
   nmap-parser
   nokogiri
   packetfu

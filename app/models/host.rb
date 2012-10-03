@@ -6,13 +6,17 @@ class Host
   #validates_uniqueness_of :ip_address
   #validates_presence_of   :ip_address
   #validates_format_of :ip_address, :with => /^(\d+)\.(\d+)\.(\d+)\.(\d+)$/
-  after_save   :log
+  #after_save   :log
 
+  include Mongoid::Document
   include ModelHelper
   
-  key :ip_address, String
-  key :created_at, Time
-  key :updated_at, Time
+  field :name, type: String
+  field :status, type: String
+  field :confidence, type: Integer   
+  field :ip_address, type: String
+  field :created_at, type: Time
+  field :updated_at, type: Time
 
   #
   # This method is highly questionable, but folks generally refer to a host
