@@ -2,7 +2,7 @@ class Note
   #validates_presence_of :name
   #after_save   :log
   include Mongoid::Document
-  include ModelHelper
+  include EntityHelper
   
   field :name, type: String
   field :status, type: String

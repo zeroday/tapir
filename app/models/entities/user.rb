@@ -4,20 +4,14 @@ class User
   #has_many    :task_runs
   #has_many    :accounts
   #validates_presence_of :usernames
-  
-  #after_save :log
-
   include Mongoid::Document
-  include ModelHelper
+  include EntityHelper
 
   #serialize :usernames
   
   before_save :default_values, :cleanup_usernames 
-  #after_save :log
-
   after_create :set_usernames_empty
-
-  include ModelHelper
+  #after_save :log
 
   field :status, type: String
   field :confidence, type: Integer  

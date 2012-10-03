@@ -6,7 +6,7 @@ class Account
   #after_save :log
 
   include Mongoid::Document
-  include ModelHelper
+  include EntityHelper
 
   field :name, type: String
   field :status, type: String

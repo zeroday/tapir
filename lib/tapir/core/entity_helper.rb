@@ -1,4 +1,4 @@
-module ModelHelper
+module EntityHelper
 
   def self.included(base)
     base.class_eval do
