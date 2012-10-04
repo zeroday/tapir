@@ -82,16 +82,10 @@ def run
 
           # Create a host to store the ip address
           h = create_entity(Host, {:ip_address => resolved_address})
-
-          # associate the newly-created host with the domain
-          d.hosts << h 
-          h.domains << d
           
-          # create a service, and also associate that with our host.
-          h.net_svcs << create_entity(NetSvc, {:type => "tcp", :port => port, :host => h})
+          # Create a service, and also associate that with our host.
+          create_entity(NetSvc, {:type => "tcp", :port => port, :host => h})
 
-          # Save the raw content of our query
-          #@task_run.save_raw_result rec.to_s
         end
 
       end

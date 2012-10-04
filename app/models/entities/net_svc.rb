@@ -2,7 +2,6 @@ class NetSvc
   #belongs_to  :host
   #has_many    :web_apps
   #has_many    :task_runs
-  #after_save   :log
 
   include Mongoid::Document
   include EntityHelper
@@ -22,11 +21,6 @@ class NetSvc
 
   def capitalize 
     "NetService"
-  end
-
-private
-  def log
-    TapirLogger.instance.log self.to_s
   end
 
 end

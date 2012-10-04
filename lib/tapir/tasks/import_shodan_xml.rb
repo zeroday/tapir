@@ -48,12 +48,7 @@ def run
         :type => "tcp",
         :fingerprint => shodan_service.data })
     end # End services processing
-    
-    #
-    # Associate the domain & location w/ the host
-    #
-    host.domains << domain
-    host.physical_locations << loc
+
   end # End host processing
   
 end

@@ -3,7 +3,6 @@ class ParsableFile
   #after_save :log
   #validates_presence_of :path
   #validates_uniqueness_of :path
-  #has_many :task_runs
   
   include Mongoid::Document
   include EntityHelper
@@ -20,8 +19,4 @@ class ParsableFile
     "#{self.class}: #{name} (#{path})"
   end
 
-private
-  def log
-    TapirLogger.instance.log self.to_s
-  end
 end

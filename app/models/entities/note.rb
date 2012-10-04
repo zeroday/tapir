@@ -1,6 +1,5 @@
 class Note
   #validates_presence_of :name
-  #after_save   :log
   include Mongoid::Document
   include EntityHelper
   
@@ -15,8 +14,4 @@ class Note
     "#{self.class}: #{self.name}"
   end
 
-private
-  def log
-    TapirLogger.instance.log self.to_s
-  end
 end

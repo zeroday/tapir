@@ -93,14 +93,9 @@ def run
 
         # If we resolved, create the right entitys
         if resolved_address
-          @task_logger.log_good "Creating domain and host entitys..."
+          @task_logger.log_good "Creating domain and host entities..."
           d = create_entity(Domain, {:name => domain})
           h = create_entity(Host, {:ip_address => resolved_address})
-          
-          # Associate our host and domain entitys.
-          d.hosts << h
-          h.domains << d
-          d.organization = @entity if @entity.kind_of? Organization
         end
 
         #@task_run.save_raw_result "#{domain}: resolved_address"

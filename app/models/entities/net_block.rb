@@ -23,11 +23,5 @@ class NetBlock
   def capitalize 
     "NetBlock"
   end
-
-private
-
-  def log
-    TapirLogger.instance.log self.to_s
-  end
   
 end

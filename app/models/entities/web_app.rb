@@ -21,9 +21,4 @@ class WebApp
   def to_s
     "#{self.class}: #{self.name} -  #{self.url}"
   end
-
-private
-  def log
-    TapirLogger.instance.log self.to_s
-  end
 end

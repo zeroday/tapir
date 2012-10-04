@@ -85,7 +85,7 @@ def run
 
           # Create the user entitys
           @task_logger.log_good "Adding user entity for: #{full_name}"
-          @entity.users << create_entity(User, { 
+          create_entity(User, { 
             :first_name => first_name, 
             :last_name => last_name })
         end

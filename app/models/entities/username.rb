@@ -1,24 +1,18 @@
-class Account
+class Username
   #belongs_to  :user
   #validates_presence_of   :account_name, :service_name, :check_uri
   #validates_uniqueness_of :account_name, :scope => :service_name
-  
+
   include Mongoid::Document
   include EntityHelper
 
   field :name, type: String
   field :status, type: String
-  field :confidence, type: Integer  
-  field :account_name, type: String
-  field :service_name, type: String
-  field :web_uri, type: String
-  field :check_uri, type: String
-  #field :user_id, type: Integer
+  field :confidence, type: Integer
   field :created_at, type: Time
   field :updated_at, type: Time 
 
   def to_s
     "#{self.class}: #{account_name} (#{service_name})"
   end
-  
 end

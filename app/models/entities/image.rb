@@ -1,7 +1,6 @@
 class Image
   #has_many     :task_runs
   #has_many     :physical_locations
-  #after_save   :log
 
   include Mongoid::Document
   include EntityHelper
@@ -21,12 +20,6 @@ class Image
 
   def filename
     self.local_path.split(File::SEPARATOR).last
-  end
-
-private
-
-  def log
-    TapirLogger.instance.log self.to_s
   end
 
 end

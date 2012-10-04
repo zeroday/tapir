@@ -53,7 +53,7 @@ def run
       o = create_entity(Organization, { :name => company_name })
 
       # Queue a detailed search
-      TaskManager.instance.queue_task_run("hoovers_company_detail",o, {})
+      # TaskManager.instance.queue_task_run("hoovers_company_detail",o, {})
 
     end
   rescue Exception => e

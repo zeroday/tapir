@@ -50,9 +50,6 @@ def run
       #@task_run.save_raw_result res_answer.to_s
     end
 
-    
-    
-    
   rescue Dnsruby::Refused
     @task_logger.log "Zone Transfer against #{@entity.name} refused."
 

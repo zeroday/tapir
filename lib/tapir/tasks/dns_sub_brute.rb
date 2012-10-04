@@ -70,10 +70,6 @@ def run
         d = create_entity(Domain, {:name => domain, :organization => @entity.organization })
         h = create_entity(Host, {:ip_address => resolved_address})
 
-        # Associate our host and domain entitys. 
-        d.hosts << h
-        h.domains << d
-
       end
 
       #@task_run.save_raw_result  "#{domain}: #{resolved_address}"

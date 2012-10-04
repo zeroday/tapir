@@ -33,13 +33,6 @@ def run
       # Create our new domain entity with the resolved name
       d = create_entity(Domain, {:name => resolved_name})
 
-      # Assocate the resolved name with the host
-      @entity.domains << d # add a domain name for this host
-      d.hosts << @entity # add this host as an address
-
-      # Save the raw data
-      #@task_run.save_raw_result resolved_name.to_s
-
     else
       @task_logger.log "Unable to find a name for #{@entity.ip_address}"
     end

@@ -6,12 +6,9 @@ class User
   #validates_presence_of :usernames
   include Mongoid::Document
   include EntityHelper
-
-  #serialize :usernames
   
   before_save :default_values, :cleanup_usernames 
   after_create :set_usernames_empty
-  #after_save :log
 
   field :status, type: String
   field :confidence, type: Integer  
@@ -72,10 +69,6 @@ private
     # Make sure we don't have multiple same usernames
     #
     self.usernames.uniq!
-  end
-
-  def log
-    TapirLogger.instance.log self.to_s
   end
 
 end

@@ -1,6 +1,5 @@
 class Finding
   #has_many     :task_runs
-  #after_save   :log
 
   include Mongoid::Document
   include EntityHelper
@@ -14,10 +13,5 @@ class Finding
 
   def to_s
     "#{self.class}"
-  end
-
-private
-  def log
-    TapirLogger.instance.log self.to_s
   end
 end

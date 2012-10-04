@@ -14,7 +14,7 @@ end
 
 ## Returns an array of valid options and their description/type for this task
 def allowed_options
- []
+ [{:timeout => {:description => "Timeout for the query", :type => Integer }}]
 end
 
 def setup(entity, options={})

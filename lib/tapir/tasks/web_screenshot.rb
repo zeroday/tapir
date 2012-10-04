@@ -68,6 +68,7 @@ def run
         :local_path => save_location,
         :remote_path => browse_location, 
         :description => "screenshot"
+        
     end
     
     #

@@ -54,7 +54,7 @@ def run
           # Don't create them if they're useless
           #
           unless lat == 0 and long == 0
-            @entity.physical_locations << create_entity(PhysicalLocation, {:latitude => "#{lat}",  :longitude => "#{long}"})
+            create_entity(PhysicalLocation, {:latitude => "#{lat}",  :longitude => "#{long}"})
           end
           
         else

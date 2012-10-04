@@ -6,7 +6,6 @@ class Host
   #validates_uniqueness_of :ip_address
   #validates_presence_of   :ip_address
   #validates_format_of :ip_address, :with => /^(\d+)\.(\d+)\.(\d+)\.(\d+)$/
-  #after_save   :log
 
   include Mongoid::Document
   include EntityHelper
@@ -28,12 +27,6 @@ class Host
 
   def to_s
     "#{self.class}: #{self.ip_address}"
-  end
-
-private
-
-  def log
-    TapirLogger.instance.log self.to_s
   end
 
 end

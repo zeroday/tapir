@@ -9,7 +9,6 @@ class Organization
   #has_many    :task_runs
   #validates_uniqueness_of :name
   #validates_presence_of :name
-  #after_save :log
 
   include Mongoid::Document
   include EntityHelper
@@ -23,11 +22,6 @@ class Organization
 
   def to_s
     "#{self.class}: #{self.name}"
-  end
-
-private
-  def log
-    TapirLogger.instance.log self.to_s
   end
 
 end

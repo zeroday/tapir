@@ -63,9 +63,6 @@ def run
               if z.type == "A"
                 h = create_entity Host, { :ip_address => z.address.to_s }
                 d = create_entity Domain, { :name => z.name.to_s }
-                # Associate them 
-                h.domains << d
-                d.hosts << h
               elsif z.type == "CNAME"
                 # TODO - recursively lookup cname host
                 @task_logger.log "TODO - handle a CNAME record"

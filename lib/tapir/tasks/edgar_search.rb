@@ -36,7 +36,8 @@ def run
     o = create_entity Organization, { 
       :name => corp.name, 
     }
-    o.physical_locations << create_entity(PhysicalLocation, {
+    
+    create_entity(PhysicalLocation, {
       :address => corps.first.address, 
       :state => corps.first.state,
       :country => corps.first.country }

@@ -1,6 +1,5 @@
 class SearchString
   #has_many     :task_runs
-  #after_save   :log
 
   include Mongoid::Document
   include EntityHelper
@@ -16,8 +15,4 @@ class SearchString
     "#{self.class}: #{self.name}"
   end
 
-private
-  def log
-    TapirLogger.instance.log self.to_s
-  end
 end

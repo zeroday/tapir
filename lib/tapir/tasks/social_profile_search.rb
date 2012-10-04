@@ -66,10 +66,11 @@ def run
         #
         # If we passed in a user, associate that with our new account entity
         #
-        if @entity.kind_of? User
-          obj.user_id = @entity.id
-          obj.save!
-        end
+        #if @entity.kind_of? User
+        #  obj.user_id = @entity.id
+        #  obj.save!
+        #end
+        
       else 
         @task_logger.log "No #{client.service_name} account found at: #{client.check_account_uri_for(account_name)}"
       end

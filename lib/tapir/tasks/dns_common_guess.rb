@@ -38,15 +38,10 @@ def run
       res_answer = Resolv.new.getaddress(domain)
       if res_answer
         @task_logger.log_good "DNS Guess succeeded for #{res_answer}"
-        #@task_run.save_raw_result "domain: #{res_answer}"
 
         # We know the domain is ~valid, and the ip address too
         d = create_entity(Domain, :name => domain)
         h = create_entity(Host, :ip_address => res_answer)
-
-        # Associate
-        @entity.domains << d if d
-        d.hosts << h if h
 
     end
     rescue Dnsruby::Refused
