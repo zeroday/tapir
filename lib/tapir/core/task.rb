@@ -1,3 +1,4 @@
+module Tapir
 class Task
 
   # Rails model compatibility #
@@ -101,7 +102,7 @@ class Task
   # Convenience Method - do not override
   #
   def safe_system(command)
-    @task_logger.log_error "UNSAFE SYSTEM CALL DUDE."
+    @task_logger.log_error "UNSAFE SYSTEM CALL. NOT COOL."
   
     if command =~ /(\||\;)/
       raise "Illegal character"
@@ -121,6 +122,10 @@ class Task
   #
   def create_entity(type, params, current_entity=@entity)
     @task_logger.log "Attempting to create new entity of type: #{type}"
+
+    # Ensure we're in the proper namespace
+    type = "Tapir::Entities::#{type}"
+    
     #
     # Call the create method for this type
     #
@@ -130,12 +135,6 @@ class Task
     # Check for dupes & return right away if this doesn't save a new
     # entity. This should prevent the entity mapping from getting created.
     #
-    
-    
-    #
-    # DEBUG
-    #
-    #binding.pry
     
     if new_entity.save
       @task_logger.log_good "Created new entity: #{new_entity}"
@@ -180,15 +179,15 @@ class Task
   #
   def find_entity(type, params)
     if type == Host
-      return Host.find_by_ip_address params[:ip_address]
+      return Tapir::Entities::Host.find_by_ip_address params[:ip_address]
     elsif type == Account
-      return Account.find_by_account_name_and_service_name params[:account_name],params[:service_name]
+      return Tapir::Entities::Account.find_by_account_name_and_service_name params[:account_name],params[:service_name]
     elsif type == NetBlock
-      return NetBlock.find_by_range params[:range]
+      return Tapir::Entities::NetBlock.find_by_range params[:range]
     elsif type == NetSvc
-      return NetSvc.find_by_host_and_port_num parasm[:host],params[:port_num]
+      return Tapir::Entities::NetSvc.find_by_host_and_port_num parasm[:host],params[:port_num]
     elsif type == ParsableFile
-      return ParsableFile.find_by_path params[:path]
+      return Tapir::Entities::ParsableFile.find_by_path params[:path]
     else
       if params.has_key? :name
         return type.send(:find_by_name, params[:name])
@@ -244,4 +243,5 @@ class Task
     @task_run.save
   end
   
+end
 end

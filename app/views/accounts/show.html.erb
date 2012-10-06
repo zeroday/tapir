@@ -23,10 +23,10 @@
 <p>
   <b>User:</b>
   <% user = User.find_by_id @account.user_id %>
-  <%= link_to user,user_path(user) %>
+  <%= link_to user,tapir_entities_user_path(user) %>
 </p>
 
 
-<%= link_to 'Edit', edit_account_path(@account) %> |
+<%= link_to 'Edit', edit_tapir_entities_account_path(@account) %> |
 <%= link_to "Destroy", @account, :confirm => 'Are you sure?', :method => :delete %> |
-<%= link_to 'Back', accounts_path %>
+<%= link_to 'Back', tapir_entities_accounts_path %>

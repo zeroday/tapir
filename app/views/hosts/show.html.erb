@@ -9,7 +9,7 @@
 <b>Parents:</b>
   <ul>
   <% @host.parents.each {|p|%>
-    <li><%= link_to p, eval("#{p.underscore}_path(p)")  %></li>
+    <li><%= link_to p, eval("tapir_entities_#{p.underscore}_path(p)")  %></li>
   <% } %>
   </ul>
 </p>  
@@ -18,7 +18,7 @@
 <b>Children:</b>
   <ul>
   <% @host.children.each {|c|%>
-    <li><%= link_to c, eval("#{c.underscore}_path(c)")  %></li>
+    <li><%= link_to c, eval("tapir_entities_#{c.underscore}_path(c)")  %></li>
   <% } %>
   </ul>
 </p>
@@ -27,7 +27,7 @@
 <b>Tasks:</b>
   <ul>
   <% @host.tasks.each {|t|%>
-    <li><%= link_to t, eval("#{t.underscore}_path(t.name)")  %></li>
+    <li><%= link_to t, eval("tapir_#{t.underscore}_path(t.name)")  %></li>
   <% } %>
   </ul>
 </p>
@@ -41,6 +41,6 @@
   </ul>
 </p>
 
-<%= link_to 'Edit', edit_host_path(@host) %> |
+<%= link_to 'Edit', edit_tapir_entities_host_path(@host) %> |
 <%= link_to "Destroy", @host, :confirm => 'Are you sure?', :method => :delete %> |
-<%= link_to 'Back', hosts_path %>
+<%= link_to 'Back', tapir_entities_hosts_path %>

@@ -12,7 +12,7 @@
   <tr>
     <td><%= search_string.name %></td>
     <td><%= link_to 'Show', search_string %></td>
-    <td><%= link_to 'Edit', edit_search_string_path(search_string) %></td>
+    <td><%= link_to 'Edit', edit_tapir_entities_search_string_path(search_string) %></td>
     <td><%= link_to 'Destroy', search_string, confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>
@@ -20,4 +20,4 @@
 
 <br />
 
-<%= link_to 'New Search string', new_search_string_path %>
+<%= link_to 'New Search string', new_tapir_entities_search_string_path %>

@@ -1,3 +1,4 @@
+module Tapir
 class TaskRun
   #belongs_to :task_run_set
   #belongs_to :account
@@ -37,4 +38,5 @@ class TaskRun
         {:parent_type => self.task_entity_type}]})
   end
 
+end
 end

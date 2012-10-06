@@ -2,7 +2,7 @@ class NetSvcsController < ApplicationController
   # GET /net_svcs
   # GET /net_svcs.json
   def index
-    @net_svcs = NetSvc.all
+    @net_svcs = Tapir::Entities::NetSvc.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -13,7 +13,7 @@ class NetSvcsController < ApplicationController
   # GET /net_svcs/1
   # GET /net_svcs/1.json
   def show
-    @net_svc = NetSvc.find(params[:id])
+    @net_svc = Tapir::Entities::NetSvc.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -24,7 +24,7 @@ class NetSvcsController < ApplicationController
   # GET /net_svcs/new
   # GET /net_svcs/new.json
   def new
-    @net_svc = NetSvc.new
+    @net_svc = Tapir::Entities::NetSvc.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -34,13 +34,13 @@ class NetSvcsController < ApplicationController
 
   # GET /net_svcs/1/edit
   def edit
-    @net_svc = NetSvc.find(params[:id])
+    @net_svc = Tapir::Entities::NetSvc.find(params[:id])
   end
 
   # POST /net_svcs
   # POST /net_svcs.json
   def create
-    @net_svc = NetSvc.new(params[:net_svc])
+    @net_svc = Tapir::Entities::NetSvc.new(params[:net_svc])
 
     respond_to do |format|
       if @net_svc.save
@@ -56,7 +56,7 @@ class NetSvcsController < ApplicationController
   # PUT /net_svcs/1
   # PUT /net_svcs/1.json
   def update
-    @net_svc = NetSvc.find(params[:id])
+    @net_svc = Tapir::Entities::NetSvc.find(params[:id])
 
     respond_to do |format|
       if @net_svc.update_attributes(params[:net_svc])
@@ -72,7 +72,7 @@ class NetSvcsController < ApplicationController
   # DELETE /net_svcs/1
   # DELETE /net_svcs/1.json
   def destroy
-    @net_svc = NetSvc.find(params[:id])
+    @net_svc = Tapir::Entities::NetSvc.find(params[:id])
     @net_svc.destroy
 
     respond_to do |format|

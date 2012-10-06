@@ -1,3 +1,4 @@
+module Tapir
 class EntityMapping
   #belongs_to :task_run
   include Mongoid::Document
@@ -39,4 +40,5 @@ class EntityMapping
     "#{self.class}: #{child_type}:#{child_id} <-> #{parent_type}:#{parent_id} - (task_run: #{task_run.id})"
   end 
 
+end
 end

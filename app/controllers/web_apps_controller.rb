@@ -2,7 +2,7 @@ class WebAppsController < ApplicationController
   # GET /web_apps
   # GET /web_apps.json
   def index
-    @web_apps = WebApp.all
+    @web_apps = Tapir::Entities::WebApp.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -13,7 +13,7 @@ class WebAppsController < ApplicationController
   # GET /web_apps/1
   # GET /web_apps/1.json
   def show
-    @web_app = WebApp.find(params[:id])
+    @web_app = Tapir::Entities::WebApp.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -24,7 +24,7 @@ class WebAppsController < ApplicationController
   # GET /web_apps/new
   # GET /web_apps/new.json
   def new
-    @web_app = WebApp.new
+    @web_app = Tapir::Entities::WebApp.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -34,13 +34,13 @@ class WebAppsController < ApplicationController
 
   # GET /web_apps/1/edit
   def edit
-    @web_app = WebApp.find(params[:id])
+    @web_app = Tapir::Entities::WebApp.find(params[:id])
   end
 
   # POST /web_apps
   # POST /web_apps.json
   def create
-    @web_app = WebApp.new(params[:web_app])
+    @web_app = Tapir::Entities::WebApp.new(params[:web_app])
 
     respond_to do |format|
       if @web_app.save
@@ -56,7 +56,7 @@ class WebAppsController < ApplicationController
   # PUT /web_apps/1
   # PUT /web_apps/1.json
   def update
-    @web_app = WebApp.find(params[:id])
+    @web_app = Tapir::Entities::WebApp.find(params[:id])
 
     respond_to do |format|
       if @web_app.update_attributes(params[:web_app])

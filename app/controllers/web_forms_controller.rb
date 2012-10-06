@@ -2,7 +2,7 @@ class WebFormsController < ApplicationController
   # GET /web_forms
   # GET /web_forms.json
   def index
-    @web_forms = WebForm.all
+    @web_forms = Tapir::Entities::WebForm.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -13,7 +13,7 @@ class WebFormsController < ApplicationController
   # GET /web_forms/1
   # GET /web_forms/1.json
   def show
-    @web_form = WebForm.find(params[:id])
+    @web_form = Tapir::Entities::WebForm.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -24,7 +24,7 @@ class WebFormsController < ApplicationController
   # GET /web_forms/new
   # GET /web_forms/new.json
   def new
-    @web_form = WebForm.new
+    @web_form = Tapir::Entities::WebForm.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -34,13 +34,13 @@ class WebFormsController < ApplicationController
 
   # GET /web_forms/1/edit
   def edit
-    @web_form = WebForm.find(params[:id])
+    @web_form = Tapir::Entities::WebForm.find(params[:id])
   end
 
   # POST /web_forms
   # POST /web_forms.json
   def create
-    @web_form = WebForm.new(params[:web_form])
+    @web_form = Tapir::Entities::WebForm.new(params[:web_form])
 
     respond_to do |format|
       if @web_form.save
@@ -56,7 +56,7 @@ class WebFormsController < ApplicationController
   # PUT /web_forms/1
   # PUT /web_forms/1.json
   def update
-    @web_form = WebForm.find(params[:id])
+    @web_form = Tapir::Entities::WebForm.find(params[:id])
 
     respond_to do |format|
       if @web_form.update_attributes(params[:web_form])
@@ -72,7 +72,7 @@ class WebFormsController < ApplicationController
   # DELETE /web_forms/1
   # DELETE /web_forms/1.json
   def destroy
-    @web_form = WebForm.find(params[:id])
+    @web_form = Tapir::Entities::WebForm.find(params[:id])
     @web_form.destroy
 
     respond_to do |format|

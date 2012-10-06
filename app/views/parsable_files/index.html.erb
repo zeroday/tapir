@@ -16,7 +16,7 @@
     <td><%= parsable_file.type %></td>
     <td><%= parsable_file.path %></td>
     <td><%= link_to 'Show', parsable_file %></td>
-    <td><%= link_to 'Edit', edit_parsable_file_path(parsable_file) %></td>
+    <td><%= link_to 'Edit', edit_tapir_entities_parsable_file_path(parsable_file) %></td>
     <td><%= link_to 'Destroy', parsable_file, confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>
@@ -24,4 +24,4 @@
 
 <br />
 
-<%= link_to 'New Parsable file', new_parsable_file_path %>
+<%= link_to 'New Parsable file', new_tapir_entities_parsable_file_path %>

@@ -2,7 +2,7 @@ class HostsController < ApplicationController
   # GET /hosts
   # GET /hosts.json
   def index
-    @hosts = Host.all
+    @hosts = Tapir::Entities::Host.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -13,7 +13,7 @@ class HostsController < ApplicationController
   # GET /hosts/1
   # GET /hosts/1.json
   def show
-    @host = Host.find(params[:id])
+    @host = Tapir::Entities::Host.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -24,7 +24,7 @@ class HostsController < ApplicationController
   # GET /hosts/new
   # GET /hosts/new.json
   def new
-    @host = Host.new
+    @host = Tapir::Entities::Host.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -34,13 +34,13 @@ class HostsController < ApplicationController
 
   # GET /hosts/1/edit
   def edit
-    @host = Host.find(params[:id])
+    @host = Tapir::Entities::Host.find(params[:id])
   end
 
   # POST /hosts
   # POST /hosts.json
   def create
-    @host = Host.new(params[:host])
+    @host = Tapir::Entities::Host.new(params[:host])
 
     respond_to do |format|
       if @host.save
@@ -56,7 +56,7 @@ class HostsController < ApplicationController
   # PUT /hosts/1
   # PUT /hosts/1.json
   def update
-    @host = Host.find(params[:id])
+    @host = Tapir::Entities::Host.find(params[:id])
 
     respond_to do |format|
       if @host.update_attributes(params[:host])
@@ -72,7 +72,7 @@ class HostsController < ApplicationController
   # DELETE /hosts/1
   # DELETE /hosts/1.json
   def destroy
-    @host = Host.find(params[:id])
+    @host = Tapir::Entities::Host.find(params[:id])
     @host.destroy
 
     respond_to do |format|

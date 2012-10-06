@@ -18,7 +18,7 @@
     <td><%= net_svc.name %></td>
     <td><%= net_svc.fingerprint %></td>
     <td><%= link_to 'Show', net_svc %></td>
-    <td><%= link_to 'Edit', edit_net_svc_path(net_svc) %></td>
+    <td><%= link_to 'Edit', edit_tapir_entities_net_svc_path(net_svc) %></td>
     <td><%= link_to 'Destroy', net_svc, confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>
@@ -26,4 +26,4 @@
 
 <br />
 
-<%= link_to 'New Net svc', new_net_svc_path %>
+<%= link_to 'New Net svc', tapir_entities_new_net_svc_path %>

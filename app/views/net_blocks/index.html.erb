@@ -12,7 +12,7 @@
   <tr>
     <td><%= net_block.range %></td>
     <td><%= link_to 'Show', net_block %></td>
-    <td><%= link_to 'Edit', edit_net_block_path(net_block) %></td>
+    <td><%= link_to 'Edit', edit_tapir_entities_net_block_path(net_block) %></td>
     <td><%= link_to 'Destroy', net_block, confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>
@@ -20,4 +20,4 @@
 
 <br />
 
-<%= link_to 'New Net block', new_net_block_path %>
+<%= link_to 'New Net block', new_tapir_entities_net_block_path %>

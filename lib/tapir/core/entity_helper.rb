@@ -1,3 +1,5 @@
+module Tapir
+module Entities
 module EntityHelper
 
   def self.included(base)
@@ -132,4 +134,6 @@ module EntityHelper
       end
     end
   end
+end
+end
 end

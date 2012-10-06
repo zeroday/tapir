@@ -9,7 +9,7 @@ end
 
 ## Returns an array of types that are allowed to call this task
 def allowed_types
-  [WebApp]
+  [Tapir::Entities::WebApp]
 end
 
 ## Returns an array of valid options and their description/type for this task

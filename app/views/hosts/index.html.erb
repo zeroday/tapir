@@ -12,7 +12,7 @@
   <tr>
     <td><%= host.ip_address %></td>
     <td><%= link_to 'Show', host %></td>
-    <td><%= link_to 'Edit', edit_host_path(host) %></td>
+    <td><%= link_to 'Edit', edit_tapir_entities_host_path(host) %></td>
     <td><%= link_to 'Destroy', host, confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>
@@ -20,4 +20,4 @@
 
 <br />
 
-<%= link_to 'New Host', new_host_path %>
+<%= link_to 'New Host', new_tapir_entities_host_path %>

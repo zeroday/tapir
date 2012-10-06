@@ -14,7 +14,7 @@
     <td><%= organization.name %></td>
     <td><%= organization.description %></td>
     <td><%= link_to 'Show', organization %></td>
-    <td><%= link_to 'Edit', edit_organization_path(organization) %></td>
+    <td><%= link_to 'Edit', edit_tapir_entities_organization_path(organization) %></td>
     <td><%= link_to 'Destroy', organization, confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>
@@ -22,4 +22,4 @@
 
 <br />
 
-<%= link_to 'New Organization', new_organization_path %>
+<%= link_to 'New Organization', new_tapir_entities_organization_path %>

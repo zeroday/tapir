@@ -2,7 +2,7 @@ class EntitysController < ApplicationController
   # GET /entitys
   # GET /entitys.json
   def index
-    @entitys = Entity.instance.all
+    @entitys = Tapir::Entity.instance.all
 
     respond_to do |format|
       format.html # index.html.erb

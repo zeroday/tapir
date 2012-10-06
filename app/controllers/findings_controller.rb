@@ -2,7 +2,7 @@ class FindingsController < ApplicationController
   # GET /findings
   # GET /findings.json
   def index
-    @findings = Finding.all
+    @findings = Tapir::Entities::Finding.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -13,7 +13,7 @@ class FindingsController < ApplicationController
   # GET /findings/1
   # GET /findings/1.json
   def show
-    @finding = Finding.find(params[:id])
+    @finding = Tapir::Entities::Finding.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -24,7 +24,7 @@ class FindingsController < ApplicationController
   # GET /findings/new
   # GET /findings/new.json
   def new
-    @finding = Finding.new
+    @finding = Tapir::Entities::Finding.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -34,13 +34,13 @@ class FindingsController < ApplicationController
 
   # GET /findings/1/edit
   def edit
-    @finding = Finding.find(params[:id])
+    @finding = Tapir::Entities::Finding.find(params[:id])
   end
 
   # POST /findings
   # POST /findings.json
   def create
-    @finding = Finding.new(params[:finding])
+    @finding = Tapir::Entities::Finding.new(params[:finding])
 
     respond_to do |format|
       if @finding.save
@@ -56,7 +56,7 @@ class FindingsController < ApplicationController
   # PUT /findings/1
   # PUT /findings/1.json
   def update
-    @finding = Finding.find(params[:id])
+    @finding = Tapir::Entities::Finding.find(params[:id])
 
     respond_to do |format|
       if @finding.update_attributes(params[:finding])
@@ -72,7 +72,7 @@ class FindingsController < ApplicationController
   # DELETE /findings/1
   # DELETE /findings/1.json
   def destroy
-    @finding = Finding.find(params[:id])
+    @finding = Tapir::Entities::Finding.find(params[:id])
     @finding.destroy
 
     respond_to do |format|

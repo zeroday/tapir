@@ -2,7 +2,7 @@ class ParsableFilesController < ApplicationController
   # GET /parsable_files
   # GET /parsable_files.json
   def index
-    @parsable_files = ParsableFile.all
+    @parsable_files = Tapir::Entities::ParsableFile.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -13,7 +13,7 @@ class ParsableFilesController < ApplicationController
   # GET /parsable_files/1
   # GET /parsable_files/1.json
   def show
-    @parsable_file = ParsableFile.find(params[:id])
+    @parsable_file = Tapir::Entities::ParsableFile.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -24,7 +24,7 @@ class ParsableFilesController < ApplicationController
   # GET /parsable_files/new
   # GET /parsable_files/new.json
   def new
-    @parsable_file = ParsableFile.new
+    @parsable_file = Tapir::Entities::ParsableFile.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -34,13 +34,13 @@ class ParsableFilesController < ApplicationController
 
   # GET /parsable_files/1/edit
   def edit
-    @parsable_file = ParsableFile.find(params[:id])
+    @parsable_file = Tapir::Entities::ParsableFile.find(params[:id])
   end
 
   # POST /parsable_files
   # POST /parsable_files.json
   def create
-    @parsable_file = ParsableFile.new(params[:parsable_file])
+    @parsable_file = Tapir::Entities::ParsableFile.new(params[:parsable_file])
 
     respond_to do |format|
       if @parsable_file.save
@@ -56,7 +56,7 @@ class ParsableFilesController < ApplicationController
   # PUT /parsable_files/1
   # PUT /parsable_files/1.json
   def update
-    @parsable_file = ParsableFile.find(params[:id])
+    @parsable_file = Tapir::Entities::ParsableFile.find(params[:id])
 
     respond_to do |format|
       if @parsable_file.update_attributes(params[:parsable_file])
@@ -72,7 +72,7 @@ class ParsableFilesController < ApplicationController
   # DELETE /parsable_files/1
   # DELETE /parsable_files/1.json
   def destroy
-    @parsable_file = ParsableFile.find(params[:id])
+    @parsable_file = Tapir::Entities::ParsableFile.find(params[:id])
     @parsable_file.destroy
 
     respond_to do |format|

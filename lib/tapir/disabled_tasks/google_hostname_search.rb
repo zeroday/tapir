@@ -10,7 +10,9 @@ end
 
 # Returns an array of valid types for this task
 def allowed_types
-  [SearchString, Organization, Domain]
+  [ Tapir::Entities::SearchString, 
+    Tapir::Entities::Organization, 
+    Tapir::Entities::Domain]
 end
 
 def setup(entity, options={})

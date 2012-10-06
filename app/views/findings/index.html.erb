@@ -12,7 +12,7 @@
   <tr>
     <td><%= finding.content %></td>
     <td><%= link_to 'Show', finding %></td>
-    <td><%= link_to 'Edit', edit_finding_path(finding) %></td>
+    <td><%= link_to 'Edit', edit_tapir_entities_finding_path(finding) %></td>
     <td><%= link_to 'Destroy', finding, confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>
@@ -20,4 +20,4 @@
 
 <br />
 
-<%= link_to 'New Finding', new_finding_path %>
+<%= link_to 'New Finding', new_tapir_entities_finding_path %>

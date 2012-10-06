@@ -2,7 +2,7 @@ class DomainsController < ApplicationController
   # GET /domains
   # GET /domains.json
   def index
-    @domains = Domain.all
+    @domains = Tapir::Entities::Domain.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -13,7 +13,7 @@ class DomainsController < ApplicationController
   # GET /domains/1
   # GET /domains/1.json
   def show
-    @domain = Domain.find(params[:id])
+    @domain = Tapir::Entities::Domain.find(params[:id])
 
     #
     # Special case - this is serialized automatically
@@ -38,7 +38,7 @@ class DomainsController < ApplicationController
   # GET /domains/new
   # GET /domains/new.json
   def new
-    @domain = Domain.new
+    @domain = Tapir::Entities::Domain.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -54,7 +54,7 @@ class DomainsController < ApplicationController
   # POST /domains
   # POST /domains.json
   def create
-    @domain = Domain.new(params[:domain])
+    @domain = Tapir::Entities::Domain.new(params[:domain])
 
     respond_to do |format|
       if @domain.save
@@ -70,7 +70,7 @@ class DomainsController < ApplicationController
   # PUT /domains/1
   # PUT /domains/1.json
   def update
-    @domain = Domain.find(params[:id])
+    @domain = Tapir::Entities::Domain.find(params[:id])
 
     respond_to do |format|
       if @domain.update_attributes(params[:domain])
@@ -86,7 +86,7 @@ class DomainsController < ApplicationController
   # DELETE /domains/1
   # DELETE /domains/1.json
   def destroy
-    @domain = Domain.find(params[:id])
+    @domain = Tapir::Entities::Domain.find(params[:id])
     @domain.destroy
 
     respond_to do |format|

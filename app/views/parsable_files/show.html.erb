@@ -19,7 +19,7 @@
 <b>Parents:</b>
   <ul>
   <% @parsable_file.parents.each {|p|%>
-    <li><%= link_to p, eval("#{p.underscore}_path(p)")  %></li>
+    <li><%= link_to p, eval("tapir_entities_#{p.underscore}_path(p)")  %></li>
   <% } %>
   </ul>
 </p>  
@@ -28,7 +28,7 @@
 <b>Children:</b>
   <ul>
   <% @parsable_file.children.each {|c|%>
-    <li><%= link_to c, eval("#{c.underscore}_path(c)")  %></li>
+    <li><%= link_to c, eval("tapir_entities_#{c.underscore}_path(c)")  %></li>
   <% } %>
   </ul>
 </p>
@@ -37,7 +37,7 @@
 <b>Tasks:</b>
   <ul>
   <% @parsable_file.tasks.each {|t|%>
-    <li><%= link_to t, eval("#{t.underscore}_path(t.name)")  %></li>
+    <li><%= link_to t, eval("tapir_#{t.underscore}_path(t.name)")  %></li>
   <% } %>
   </ul>
 </p>
@@ -52,6 +52,6 @@
 </p>
 
 
-<%= link_to 'Edit', edit_parsable_file_path(@parsable_file) %> |
+<%= link_to 'Edit', edit_tapir_entities_parsable_file_path(@parsable_file) %> |
 <%= link_to "Destroy", @parsable_file, :confirm => 'Are you sure?', :method => :delete %> |
-<%= link_to 'Back', parsable_files_path %>
+<%= link_to 'Back', tapir_entities_parsable_files_path %>

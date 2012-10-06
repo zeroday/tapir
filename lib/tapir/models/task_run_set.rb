@@ -1,3 +1,4 @@
+module Tapir
 class TaskRunSet
   #has_many :task_runs
 
@@ -11,4 +12,5 @@ class TaskRunSet
     TaskRun.where(:task_run_set_id => self.id)
   end
 
+end
 end

@@ -57,12 +57,12 @@ Tabulous.setup do |config|
       #------------------------------------------------------------------------------------------------------------------------------------------------------------#
       #    TAB NAME                   |    DISPLAY TEXT            |    PATH                                                     |    VISIBLE?    |    ENABLED?    #
       #------------------------------------------------------------------------------------------------------------------------------------------------------------#
-      [    :organizations_tab         ,    'Organizations'         ,    organizations_path                                       ,    true        ,    true        ],
-      [    :domains_tab               ,    'Domains'               ,    domains_path                                             ,    true        ,    true        ],
-      [    :hosts_tab                 ,    'Hosts'                 ,    hosts_path                                               ,    true        ,    true        ],
-      [    :users_tab                 ,    'Users'                 ,    users_path                                               ,    true        ,    true        ],
-      [    :tasks_tab                 ,    'Tasks'                 ,    tasks_path                                               ,    true        ,    true        ],
-      [    :task_runs_tab             ,    'Task runs'             ,    task_runs_path                                           ,    true        ,    true        ],
+      [    :organizations_tab         ,    'Organizations'         ,    tapir_entities_organizations_path                                       ,    true        ,    true        ],
+      [    :domains_tab               ,    'Domains'               ,    tapir_entities_domains_path                                             ,    true        ,    true        ],
+      [    :hosts_tab                 ,    'Hosts'                 ,    tapir_entities_hosts_path                                               ,    true        ,    true        ],
+      [    :users_tab                 ,    'Users'                 ,    tapir_entities_users_path                                               ,    true        ,    true        ],
+      [    :tasks_tab                 ,    'Tasks'                 ,    tapir_tasks_path                                               ,    true        ,    true        ],
+      [    :task_runs_tab             ,    'Task runs'             ,    tapir_task_runs_path                                           ,    true        ,    true        ],
       [    :reports_tab               ,    'Reports'               ,    reports_path                                             ,    true        ,    true        ],
       #------------------------------------------------------------------------------------------------------------------------------------------------------------#
       #    TAB NAME                   |    DISPLAY TEXT            |    PATH                                                     |    VISIBLE?    |    ENABLED?    #

@@ -2,7 +2,7 @@ class OrganizationsController < ApplicationController
   # GET /organizations
   # GET /organizations.json
   def index
-    @organizations = Organization.all
+    @organizations = Tapir::Entities::Organization.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -13,7 +13,7 @@ class OrganizationsController < ApplicationController
   # GET /organizations/1
   # GET /organizations/1.json
   def show
-    @organization = Organization.find(params[:id])
+    @organization = Tapir::Entities::Organization.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -24,7 +24,7 @@ class OrganizationsController < ApplicationController
   # GET /organizations/new
   # GET /organizations/new.json
   def new
-    @organization = Organization.new
+    @organization = Tapir::Entities::Organization.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -34,13 +34,13 @@ class OrganizationsController < ApplicationController
 
   # GET /organizations/1/edit
   def edit
-    @organization = Organization.find(params[:id])
+    @organization = Tapir::Entities::Organization.find(params[:id])
   end
 
   # POST /organizations
   # POST /organizations.json
   def create
-    @organization = Organization.new(params[:organization])
+    @organization = Tapir::Entities::Organization.new(params[:organization])
 
     respond_to do |format|
       if @organization.save
@@ -56,7 +56,7 @@ class OrganizationsController < ApplicationController
   # PUT /organizations/1
   # PUT /organizations/1.json
   def update
-    @organization = Organization.find(params[:id])
+    @organization = Tapir::Entities::Organization.find(params[:id])
 
     respond_to do |format|
       if @organization.update_attributes(params[:organization])
@@ -72,7 +72,7 @@ class OrganizationsController < ApplicationController
   # DELETE /organizations/1
   # DELETE /organizations/1.json
   def destroy
-    @organization = Organization.find(params[:id])
+    @organization = Tapir::Entities::Organization.find(params[:id])
     @organization.destroy
 
     respond_to do |format|

@@ -1,7 +1,7 @@
 class ReportsController < ApplicationController
 
   def list_all
-    @entitys = Entity.instance.all
+    @entitys = Tapir::Entity.instance.all
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @entitys }
@@ -11,7 +11,7 @@ class ReportsController < ApplicationController
   # GET /reports/google_default
   # GET /reports/google_default.json
   def google_default
-    @loc = PhysicalLocation.all
+    @loc = Tapir::Entities::PhysicalLocation.all
     
     @json =  "var sweetObj = {\'locations\': ["
     @loc.each do |loc|

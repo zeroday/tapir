@@ -19,7 +19,7 @@
     <td><%= account.web_uri %></td>
     <td><%= account.check_uri %></td>
     <td><%= link_to 'Show', account %></td>
-    <td><%= link_to 'Edit', edit_account_path(account) %></td>
+    <td><%= link_to 'Edit', edit_tapir_entities_account_path(account) %></td>
     <td><%= link_to 'Destroy', account, confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>
@@ -28,4 +28,4 @@
 
 <br />
 
-<%= link_to 'New Account', new_account_path %>
+<%= link_to 'New Account', new_tapir_entities_account_path %>

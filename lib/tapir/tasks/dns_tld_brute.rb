@@ -15,7 +15,9 @@ end
 
 # Returns an array of valid types for this task
 def allowed_types
-  [Domain, SearchString, Organization]
+  [ Tapir::Entities::Domain, 
+    Tapir::Entities::SearchString, 
+    Tapir::Entities::Organization]
 end
 
 ## Returns an array of valid options and their description/type for this task

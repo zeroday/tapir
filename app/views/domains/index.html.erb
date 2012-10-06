@@ -14,7 +14,7 @@
     <td><%= domain.name %></td>
     <td><%= domain.status %></td>
     <td><%= link_to 'Show', domain %></td>
-    <td><%= link_to 'Edit', edit_domain_path(domain) %></td>
+    <td><%= link_to 'Edit', edit_tapir_entities_domain_path(domain) %></td>
     <td><%= link_to 'Destroy', domain, confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>
@@ -22,4 +22,4 @@
 
 <br />
 
-<%= link_to 'New Domain', new_domain_path %>
+<%= link_to 'New Domain', new_tapir_entities_domain_path %>

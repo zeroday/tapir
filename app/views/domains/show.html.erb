@@ -53,7 +53,7 @@
 <b>Parents:</b>
   <ul>
   <% @domain.parents.each {|p|%>
-    <li><%= link_to p, eval("#{p.underscore}_path(p)")  %></li>
+    <li><%= link_to p, eval("tapir_entities_#{p.underscore}_path(p)")  %></li>
   <% } %>
   </ul>
 </p>  
@@ -62,7 +62,7 @@
 <b>Children:</b>
   <ul>
   <% @domain.children.each {|c|%>
-    <li><%= link_to c, eval("#{c.underscore}_path(c)")  %></li>
+    <li><%= link_to c, eval("tapir_entities_#{c.underscore}_path(c)")  %></li>
   <% } %>
   </ul>
 </p>
@@ -70,8 +70,9 @@
 <p>
 <b>Tasks:</b>
   <ul>
+
   <% @domain.tasks.each {|t|%>
-    <li><%= link_to t, eval("#{t.underscore}_path(t.name)")  %></li>
+    <li><%= link_to t, eval("tapir_#{t.underscore}_path(t.name)")  %></li>
   <% } %>
   </ul>
 </p>
@@ -80,11 +81,11 @@
 <b>Task Runs:</b>
   <ul>
   <% @domain.task_runs.each {|r|%>
-    <li><%= link_to r, task_run_path(r.id)  %></li>
+    <li><%= link_to r, tapir_task_run_path(r.id)  %></li>
   <% } %>
   </ul>
 </p>
 
-<%= link_to 'Edit', edit_domain_path(@domain) %> |
+<%= link_to 'Edit', edit_tapir_entities_domain_path(@domain) %> |
 <%= link_to "Destroy", @domain, :confirm => 'Are you sure?', :method => :delete %> |
-<%= link_to 'Back', domains_path %>
+<%= link_to 'Back', tapir_entities_domains_path %>

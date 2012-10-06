@@ -16,7 +16,7 @@
     <td><%= web_form.action %></td>
     <td><%= web_form.fields %></td>
     <td><%= link_to 'Show', web_form %></td>
-    <td><%= link_to 'Edit', edit_web_form_path(web_form) %></td>
+    <td><%= link_to 'Edit', edit_tapir_entities_web_form_path(web_form) %></td>
     <td><%= link_to 'Destroy', web_form, confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>
@@ -24,4 +24,4 @@
 
 <br />
 
-<%= link_to 'New Web form', new_web_form_path %>
+<%= link_to 'New Web form', new_tapir_entities_web_form_path %>

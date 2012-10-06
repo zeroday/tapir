@@ -1,5 +1,6 @@
 require 'singleton'
 
+module Tapir
 class EntityManager
 
   include Singleton
@@ -75,4 +76,5 @@ class EntityManager
   task_runs
   end
   
+end
 end

@@ -8,7 +8,7 @@ end
 
 ## Returns an array of valid types for this task
 def allowed_types
-  [Host]
+  [Tapir::Entities::Host]
 end
 
 ## Returns an array of valid options and their description/type for this task
