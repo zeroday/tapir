@@ -29,7 +29,7 @@ def run
       
       if resolved_address
         @task_logger.log_good "Creating host entity for #{resolved_address}"
-        h = create_entity(Host, {:ip_address => resolved_address})
+        h = create_entity(Tapir::Entities::Host, {:ip_address => resolved_address})
       else
         @task_logger.log "Unable to find address for #{@entity.name}"
       end

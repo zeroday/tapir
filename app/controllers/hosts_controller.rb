@@ -40,7 +40,7 @@ class HostsController < ApplicationController
   # POST /hosts
   # POST /hosts.json
   def create
-    @host = Tapir::Entities::Host.new(params[:host])
+    @host = Tapir::Entities::Host.new(params[:tapir_entities_host])
 
     respond_to do |format|
       if @host.save
@@ -59,7 +59,7 @@ class HostsController < ApplicationController
     @host = Tapir::Entities::Host.find(params[:id])
 
     respond_to do |format|
-      if @host.update_attributes(params[:host])
+      if @host.update_attributes(params[:tapir_entities_host])
         format.html { redirect_to @host, notice: 'Host was successfully updated.' }
         format.json { head :ok }
       else

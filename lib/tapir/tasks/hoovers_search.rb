@@ -50,7 +50,7 @@ def run
       @task_logger.log "Using Company search URI: #{company_uri}"
 
       # Create a new organization entity
-      o = create_entity(Organization, { :name => company_name })
+      o = create_entity(Tapir::Entities::Organization, { :name => company_name })
 
       # Queue a detailed search
       # TaskManager.instance.queue_task_run("hoovers_company_detail",o, {})

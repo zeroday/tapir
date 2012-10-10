@@ -65,7 +65,7 @@ def run
       driver.navigate.to browse_location
       driver.save_screenshot save_location
 
-      create_entity Image, 
+      create_entity Tapir::Entities::Image, 
         :local_path => save_location,
         :remote_path => browse_location, 
         :description => "screenshot"

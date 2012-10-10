@@ -28,26 +28,26 @@ def run
   # TODO - check for dictionary terms?
 
   #johndoe
-  create_entity Username, {:name => "#{@entity.first_name}.#{@entity.last_name}"}
+  create_entity Tapir::Entities::Username, {:name => "#{@entity.first_name}.#{@entity.last_name}"}
   
   # john.doe
-  create_entity Username, {:name => "#{@entity.first_name}.#{@entity.last_name}"}
+  create_entity Tapir::Entities::Username, {:name => "#{@entity.first_name}.#{@entity.last_name}"}
 
   # john_doe 
-  create_entity Username, {:name => "#{@entity.first_name}_#{@entity.last_name}"}
+  create_entity Tapir::Entities::Username, {:name => "#{@entity.first_name}_#{@entity.last_name}"}
   
   # jdoe
-  create_entity Username, {:name => "#{@entity.first_name.split("").first}#{@entity.last_name}"}
+  create_entity Tapir::Entities::Username, {:name => "#{@entity.first_name.split("").first}#{@entity.last_name}"}
 
   # doe
-  create_entity Username, {:name => "#{@entity.last_name}"}
+  create_entity Tapir::Entities::Username, {:name => "#{@entity.last_name}"}
   
   if @entity.middle_name
     #johneffingdoe
-    create_entity Username, {:name => "#{@entity.first_name}#{@entity.middle_name}#{@entity.last_name}"}
+    create_entity Tapir::Entities::Username, {:name => "#{@entity.first_name}#{@entity.middle_name}#{@entity.last_name}"}
 
     #jedoe
-    create_entity Username, {:name => "#{@entity.first_name.split("").first}#{@entity.middle_name.split("").first}#{@entity.last_name}"}
+    create_entity Tapir::Entities::Username, {:name => "#{@entity.first_name.split("").first}#{@entity.middle_name.split("").first}#{@entity.last_name}"}
   end
 
 

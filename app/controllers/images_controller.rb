@@ -40,7 +40,7 @@ class ImagesController < ApplicationController
   # POST /images
   # POST /images.json
   def create
-    @image = Tapir::Entities::Image.new(params[:image])
+    @image = Tapir::Entities::Image.new(params[:tapir_entities_image])
 
     respond_to do |format|
       if @image.save
@@ -59,7 +59,7 @@ class ImagesController < ApplicationController
     @image = Tapir::Entities::Image.find(params[:id])
 
     respond_to do |format|
-      if @image.update_attributes(params[:image])
+      if @image.update_attributes(params[:tapir_entities_image])
         format.html { redirect_to @image, notice: 'Image was successfully updated.' }
         format.json { head :ok }
       else

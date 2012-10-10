@@ -47,7 +47,7 @@ def run
     #
     # if it was a domain, we've got a whole lot of shit we can scoop
     #
-    if @entity.kind_of? Domain
+    if @entity.kind_of? Tapir::Entities::Domain
       #
       # We're going to have nameservers either way?
       #
@@ -57,12 +57,12 @@ def run
           # If it's an ip address, let's create a host record
           #
           if nameserver.to_s =~ /\d\.\d\.\d\.\d/
-            new_entity = create_entity Host , :ip_address => nameserver.to_s
+            new_entity = create_entity Tapir::Entities::Host , :ip_address => nameserver.to_s
           else
             #
             # Otherwise it's another domain, and we can't do much but add it
             #
-            new_entity = create_entity Domain, :name => nameserver.to_s
+            new_entity = create_entity Tapir::Entities::Domain, :name => nameserver.to_s
           end
         end
       end
@@ -104,7 +104,7 @@ def run
         if answer.admin_contact
           @task_logger.log "Creating user from admin contact"
           fname,lname = answer.admin_contact.name.split(" ")
-          create_entity(User, {:first_name => fname, :last_name => lname})
+          create_entity(Tapir::Entities::User, {:first_name => fname, :last_name => lname})
         end
       rescue Exception => e 
         @task_logger.log "Unable to grab admin contact" 
@@ -117,7 +117,7 @@ def run
         if answer.registrant_contact
           @task_logger.log "Creating user from registrant contact"
           fname,lname = answer.registrant_contact.name.split(" ")
-          create_entity(User, {:first_name => fname, :last_name => lname})
+          create_entity(Tapir::Entities::User, {:first_name => fname, :last_name => lname})
         end
       rescue Exception => e 
         @task_logger.log "Unable to grab registrant contact" 
@@ -140,7 +140,7 @@ def run
       #
       #
       #
-      create_entity NetBlock, {
+      create_entity Tapir::Entities::NetBlock, {
         :range => "#{start_address}-#{end_address}",
         :handle => handle, 
         :description => org_ref

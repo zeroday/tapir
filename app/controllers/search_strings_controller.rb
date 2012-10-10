@@ -40,7 +40,7 @@ class SearchStringsController < ApplicationController
   # POST /search_strings
   # POST /search_strings.json
   def create
-    @search_string = Tapir::Entities::SearchString.new(params[:search_string])
+    @search_string = Tapir::Entities::SearchString.new(params[:tapir_entities_search_string])
 
     respond_to do |format|
       if @search_string.save
@@ -59,7 +59,7 @@ class SearchStringsController < ApplicationController
     @search_string = Tapir::Entities::SearchString.find(params[:id])
 
     respond_to do |format|
-      if @search_string.update_attributes(params[:search_string])
+      if @search_string.update_attributes(params[:tapir_entities_search_string])
         format.html { redirect_to @search_string, notice: 'Search string was successfully updated.' }
         format.json { head :ok }
       else

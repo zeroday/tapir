@@ -29,7 +29,7 @@ function check(field) {
      r = "#{o.underscore}##{o.id}"
    %>
 
-    <input id="<%=r%>" type="checkbox" name="entitys[<%=r%>]" /><a href="<%=request.url%>/../../../<%=o.underscore%>s/<%=o.id%>"><%=o.to_s%></a><br/>
+    <input id="<%=r%>" type="checkbox" name="entities[<%=r%>]" /><a href="<%=request.url%>/../../../<%=o.path%>s/<%=o.id%>"><%=o%></a><br/>
     
   <% end %>
   <input id="submit" type="submit" /><br/>

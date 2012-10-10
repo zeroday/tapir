@@ -40,7 +40,7 @@ class WebAppsController < ApplicationController
   # POST /web_apps
   # POST /web_apps.json
   def create
-    @web_app = Tapir::Entities::WebApp.new(params[:web_app])
+    @web_app = Tapir::Entities::WebApp.new(params[:tapir_entities_web_app])
 
     respond_to do |format|
       if @web_app.save
@@ -59,7 +59,7 @@ class WebAppsController < ApplicationController
     @web_app = Tapir::Entities::WebApp.find(params[:id])
 
     respond_to do |format|
-      if @web_app.update_attributes(params[:web_app])
+      if @web_app.update_attributes(params[:tapir_entities_web_app])
         format.html { redirect_to @web_app, notice: 'Web app was successfully updated.' }
         format.json { head :ok }
       else

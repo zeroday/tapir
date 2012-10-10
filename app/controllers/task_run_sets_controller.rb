@@ -40,7 +40,7 @@ class TaskRunSetsController < ApplicationController
   # POST /task_run_sets
   # POST /task_run_sets.json
   def create
-    @task_run_set = Tapir::TaskRunSet.new(params[:task_set])
+    @task_run_set = Tapir::TaskRunSet.new(params[:tapir_task_set])
 
     respond_to do |format|
       if @task_run_set.save
@@ -59,7 +59,7 @@ class TaskRunSetsController < ApplicationController
     @task_run_set = Tapir::TaskRunSet.find(params[:id])
 
     respond_to do |format|
-      if @task_run_set.update_attributes(params[:task_set])
+      if @task_run_set.update_attributes(params[:tapir_task_set])
         format.html { redirect_to @task_run_set, notice: 'Task set was successfully updated.' }
         format.json { head :no_content }
       else
@@ -86,7 +86,7 @@ class TaskRunSetsController < ApplicationController
     #
     # Get our params
     #
-    entity_set = params['entitys']
+    entity_set = params['entities']
     task_name = params['task_name']
     options = params['options'] || {}
     task_run_set = Tapir::TaskRunSet.create
@@ -99,9 +99,9 @@ class TaskRunSetsController < ApplicationController
     redirect_to :action => "show" unless entity_set
 
     #
-    # Create the entitys based on the params
+    # Create the entities based on the params
     #
-    entitys = []
+    entities = []
     entity_set.each do |entity_and_id|
       entity,id = entity_and_id.first.split("#")
         # Pretty gangster (rails) magic here
@@ -116,14 +116,16 @@ class TaskRunSetsController < ApplicationController
         # entity.titleize - "Tapir/Entities/Domain"
         # entity.titleize.gsub(" ","").gsub("/","::") - "Tapir::Entities::Domain"
         #
-        x = eval(entity.titleize.gsub(" ","").gsub("/","::")) 
-        entitys << x.find(id) if x
+        entity_type = entity.split(" ").first
+        #binding.pry
+        type = eval(entity_type.titleize.gsub(" ", "::")) if entity_type 
+        entities << type.find(id) if type
     end
 
     #
     # Run the task on each entity
     #
-    entitys.each do |o|
+    entities.each do |o|
       # and run the task  
       o.run_task(task_name, task_run_set.id, options)
     end

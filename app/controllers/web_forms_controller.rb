@@ -40,7 +40,7 @@ class WebFormsController < ApplicationController
   # POST /web_forms
   # POST /web_forms.json
   def create
-    @web_form = Tapir::Entities::WebForm.new(params[:web_form])
+    @web_form = Tapir::Entities::WebForm.new(params[:tapir_entities_web_form])
 
     respond_to do |format|
       if @web_form.save
@@ -59,7 +59,7 @@ class WebFormsController < ApplicationController
     @web_form = Tapir::Entities::WebForm.find(params[:id])
 
     respond_to do |format|
-      if @web_form.update_attributes(params[:web_form])
+      if @web_form.update_attributes(params[:tapir_entities_web_form])
         format.html { redirect_to @web_form, notice: 'Web form was successfully updated.' }
         format.json { head :ok }
       else

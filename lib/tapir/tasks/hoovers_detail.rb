@@ -68,7 +68,7 @@ def run
         @task_logger.log_good "Got City & State: #{city_state}"
 
         # Set the City and State
-        @entity.physical_locations << create_entity(PhysicalLocation, {
+        create_entity(Tapir::Entities::PhysicalLocation, {
           :address => street_address,
           :city => city_state.split(' ').first, 
           :state => city_state.split(' ').last })
@@ -85,7 +85,7 @@ def run
 
           # Create the user entitys
           @task_logger.log_good "Adding user entity for: #{full_name}"
-          create_entity(User, { 
+          create_entity(Tapir::Entities::User, { 
             :first_name => first_name, 
             :last_name => last_name })
         end

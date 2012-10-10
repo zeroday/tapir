@@ -40,7 +40,7 @@ class NetBlocksController < ApplicationController
   # POST /net_blocks
   # POST /net_blocks.json
   def create
-    @net_block = Tapir::Entities::NetBlock.new(params[:net_block])
+    @net_block = Tapir::Entities::NetBlock.new(params[:tapir_entities_net_block])
 
     respond_to do |format|
       if @net_block.save
@@ -59,7 +59,7 @@ class NetBlocksController < ApplicationController
     @net_block = Tapir::Entities::NetBlock.find(params[:id])
 
     respond_to do |format|
-      if @net_block.update_attributes(params[:net_block])
+      if @net_block.update_attributes(params[:tapir_entities_net_block])
         format.html { redirect_to @net_block, notice: 'Net block was successfully updated.' }
         format.json { head :ok }
       else

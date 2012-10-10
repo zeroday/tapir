@@ -54,7 +54,7 @@ class DomainsController < ApplicationController
   # POST /domains
   # POST /domains.json
   def create
-    @domain = Tapir::Entities::Domain.new(params[:domain])
+    @domain = Tapir::Entities::Domain.new(params[:tapir_entities_domain])
 
     respond_to do |format|
       if @domain.save
@@ -73,7 +73,7 @@ class DomainsController < ApplicationController
     @domain = Tapir::Entities::Domain.find(params[:id])
 
     respond_to do |format|
-      if @domain.update_attributes(params[:domain])
+      if @domain.update_attributes(params[:tapir_entities_domain])
         format.html { redirect_to @domain, notice: 'Domain was successfully updated.' }
         format.json { head :ok }
       else
@@ -90,7 +90,7 @@ class DomainsController < ApplicationController
     @domain.destroy
 
     respond_to do |format|
-      format.html { redirect_to domains_url }
+      format.html { redirect_to tapir_entities_domains_url }
       format.json { head :ok }
     end
   end

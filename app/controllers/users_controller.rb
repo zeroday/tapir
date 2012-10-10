@@ -42,7 +42,7 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
-    @user = Tapir::Entities::User.new(params[:user])
+    @user = Tapir::Entities::User.new(params[:tapir_entities_user])
     
     respond_to do |format|
       if @user.save
@@ -61,7 +61,7 @@ class UsersController < ApplicationController
     @user = Tapir::Entities::User.find(params[:id])
 
     respond_to do |format|
-      if @user.update_attributes(params[:user])
+      if @user.update_attributes(params[:tapir_entities_user])
         format.html { redirect_to @user, notice: 'User was successfully updated.' }
         format.json { head :ok }
       else

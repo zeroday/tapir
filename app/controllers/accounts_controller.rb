@@ -40,7 +40,7 @@ class AccountsController < ApplicationController
   # POST /accounts
   # POST /accounts.json
   def create
-    @account = Tapir::Entities::Account.new(params[:account])
+    @account = Tapir::Entities::Account.new(params[:tapir_entities_account])
 
     respond_to do |format|
       if @account.save
@@ -59,7 +59,7 @@ class AccountsController < ApplicationController
     @account = Tapir::Entities::Account.find(params[:id])
 
     respond_to do |format|
-      if @account.update_attributes(params[:account])
+      if @account.update_attributes(params[:tapir_entities_account])
         format.html { redirect_to @account, notice: 'Account was successfully updated.' }
         format.json { head :ok }
       else

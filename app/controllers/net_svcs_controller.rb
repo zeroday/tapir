@@ -40,7 +40,7 @@ class NetSvcsController < ApplicationController
   # POST /net_svcs
   # POST /net_svcs.json
   def create
-    @net_svc = Tapir::Entities::NetSvc.new(params[:net_svc])
+    @net_svc = Tapir::Entities::NetSvc.new(params[:tapir_entities_net_svc])
 
     respond_to do |format|
       if @net_svc.save
@@ -59,7 +59,7 @@ class NetSvcsController < ApplicationController
     @net_svc = Tapir::Entities::NetSvc.find(params[:id])
 
     respond_to do |format|
-      if @net_svc.update_attributes(params[:net_svc])
+      if @net_svc.update_attributes(params[:tapir_entities_net_svc])
         format.html { redirect_to @net_svc, notice: 'Net svc was successfully updated.' }
         format.json { head :ok }
       else

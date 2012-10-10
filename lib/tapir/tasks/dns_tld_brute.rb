@@ -79,7 +79,7 @@ def run
     gtld_list.each do |tld|
       begin
 
-        if @entity.class == Domain
+        if @entity.class == Tapir::Entities::Domain
           # get only the basename
           basename = @entity.name.split(".")[0..-2].join(".").gsub(" ","")
         else
@@ -96,8 +96,8 @@ def run
         # If we resolved, create the right entitys
         if resolved_address
           @task_logger.log_good "Creating domain and host entities..."
-          d = create_entity(Domain, {:name => domain})
-          h = create_entity(Host, {:ip_address => resolved_address})
+          d = create_entity(Tapir::Entities::Domain, {:name => domain})
+          h = create_entity(Tapir::Entities::Host, {:ip_address => resolved_address})
         end
 
         #@task_run.save_raw_result "#{domain}: resolved_address"

@@ -67,8 +67,8 @@ def run
         @task_logger.log_good "Creating domain and host entitys..."
 
         # create new host and domain entitys
-        d = create_entity(Domain, {:name => domain, :organization => @entity.organization })
-        h = create_entity(Host, {:ip_address => resolved_address})
+        d = create_entity(Tapir::Entities::Domain, {:name => domain, :organization => @entity.organization })
+        h = create_entity(Tapir::Entities::Host, {:ip_address => resolved_address})
 
       end
 

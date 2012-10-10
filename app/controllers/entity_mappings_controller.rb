@@ -13,7 +13,7 @@ class EntityMappingsController < ApplicationController
   # GET /entity_mappings/1
   # GET /entity_mappings/1.json
   def show
-    @entity_mapping = Tapir::ntityMapping.find(params[:id])
+    @entity_mapping = Tapir::EntityMapping.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -40,7 +40,7 @@ class EntityMappingsController < ApplicationController
   # POST /entity_mappings
   # POST /entity_mappings.json
   def create
-    @entity_mapping = Tapir::EntityMapping.new(params[:entity_mapping])
+    @entity_mapping = Tapir::EntityMapping.new(params[:tapir_entity_mapping])
 
     respond_to do |format|
       if @entity_mapping.save
@@ -59,7 +59,7 @@ class EntityMappingsController < ApplicationController
     @entity_mapping = Tapir::EntityMapping.find(params[:id])
 
     respond_to do |format|
-      if @entity_mapping.update_attributes(params[:entity_mapping])
+      if @entity_mapping.update_attributes(params[:tapir_entity_mapping])
         format.html { redirect_to @entity_mapping, notice: 'Entity mapping was successfully updated.' }
         format.json { head :ok }
       else

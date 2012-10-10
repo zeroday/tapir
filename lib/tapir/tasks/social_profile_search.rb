@@ -29,7 +29,7 @@ def run
   #
   # Store the account name, depending on the entity we passed in.
   #
-  if @entity.kind_of? User
+  if @entity.kind_of? Tapir::Entities::User
     account_names = @entity.usernames || ["#{@entity.first_name}_#{@entity.last_name}"]
   else
     account_names = [@entity.name]
@@ -58,7 +58,7 @@ def run
         #
         # Create an account w/ the correct parameters
         #
-        obj = create_entity Account, 
+        obj = create_entity Tapir::Entities::Account, 
         :account_name => account_name, 
         :service_name => client.service_name, 
         :check_uri => client.check_account_uri_for(account_name),

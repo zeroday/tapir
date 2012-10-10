@@ -40,7 +40,7 @@ class ParsableFilesController < ApplicationController
   # POST /parsable_files
   # POST /parsable_files.json
   def create
-    @parsable_file = Tapir::Entities::ParsableFile.new(params[:parsable_file])
+    @parsable_file = Tapir::Entities::ParsableFile.new(params[:tapir_entities_parsable_file])
 
     respond_to do |format|
       if @parsable_file.save
@@ -59,7 +59,7 @@ class ParsableFilesController < ApplicationController
     @parsable_file = Tapir::Entities::ParsableFile.find(params[:id])
 
     respond_to do |format|
-      if @parsable_file.update_attributes(params[:parsable_file])
+      if @parsable_file.update_attributes(params[:tapir_entities_parsable_file])
         format.html { redirect_to @parsable_file, notice: 'Parsable file was successfully updated.' }
         format.json { head :ok }
       else

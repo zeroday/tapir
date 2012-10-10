@@ -33,11 +33,11 @@ def run
 
   corps.each do |corp|
     # Create a new organization entity & attach a record
-    o = create_entity Organization, { 
+    o = create_entity Tapir::Entities::Organization, { 
       :name => corp.name, 
     }
     
-    create_entity(PhysicalLocation, {
+    create_entity(Tapir::Entities::PhysicalLocation, {
       :address => corps.first.address, 
       :state => corps.first.state,
       :country => corps.first.country }

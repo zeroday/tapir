@@ -40,7 +40,7 @@ class FindingsController < ApplicationController
   # POST /findings
   # POST /findings.json
   def create
-    @finding = Tapir::Entities::Finding.new(params[:finding])
+    @finding = Tapir::Entities::Finding.new(params[:tapir_entities_finding])
 
     respond_to do |format|
       if @finding.save
@@ -59,7 +59,7 @@ class FindingsController < ApplicationController
     @finding = Tapir::Entities::Finding.find(params[:id])
 
     respond_to do |format|
-      if @finding.update_attributes(params[:finding])
+      if @finding.update_attributes(params[:tapir_entities_finding])
         format.html { redirect_to @finding, notice: 'Finding was successfully updated.' }
         format.json { head :ok }
       else

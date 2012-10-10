@@ -40,7 +40,7 @@ class PhysicalLocationsController < ApplicationController
   # POST /physical_locations
   # POST /physical_locations.json
   def create
-    @physical_location = Tapir::Entities::PhysicalLocation.new(params[:physical_location])
+    @physical_location = Tapir::Entities::PhysicalLocation.new(params[:tapir_entities_physical_location])
 
     respond_to do |format|
       if @physical_location.save
@@ -59,7 +59,7 @@ class PhysicalLocationsController < ApplicationController
     @physical_location = Tapir::Entities::PhysicalLocation.find(params[:id])
 
     respond_to do |format|
-      if @physical_location.update_attributes(params[:physical_location])
+      if @physical_location.update_attributes(params[:tapir_entities_physical_location])
         format.html { redirect_to @physical_location, notice: 'Physical location was successfully updated.' }
         format.json { head :ok }
       else

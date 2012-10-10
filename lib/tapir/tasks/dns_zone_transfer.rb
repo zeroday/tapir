@@ -61,8 +61,8 @@ def run
             # Create host records for each item in the zone
             zone.each do |z|
               if z.type == "A"
-                h = create_entity Host, { :ip_address => z.address.to_s }
-                d = create_entity Domain, { :name => z.name.to_s }
+                h = create_entity Tapir::Entities::Host, { :ip_address => z.address.to_s }
+                d = create_entity Tapir::Entities::Domain, { :name => z.name.to_s }
               elsif z.type == "CNAME"
                 # TODO - recursively lookup cname host
                 @task_logger.log "TODO - handle a CNAME record"

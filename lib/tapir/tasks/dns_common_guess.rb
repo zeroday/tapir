@@ -40,8 +40,8 @@ def run
         @task_logger.log_good "DNS Guess succeeded for #{res_answer}"
 
         # We know the domain is ~valid, and the ip address too
-        d = create_entity(Domain, :name => domain)
-        h = create_entity(Host, :ip_address => res_answer)
+        d = create_entity(Tapir::Entities::Domain, :name => domain)
+        h = create_entity(Tapir::Entities::Host, :ip_address => res_answer)
 
     end
     rescue Dnsruby::Refused

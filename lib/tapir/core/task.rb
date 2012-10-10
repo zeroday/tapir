@@ -124,8 +124,10 @@ class Task
     @task_logger.log "Attempting to create new entity of type: #{type}"
 
     # Ensure we're in the proper namespace
-    type = "Tapir::Entities::#{type}"
-    
+    #binding.pry 
+    #type = "Tapir::Entities::#{type}" unless type =~ /^Tapir::Entities::/
+    #binding.pry
+
     #
     # Call the create method for this type
     #

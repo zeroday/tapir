@@ -40,7 +40,7 @@ class NotesController < ApplicationController
   # POST /notes
   # POST /notes.json
   def create
-    @note = Tapir::Entities::Note.new(params[:note])
+    @note = Tapir::Entities::Note.new(params[:tapir_entities_note])
 
     respond_to do |format|
       if @note.save
@@ -59,7 +59,7 @@ class NotesController < ApplicationController
     @note = Tapir::Entities::Note.find(params[:id])
 
     respond_to do |format|
-      if @note.update_attributes(params[:note])
+      if @note.update_attributes(params[:tapir_entities_note])
         format.html { redirect_to @note, notice: 'Note was successfully updated.' }
         format.json { head :no_content }
       else

@@ -31,7 +31,7 @@ def run
   corps = x.search @entity.name
 
   # Attach to the first entity
-  @entity.physical_locations << create_entity(PhysicalLocation, {
+  @entity.physical_locations << create_entity(Tapir::Entities::PhysicalLocation, {
     :address => corps.first.address, 
     :state => corps.first.state, 
     :country => corps.first.country })

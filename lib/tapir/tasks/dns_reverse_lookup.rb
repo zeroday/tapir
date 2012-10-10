@@ -31,7 +31,7 @@ def run
       @task_logger.log_good "Creating domain #{name}"
       
       # Create our new domain entity with the resolved name
-      d = create_entity(Domain, {:name => resolved_name})
+      d = create_entity(Tapir::Entities::Domain, {:name => resolved_name})
 
     else
       @task_logger.log "Unable to find a name for #{@entity.ip_address}"

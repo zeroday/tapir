@@ -40,7 +40,7 @@ class TasksController < ApplicationController
   # POST /Tasks
   # POST /Tasks.json
   def create
-    @task = Tapir::Task.new(params[:Task])
+    @task = Tapir::Task.new(params[:tapir_task])
 
     respond_to do |format|
       if @task.save
@@ -59,7 +59,7 @@ class TasksController < ApplicationController
     @task = Tapir::Task.find(params[:id])
 
     respond_to do |format|
-      if @task.update_attributes(params[:Task])
+      if @task.update_attributes(params[:tapir_task])
         format.html { redirect_to @task, notice: 'Task was successfully updated.' }
         format.json { head :ok }
       else

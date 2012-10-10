@@ -40,7 +40,7 @@ class OrganizationsController < ApplicationController
   # POST /organizations
   # POST /organizations.json
   def create
-    @organization = Tapir::Entities::Organization.new(params[:organization])
+    @organization = Tapir::Entities::Organization.new(params[:tapir_entities_organization])
 
     respond_to do |format|
       if @organization.save
@@ -59,7 +59,7 @@ class OrganizationsController < ApplicationController
     @organization = Tapir::Entities::Organization.find(params[:id])
 
     respond_to do |format|
-      if @organization.update_attributes(params[:organization])
+      if @organization.update_attributes(params[:tapir_entities_organization])
         format.html { redirect_to @organization, notice: 'Organization was successfully updated.' }
         format.json { head :ok }
       else

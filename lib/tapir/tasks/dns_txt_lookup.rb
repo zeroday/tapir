@@ -44,7 +44,7 @@ def run
 #     res_answer.downcase.split("ipv4").
 #     create_entity NetBlock, :range
 
-      create_entity Finding, :name => "dns_txt_lookup", :content => res_answer.answer
+      create_entity Tapir::Entities::Finding, :name => "dns_txt_lookup", :content => res_answer.answer
 
       # save the raw result
       #@task_run.save_raw_result res_answer.to_s

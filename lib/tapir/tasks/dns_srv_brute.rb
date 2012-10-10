@@ -78,10 +78,10 @@ def run
           @task_logger.log_good "Creating domain and host entitys..."
 
           # Create a domain. pass down the organization if we have it.
-          d = create_entity(Domain, {:name => domain, :organization => @entity.organization })
+          d = create_entity(Tapir::Entities::Domain, {:name => domain, :organization => @entity.organization })
 
           # Create a host to store the ip address
-          h = create_entity(Host, {:ip_address => resolved_address})
+          h = create_entity(Tapir::Entities::Host, {:ip_address => resolved_address})
           
           # Create a service, and also associate that with our host.
           create_entity(NetSvc, {:type => "tcp", :port => port, :host => h})
