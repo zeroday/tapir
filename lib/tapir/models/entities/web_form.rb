@@ -10,6 +10,10 @@ module Tapir
       field :created_at, type: Time
       field :updated_at, type: Time
 
+      def underscore
+        "tapir_entities_web_form"
+      end
+
     end
   end
 end

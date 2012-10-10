@@ -14,6 +14,10 @@ module Tapir
       field :created_at, type: Time
       field :updated_at, type: Time
 
+      def underscore
+        "tapir_entities_physical_location"
+      end
+
     end
   end
 end

@@ -15,6 +15,10 @@ module Tapir
         "Tapir::Entities::NetSvc"
       end
 
+      def underscore
+        "tapir_entities_net_svc"
+      end
+
     end
   end
 end

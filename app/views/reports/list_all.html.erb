@@ -2,7 +2,7 @@
 <b>Entities:</b>
   <ul>
   <% @entitys.each {|t|%>
-    <li><%= binding.pry; link_to eval("#{t.underscore}_path(t)"), t  %></li>
+    <li><%= link_to t, eval("#{t.underscore}_path(t)")  %></li>
   <% } %>
   </ul>
 </p>
