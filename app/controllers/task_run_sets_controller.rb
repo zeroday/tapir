@@ -86,11 +86,18 @@ class TaskRunSetsController < ApplicationController
     #
     # Get our params
     #
+    #binding.pry
     entity_set = params['entities']
     task_name = params['task_name']
     options = params['options'] || {}
     task_run_set = Tapir::TaskRunSet.create
     
+    #
+    # If we got a string for our entity set (it was a get param), convert it
+    # to checkbox syntax.
+    #
+    entity_set = [[entity_set, "on"]]  if entity_set.kind_of? String
+
     #
     # If we don't have reasonable input, return
     #

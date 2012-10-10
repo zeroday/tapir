@@ -32,7 +32,7 @@
 <b>Tasks:</b>
   <ul>
   <% @organization.tasks.each {|t|%>
-    <li><%= link_to t, eval("tapir_#{t.underscore}_path(t.name)")  %></li>
+    <li><%= link_to t, "/task_runner?task_name=#{t.name}&entities=#{@organization.underscore}%23#{@organization.id}" %></li>
   <% } %>
   </ul>
 </p>
