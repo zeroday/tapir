@@ -4,6 +4,10 @@ def name
   "dns_common_guess"
 end
 
+def pretty_name
+  "DNS Common Name Guess"
+end
+
 ## Returns a string which describes what this task does
 def description
   "Guess some common domain names based on the organization name"

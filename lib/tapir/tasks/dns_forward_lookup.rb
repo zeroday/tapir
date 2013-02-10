@@ -2,9 +2,13 @@ def name
   "dns_forward_lookup"
 end
 
+def pretty_name
+  "DNS Forward Lookup"
+end
+
 ## Returns a string which describes what this task does
 def description
-  "Forward DNS Lookup"
+  "Query for the ip address of the given DNS name"
 end
 
 ## Returns an array of valid types for this task

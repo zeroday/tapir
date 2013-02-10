@@ -4,6 +4,10 @@ def name
   "dns_srv_brute"
 end
 
+def pretty_name
+  "DNS SRV Brute"
+end
+
 # Returns a string which describes what this task does
 def description
   "Simple DNS Service Record Bruteforce"

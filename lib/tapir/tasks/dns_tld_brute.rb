@@ -8,9 +8,13 @@ def name
   "dns_tld_brute"
 end
 
+def pretty_name
+  "DNS TLD Brute"
+end
+
 # Returns a string which describes what this task does
 def description
-  "Simple TLD Bruteforce"
+  "Bruteforce the top-level domains (TLDs) for a given entity"
 end
 
 # Returns an array of valid types for this task

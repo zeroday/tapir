@@ -3,6 +3,10 @@ def name
   "edgar_detail"
 end
 
+def pretty_name
+  "EDGAR Corporation Detail"
+end
+
 # Returns a string which describes this task.
 def description
   "This task hits the corpwatch API and adds detail for the organization."

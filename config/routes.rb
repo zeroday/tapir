@@ -27,9 +27,7 @@ Tapir::Application.routes.draw do
     end
   end
 
-  ###
-  ### Welcome
-  ###
+  # Welcome page
   match "/" => "welcome#index"
   match "/welcome" => "welcome#index"
   root :to => redirect("/")
@@ -43,7 +41,6 @@ Tapir::Application.routes.draw do
 
   # Task Runner
   match "/task_runner" => "task_run_sets#run"
-
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

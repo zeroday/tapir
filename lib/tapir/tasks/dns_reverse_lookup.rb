@@ -2,8 +2,12 @@ def name
   "dns_reverse_lookup"
 end
 
+def pretty_name
+  "DNS Reverse Lookup"
+end
+
 def description
-  "Reverse DNS Lookup"
+  "Look up the name of the given ip address"
 end
 
 ## Returns an array of valid types for this task

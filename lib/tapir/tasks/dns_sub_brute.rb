@@ -4,6 +4,10 @@ def name
   "dns_sub_brute"
 end
 
+def pretty_name
+  "DNS Subdomain Brute"
+end
+
 # Returns a string which describes what this task does
 def description
   "Simple DNS Subdomain Bruteforce"

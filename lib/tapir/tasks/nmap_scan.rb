@@ -2,6 +2,10 @@ def name
   "nmap_scan"
 end
 
+def pretty_name
+  "Nmap Scan"
+end
+
 ## Returns a string which describes what this task does
 def description
   "This task runs an nmap scan on the target host or domain."

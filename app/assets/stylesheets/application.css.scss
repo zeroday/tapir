@@ -12,8 +12,11 @@
 @import "bootstrap";
 
 /* compensate the overlap caused by bootstrap top navigation, min. 40px at the top! */
-body { padding: 60px 10px 10px 10px; }
-
+body { 
+	background: url('/textures/retina_dust/retina_dust.png') repeat ;
+  padding: 60px 10px 10px 10px;
+  font-family: ‘Lucida Sans Unicode’, ‘Lucida Grande’, sans-serif;
+}
 
 div.dataTables_length label {
 	float: left;
@@ -60,4 +63,9 @@ table.table thead .sorting_desc_disabled { background: url('images/sort_desc_dis
 
 table.dataTable th:active {
 	outline: none;
+}
+
+.navbar-inner {
+	background: url('/textures/use_your_illusion/use_your_illusion.png') repeat ;
+  font-family: ‘Lucida Sans Unicode’, ‘Lucida Grande’, sans-serif;
 }

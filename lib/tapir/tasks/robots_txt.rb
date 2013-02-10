@@ -2,6 +2,10 @@ def name
   "robots_txt"
 end
 
+def pretty_name
+  "Robots.txt search"
+end
+
 ## Returns a string which describes what this task does
 def description
   "This task grabs the robots.txt and adds a record with the contents"

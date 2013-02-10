@@ -5,17 +5,16 @@ def name
   "geolocate_host"
 end
 
+def pretty_name
+  "Geolocate a Host"
+end
+
 def description
   "Performs a geolocation lookup based on an ip address"
 end
 
 def allowed_types
   [Tapir::Entities::Host]
-end
-
-## Returns an array of valid options and their description/type for this task
-def allowed_options
- []
 end
 
 def setup(entity, options={})

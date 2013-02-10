@@ -4,6 +4,10 @@ def name
   "dns_zone_transfer"
 end
 
+def pretty_name
+  "DNS Zone Transfer"
+end
+
 ## Returns a string which describes what this task does
 def description
   "DNS Zone Tranfer"

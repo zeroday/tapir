@@ -2,9 +2,13 @@ def name
   "whois"
 end
 
+def pretty_name
+  "WHOIS Lookup"
+end
+
 ## Returns a string which describes what this task does
 def description
-  "Whois lookup"
+  "Perform a whois lookup for a given entity"
 end
 
 ## Returns an array of valid types for this task

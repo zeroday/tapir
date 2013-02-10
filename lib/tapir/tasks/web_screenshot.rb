@@ -5,6 +5,10 @@ def name
   "web_screenshot"
 end
 
+def pretty_name
+  "Web Screenshot"
+end
+
 ## Returns a string which describes what this task does
 def description
   "This takes a screenshot of a website using webdriver"

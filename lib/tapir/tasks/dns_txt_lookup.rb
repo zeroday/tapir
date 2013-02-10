@@ -4,9 +4,13 @@ def name
   "dns_txt_lookup"
 end
 
+def pretty_name
+  "DNS TXT Record lookup"
+end
+
 ## Returns a string which describes what this task does
 def description
-  "DNS TXT Record Lookup"
+  "Query for txt records at this domain"
 end
 
 ## Returns an array of valid types for this task

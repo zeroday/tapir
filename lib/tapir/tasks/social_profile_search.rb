@@ -2,6 +2,10 @@ def name
   "social_profile_search"
 end
 
+def pretty_name
+  "Social Profile Search"
+end
+
 ## Returns a string which describes what this task does
 def description
   "This task searches for common social media profiles"

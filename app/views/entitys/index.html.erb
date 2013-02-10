@@ -1,8 +1,12 @@
-<div id="tasks">
-  <table>
+<table>
   <tr>
-    <th>Entities</th>    
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
   </tr>
+
+<% @entitys.each do |entity| %>
   <tr>
     <td>
       <ul>
@@ -11,6 +15,13 @@
         <% end %>
       </ul>
     <td>
+    <td><%= entity %></td>
+    <td><%= link_to 'Show', entity_path(entity) %></td>
+    <td><%= link_to 'Edit', edit_entity_path(entity) %></td>
   </tr>
+<% end %>
 </table>
-</div>
+
+<br />
+
+<%= link_to 'New Entity', new_entity_path %>

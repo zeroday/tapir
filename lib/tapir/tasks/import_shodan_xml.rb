@@ -2,6 +2,10 @@ def name
   "import_shodan_xml"
 end
 
+def pretty_name
+  "Import SHODAN XML"
+end
+
 ## Returns a string which describes what this task does
 def description
   "This is a task to import SHODAN xml."

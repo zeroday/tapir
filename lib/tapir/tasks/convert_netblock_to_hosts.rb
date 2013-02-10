@@ -4,6 +4,10 @@ def name
   "convert_netblock_to_hosts"
 end
 
+def pretty_name
+  "Convert Netblock to Hosts"
+end
+
 ## Returns a string which describes what this task does
 def description
   "This task converts a netblock into host records"

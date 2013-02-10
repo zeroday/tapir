@@ -7,6 +7,10 @@ def name
   "hoovers_company_search"
 end
 
+def pretty_name
+  "Hoovers Search"
+end
+
 # Returns a string which describes this task.
 def description
   "This task scrapes Hoovers and creates organizations for all companies found."
