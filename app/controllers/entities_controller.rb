@@ -38,7 +38,7 @@ class EntitiesController < ApplicationController
   # GET /entities/new
   # GET /entities/new.json
   def new
-    @entity = Tapir::Entities::Base.new
+    #@entity = Tapir::Entities::Base.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -54,7 +54,7 @@ class EntitiesController < ApplicationController
   # POST /entities
   # POST /entities.json
   def create
-    @entity = Tapir::Entities::Base.new(params[:entity])
+    #@entity = Tapir::Entities::Base.new(params[:entity])
 
     respond_to do |format|
       if @entity.save

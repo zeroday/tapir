@@ -51,6 +51,10 @@ class Task
   def task_name
     name
   end
+
+  def pretty_name
+    "Generic Task"
+  end
   
   def description
     "This is a generic task"

@@ -59,8 +59,8 @@ Tabulous.setup do |config|
       #------------------------------------------------------------------------------------------------------------------------------------------------------------#
       [    :entities_tab              ,    'Entities'              ,    tapir_entities_path                                     ,    true        ,    true        ],
       [    :tasks_tab                 ,    'Tasks'                 ,    tapir_tasks_path                                        ,    true        ,    true        ],
-      [    :task_runs_tab             ,    'Task runs'             ,    tapir_task_runs_path                                    ,    true        ,    true        ],
-      [    :reports_tab               ,    'Reports'               ,    reports_path                                            ,    true        ,    true        ],
+      [    :task_runs_tab             ,    'Completed Tasks'       ,    tapir_task_runs_path                                    ,    true        ,    true        ],
+      [    :reports_tab               ,    'Reports'               ,    tapir_reports_path                                            ,    true        ,    true        ],
       #------------------------------------------------------------------------------------------------------------------------------------------------------------#
       #    TAB NAME                   |    DISPLAY TEXT            |    PATH                                                     |    VISIBLE?    |    ENABLED?    #
       #------------------------------------------------------------------------------------------------------------------------------------------------------------#

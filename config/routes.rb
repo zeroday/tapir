@@ -5,24 +5,28 @@ Tapir::Application.routes.draw do
     resources :tasks
     resources :task_runs 
     resources :entity_mappings
-    resources :entities 
+    resources :entities
+  
+
+    # Welcome page
+    match "/welcome" => "welcome#index"
+
+    ###
+    ### Reports
+    ###
+    match "/reports" => "reports#index"
+    match "/reports/google_default"
+    match "/reports/list_all"
+    match "/reports/organization_report"
+
+    # Task Runner
+    match "/task_runner" => "task_run_sets#run"
+
   end
 
-  # Welcome page
-  match "/" => "welcome#index"
-  match "/welcome" => "welcome#index"
+  match "/" => "tapir/welcome#index"
   root :to => redirect("/")
 
-  ###
-  ### Reports
-  ###
-  match "/reports" => "reports#index"
-  match "/reports/google_default"
-  match "/reports/list_all"
-  match "/reports/organization_report"
-
-  # Task Runner
-  match "/task_runner" => "task_run_sets#run"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
