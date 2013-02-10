@@ -1,32 +1,7 @@
 <p>
 <b>Organizations:</b>
-  <% Organization.all.each do |o|%>
-    <p>
-    <%= link_to o, eval("#{o.underscore}_path(o)") %>:
-      <p>
-      <b>Hosts:</b>
-      <% o.hosts.each do |h|%>
-        <ul>
-          <li><%= link_to h, eval("#{h.underscore}_path(h)") %> </li>
-        </ul>
-      <% end %>
-      </p>
-      <p>
-      <b>Domains:</b>
-      <% o.domains.each do |d|%>
-        <ul>
-          <li><%= link_to d, eval("#{d.underscore}_path(d)") %> </li>
-        </ul>
-      <% end %>
-      </p>
-      <p>
-      <b>Users:</b>
-      <% o.users.each do |u|%>
-        <ul>
-          <li><%= link_to u, eval("#{h.underscore}_path(u)") %> </li>
-        </ul>
-      <% end %>
-      </p>
+  <% Tapir::Entities::Organization.all.each do |o| %>
+    <p><%= link_to o, eval("#{o.underscore}_path(o)") %></p>
   <% end %>
   </p>
 </p>

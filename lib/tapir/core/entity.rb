@@ -1,4 +1,5 @@
 require 'singleton'
+
 module Tapir
   class Entity
     include Singleton

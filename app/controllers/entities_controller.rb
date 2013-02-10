@@ -1,19 +1,19 @@
-class EntitysController < ApplicationController
-  # GET /entitys
-  # GET /entitys.json
+class EntitiesController < ApplicationController
+  # GET /entities
+  # GET /entities.json
   def index
-    @entitys = Tapir::Entity.instance.all
+    @entities = Tapir::Entity.instance.all
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @entitys }
+      format.json { render json: @entities }
     end
   end
 
-  # GET /entitys/1
-  # GET /entitys/1.json
+  # GET /entities/1
+  # GET /entities/1.json
   def show
-    @entity = Entity.find(params[:id])
+    @entity = Tapir::Entities::Base.find(params[:id])
 
     #
     # Special case - this is serialized automatically
@@ -35,10 +35,10 @@ class EntitysController < ApplicationController
     end
   end
 
-  # GET /entitys/new
-  # GET /entitys/new.json
+  # GET /entities/new
+  # GET /entities/new.json
   def new
-    @entity = Entity.new
+    @entity = Tapir::Entities::Base.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -46,15 +46,15 @@ class EntitysController < ApplicationController
     end
   end
 
-  # GET /entitys/1/edit
+  # GET /entities/1/edit
   def edit
-    @entity = Entity.find(params[:id])
+    @entity = Tapir::Entities::Base.find(params[:id])
   end
 
-  # POST /entitys
-  # POST /entitys.json
+  # POST /entities
+  # POST /entities.json
   def create
-    @entity = Entity.new(params[:entity])
+    @entity = Tapir::Entities::Base.new(params[:entity])
 
     respond_to do |format|
       if @entity.save
@@ -67,10 +67,10 @@ class EntitysController < ApplicationController
     end
   end
 
-  # PUT /entitys/1
-  # PUT /entitys/1.json
+  # PUT /entities/1
+  # PUT /entities/1.json
   def update
-    @entity = Entity.find(params[:id])
+    @entity = Tapir::Entities::Base.find(params[:id])
 
     respond_to do |format|
       if @entity.update_attributes(params[:entity])
@@ -83,14 +83,14 @@ class EntitysController < ApplicationController
     end
   end
 
-  # DELETE /entitys/1
-  # DELETE /entitys/1.json
+  # DELETE /entities/1
+  # DELETE /entities/1.json
   def destroy
-    @entity = Entity.find(params[:id])
+    @entity = Tapir::Entities::Base.find(params[:id])
     @entity.destroy
 
     respond_to do |format|
-      format.html { redirect_to entitys_url }
+      format.html { redirect_to entities_url }
       format.json { head :ok }
     end
   end

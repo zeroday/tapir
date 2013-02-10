@@ -1,30 +1,11 @@
 Tapir::Application.routes.draw do
 
   resource :tapir do
-
     resources :task_run_sets
     resources :tasks
     resources :task_runs 
     resources :entity_mappings
-
-    resource :entities do
-  
-      resources :parsable_files
-      resources :accounts
-      resources :images
-      resources :net_blocks
-      resources :findings
-      resources :web_apps
-      resources :web_forms
-      resources :net_svcs
-      resources :physical_locations
-      resources :search_strings
-      resources :domains
-      resources :hosts
-      resources :users
-      resources :organizations
-
-    end
+    resources :entities 
   end
 
   # Welcome page
@@ -36,8 +17,9 @@ Tapir::Application.routes.draw do
   ### Reports
   ###
   match "/reports" => "reports#index"
-  match "/reports/list_all"
   match "/reports/google_default"
+  match "/reports/list_all"
+  match "/reports/organization_report"
 
   # Task Runner
   match "/task_runner" => "task_run_sets#run"

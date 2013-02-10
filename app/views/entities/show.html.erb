@@ -9,7 +9,7 @@
 <b>Parents:</b>
   <ul>
   <% @entity.parents.each {|p|%>
-    <li><%= link_to p, eval("#{p.underscore}_path(p)")  %></li>
+    <li><%= link_to p, eval("tapir_entities_#{p.underscore}_path(p)")  %></li>
   <% } %>
   </ul>
 </p>  
@@ -18,7 +18,7 @@
 <b>Children:</b>
   <ul>
   <% @entity.children.each {|c|%>
-    <li><%= link_to c, eval("#{c.underscore}_path(c)")  %></li>
+    <li><%= link_to c, eval("tapir_entities_#{c.underscore}_path(c)")  %></li>
   <% } %>
   </ul>
 </p>
@@ -27,7 +27,7 @@
 <b>Tasks:</b>
   <ul>
   <% @entity.tasks.each {|t|%>
-    <li><%= link_to t, eval("#{t.underscore}_path(t.name)")  %></li>
+    <li><%= link_to t,tapir_task_path(t)  %></li>
   <% } %>
   </ul>
 </p>
@@ -36,11 +36,10 @@
 <b>Task Runs:</b>
   <ul>
   <% @entity.task_runs.each {|r|%>
-    <li><%= link_to r, task_run_path(r.id)  %></li>
+    <li><%= link_to r, tapir_task_run_path(r)  %></li>
   <% } %>
   </ul>
 </p>
 
-<%= link_to 'Edit', edit_entity_path(@entity) %> |
-<%= link_to "Destroy", @entity, :confirm => 'Are you sure?', :method => :delete %> |
-<%= link_to 'Back', entitys_path %>
+<%= link_to 'Edit', edit_tapir_entity_path(@entity) %> |
+<%= link_to 'Back', tapir_entities_path %>
