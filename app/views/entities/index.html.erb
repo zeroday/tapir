@@ -5,7 +5,7 @@
 
 <% @entities.each do |entity| %>
   <tr>
-    <td><%= link_to entity, tapir_entities_path(entity) %></td>
+    <td><%= link_to entity, tapir_entities_path(entity.id) %></td>
   </tr>
 <% end %>
 </table>

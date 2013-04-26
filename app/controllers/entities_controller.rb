@@ -2,7 +2,7 @@ class EntitiesController < ApplicationController
   # GET /entities
   # GET /entities.json
   def index
-    @entities = Tapir::Entity.instance.all
+    @entities = Tapir::Entities::Base.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -13,11 +13,13 @@ class EntitiesController < ApplicationController
   # GET /entities/1
   # GET /entities/1.json
   def show
+    #binding.pry
     @entity = Tapir::Entities::Base.find(params[:id])
 
     #
     # Special case - this is serialized automatically
-    # 
+    #
+=begin 
     if @entity.referral_whois
       @entity_referral_whois_array = YAML::load(@entity.referral_whois)
       #
@@ -28,7 +30,7 @@ class EntitiesController < ApplicationController
     else
       @entity_referral_whois_array = []
     end
-    
+=end
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @entity }
@@ -90,7 +92,7 @@ class EntitiesController < ApplicationController
     @entity.destroy
 
     respond_to do |format|
-      format.html { redirect_to entities_url }
+      format.html { redirect_to tapir_entities_url }
       format.json { head :ok }
     end
   end

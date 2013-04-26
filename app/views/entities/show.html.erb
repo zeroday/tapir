@@ -41,5 +41,6 @@
   </ul>
 </p>
 
+<%= link_to "Destroy", tapir_entities_path(@entity.id), :confirm => 'Are you sure?', :method => :delete %> | 
 <%= link_to 'Edit', edit_tapir_entity_path(@entity) %> |
 <%= link_to 'Back', tapir_entities_path %>
