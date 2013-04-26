@@ -9,10 +9,10 @@ module Tapir
       field :status, type: String
       field :confidence, type: Integer
 
-<<<<<<< Updated upstream
       def to_s
         "#{entity_type} #{name}"
-=======
+      end
+
       # Class method to convert to a path
       def self.path
         "/entities/#{self.id}"
@@ -26,8 +26,8 @@ module Tapir
       # Instance method to convert to a path
       def path
         "/entities/#{self.id}"
->>>>>>> Stashed changes
       end
+
 
       def all
         entities = []
