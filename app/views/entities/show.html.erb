@@ -27,7 +27,7 @@
 <b>Tasks:</b>
   <ul>
   <% @entity.tasks.each {|t|%>
-    <li><%= link_to t,tapir_task_path(t)  %></li>
+    <li><%= link_to t,tapir_task_path(t.task_name)  %></li>
   <% } %>
   </ul>
 </p>

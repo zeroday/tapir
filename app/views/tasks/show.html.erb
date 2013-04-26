@@ -22,15 +22,11 @@ function check(field) {
 
 <p>
   <b>Available Entities:</b><br/>
-  <form name="task_runner" id="task_runner" action="/task_runner" method="POST"> 
+  <form name="task_runner" id="run_task" action="/run_task" method="POST"> 
   <input type="hidden" name="task_name" id="task_name" value="<%=@task.name%>"><br/>
   <input type="checkbox" name="Toggle" value="Toggle" onClick="check(document.task_runner)"><br/>
-  <% @task.candidates.each do |o|
-     r = "#{o.underscore}##{o.id}"
-   %>
-
+  <% @task.candidates.each do |o| r = "#{o.underscore}##{o.id}" %>
     <input id="<%=r%>" type="checkbox" name="entities[<%=r%>]" /><a href="<%=request.url%>/../../../<%=o.path%>s/<%=o.id%>"><%=o%></a><br/>
-    
   <% end %>
   <input id="submit" type="submit" /><br/>
   </form>

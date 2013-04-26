@@ -1,6 +1,6 @@
 class EntitiesController < ApplicationController
-  # GET /entities
-  # GET /entities.json
+  # GET /tapir/entities
+  # GET /tapir/entities.json
   def index
     @entities = Tapir::Entities::Base.all
 
@@ -10,8 +10,8 @@ class EntitiesController < ApplicationController
     end
   end
 
-  # GET /entities/1
-  # GET /entities/1.json
+  # GET /tapir/entities/1
+  # GET /tapir/entities/1.json
   def show
     #binding.pry
     @entity = Tapir::Entities::Base.find(params[:id])
@@ -37,30 +37,36 @@ class EntitiesController < ApplicationController
     end
   end
 
-  # GET /entities/new
-  # GET /entities/new.json
+  # GET /tapir/entities/new
+  # GET /tapir/entities/new.json
   def new
-    #@entity = Tapir::Entities::Base.new
-
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @entity }
     end
   end
 
-  # GET /entities/1/edit
+  # GET /tapir/entities/1/edit
   def edit
     @entity = Tapir::Entities::Base.find(params[:id])
   end
 
-  # POST /entities
-  # POST /entities.json
+  # POST /tapir/tapir/entities
+  # POST /tapir/tapir/entities.json
   def create
-    #@entity = Tapir::Entities::Base.new(params[:entity])
+
+    # interpret the type based on the user's input. 
+    # TODO - SECURITY - limit this to valid type
+    type = params[:type]
+
+    @entity = eval("Tapir::Entities::#{type}").new
+
+    require 'pry'
+    binding.pry
 
     respond_to do |format|
       if @entity.save
-        format.html { redirect_to @entity, notice: 'entity was successfully created.' }
+        format.html { render action: "edit", notice: 'entity was successfully created.' }
         format.json { render json: @entity, status: :created, location: @entity }
       else
         format.html { render action: "new" }
@@ -69,8 +75,8 @@ class EntitiesController < ApplicationController
     end
   end
 
-  # PUT /entities/1
-  # PUT /entities/1.json
+  # PUT /tapir/entities/1
+  # PUT /tapir/entities/1.json
   def update
     @entity = Tapir::Entities::Base.find(params[:id])
 
@@ -85,8 +91,8 @@ class EntitiesController < ApplicationController
     end
   end
 
-  # DELETE /entities/1
-  # DELETE /entities/1.json
+  # DELETE /tapir/entities/1
+  # DELETE /tapir/entities/1.json
   def destroy
     @entity = Tapir::Entities::Base.find(params[:id])
     @entity.destroy

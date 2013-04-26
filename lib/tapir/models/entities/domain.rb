@@ -23,6 +23,10 @@ module Tapir
       field :created_at, type: Time
       field :updated_at, type: Time
       
+      def self.model_name
+        super.model_name
+      end
+
     end
   end
 end

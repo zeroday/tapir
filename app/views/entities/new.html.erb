@@ -1,5 +1,8 @@
 <h1>New entity</h1>
 
-<%= render 'form' %>
+<%= form_tag "/tapir/entities" do %>
+  <%= text_field_tag "type", "Domain" %>
+  <%= submit_tag "Save" %>
+<% end %>
 
 <%= link_to 'Back', tapir_entities_path %>

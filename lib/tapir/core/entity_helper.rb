@@ -9,6 +9,14 @@ module EntityHelper
       # gangster method_missing magic to automatically create tasks by name
       #
       def method_missing(method, *args, &block)
+         
+         # Deal with the missing path helpers 
+         #if method_missing =~ /tapir_entities_/
+         #   binding.pry
+         #   return "/entities/#{self.id}"
+         #end
+
+         # Deal with calling tasks as a method on the entity
          call_parent = true
          TaskManager.instance.get_tasks_for(self).each do |task|
           puts "checking task #{task}"

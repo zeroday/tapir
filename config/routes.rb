@@ -20,7 +20,7 @@ Tapir::Application.routes.draw do
     match "/reports/organization_report"
 
     # Task Runner
-    match "/task_runner" => "task_run_sets#run"
+    match "/run_task" => "task_run_sets#run"
 
   end
 
