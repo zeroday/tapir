@@ -8,6 +8,7 @@ module EntityHelper
       #
       # gangster method_missing magic to automatically create tasks by name
       #
+=begin
       def method_missing(method, *args, &block)
          
          # Deal with the missing path helpers 
@@ -46,6 +47,7 @@ module EntityHelper
         end
         super if call_parent
       end
+=end
       # end method_missing magic
 
       def to_s

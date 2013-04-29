@@ -1,13 +1,6 @@
 module Tapir
   module Entities
-    class Domain < Base
-      #belongs_to :organization
-      #has_many   :hosts
-      #has_many   :netblocks
-      #has_many   :task_runs
-      #validates_uniqueness_of :name
-      #validates_presence_of   :name
-      
+    class Domain < Base      
       field :record_created_on, type: Time
       field :record_updated_on, type: Time
       field :record_expires_on, type: Time
@@ -23,8 +16,12 @@ module Tapir
       field :created_at, type: Time
       field :updated_at, type: Time
       
-      def self.model_name
-        super.model_name
+      #def self.model_name
+      #  super.model_name
+      #end
+
+      def tapir_entities_domain_path
+        binding.pry
       end
 
     end

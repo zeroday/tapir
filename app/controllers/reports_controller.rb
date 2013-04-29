@@ -1,7 +1,7 @@
 class ReportsController < ApplicationController
 
   def list_all
-    @entitys = Tapir::Entity.instance.all
+    @entitys = Tapir::Entities::Base.all
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @entitys }

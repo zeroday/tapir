@@ -82,21 +82,20 @@ class TaskRunSetsController < ApplicationController
   end
   
   def run
-
     #
     # Get our params
     #
-    #binding.pry
-    entity_set = params['entities']
-    task_name = params['task_name']
-    options = params['options'] || {}
+    entity_set = params[:entities]
+    task_name = params[:task_name]
+    options = params[:options] || {}
     task_run_set = Tapir::TaskRunSet.create
     
-    #
+
+    # TODO: Removable?
     # If we got a string for our entity set (it was a get param), convert it
     # to checkbox syntax.
     #
-    entity_set = [[entity_set, "on"]]  if entity_set.kind_of? String
+    #entity_set = [[entity_set, "on"]]  if entity_set.kind_of? String
 
     #
     # If we don't have reasonable input, return
@@ -109,24 +108,19 @@ class TaskRunSetsController < ApplicationController
     # Create the entities based on the params
     #
     entities = []
-    entity_set.each do |entity_and_id|
-      entity,id = entity_and_id.first.split("#")
-        # Pretty gangster (rails) magic here
-        #
-        # Converts the parameter to a class and create an object
+    entity_set.each do |key, value|
+
+        # Convert the parameter to a class and create an object
         # 
         # Example: 
+        #  - entity_set - {"Tapir::Entities::Domain#5143ddc9ad19763c1d000004"=>"on"}
+        #  - entity.titleize.gsub(" ","").gsub("/","::") - "Tapir::Entities::Domain"
         #
-        # entity_set - {"tapir/entities/domain#507071c157124ab0ff000001"=>"on"
-        # entity_and_id - ["tapir/entities/domain#507071c157124ab0ff000001", "on"]
-        # entity - "tapir/entities/domain"
-        # entity.titleize - "Tapir/Entities/Domain"
-        # entity.titleize.gsub(" ","").gsub("/","::") - "Tapir::Entities::Domain"
-        #
-        entity_type = entity.split(" ").first
-        #binding.pry
-        type = eval(entity_type.titleize.gsub(" ", "::")) if entity_type 
-        entities << type.find(id) if type
+        entity_type = key.split("#").first
+        entity_id = key.split("#").last
+
+        type = eval(entity_type)
+        entities << type.find(entity_id)
     end
 
     #

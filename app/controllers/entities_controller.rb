@@ -13,24 +13,8 @@ class EntitiesController < ApplicationController
   # GET /tapir/entities/1
   # GET /tapir/entities/1.json
   def show
-    #binding.pry
     @entity = Tapir::Entities::Base.find(params[:id])
 
-    #
-    # Special case - this is serialized automatically
-    #
-=begin 
-    if @entity.referral_whois
-      @entity_referral_whois_array = YAML::load(@entity.referral_whois)
-      #
-      # this may still be a string
-      #
-      @entity_referral_whois_array = [@entity_referral_whois_array] if 
-        @entity_referral_whois_array.kind_of? String
-    else
-      @entity_referral_whois_array = []
-    end
-=end
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @entity }
@@ -40,6 +24,8 @@ class EntitiesController < ApplicationController
   # GET /tapir/entities/new
   # GET /tapir/entities/new.json
   def new
+    @entity_types = Tapir::Entities::Base.descendants
+
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @entity }
@@ -48,7 +34,8 @@ class EntitiesController < ApplicationController
 
   # GET /tapir/entities/1/edit
   def edit
-    @entity = Tapir::Entities::Base.find(params[:id])
+    type = params[:type]
+    @entity = eval("#{type}").find(params[:id])
   end
 
   # POST /tapir/tapir/entities
@@ -58,11 +45,7 @@ class EntitiesController < ApplicationController
     # interpret the type based on the user's input. 
     # TODO - SECURITY - limit this to valid type
     type = params[:type]
-
-    @entity = eval("Tapir::Entities::#{type}").new
-
-    require 'pry'
-    binding.pry
+    @entity = eval("#{type}").new
 
     respond_to do |format|
       if @entity.save
@@ -78,11 +61,11 @@ class EntitiesController < ApplicationController
   # PUT /tapir/entities/1
   # PUT /tapir/entities/1.json
   def update
-    @entity = Tapir::Entities::Base.find(params[:id])
-
+    type = params[:type]
+    @entity = eval("#{type}").find(params[:oid])
     respond_to do |format|
-      if @entity.update_attributes(params[:entity])
-        format.html { redirect_to @entity, notice: 'entity was successfully updated.' }
+      if @entity.update_attributes(params)
+        format.html { redirect_to tapir_entity_path(@entity), notice: 'Entity was successfully updated.' }
         format.json { head :ok }
       else
         format.html { render action: "edit" }
@@ -94,7 +77,9 @@ class EntitiesController < ApplicationController
   # DELETE /tapir/entities/1
   # DELETE /tapir/entities/1.json
   def destroy
-    @entity = Tapir::Entities::Base.find(params[:id])
+    binding.pry
+    type = params[:type]
+    @entity = eval("#{type}").find(params[:id])
     @entity.destroy
 
     respond_to do |format|

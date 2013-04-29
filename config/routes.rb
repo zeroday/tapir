@@ -1,14 +1,15 @@
 Tapir::Application.routes.draw do
 
   resource :tapir do
-    resources :task_run_sets
     resources :tasks
-    resources :task_runs 
+    resources :task_runs
+    resources :task_run_sets
     resources :entity_mappings
     resources :entities
   
-
-    # Welcome page
+    ###
+    ### Welcome page
+    ###
     match "/welcome" => "welcome#index"
 
     ###
@@ -18,13 +19,15 @@ Tapir::Application.routes.draw do
     match "/reports/google_default"
     match "/reports/list_all"
     match "/reports/organization_report"
-
-    # Task Runner
+    
+    ###
+    ### Task Runner
+    ###
     match "/run_task" => "task_run_sets#run"
-
   end
 
   match "/" => "tapir/welcome#index"
+  
   root :to => redirect("/")
 
 

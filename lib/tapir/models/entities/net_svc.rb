@@ -1,10 +1,6 @@
 module Tapir
   module Entities
     class NetSvc < Base
-      #belongs_to  :host
-      #has_many    :web_apps
-      #has_many    :task_runs
-
       field :fingerprint, type: String
       field :proto, type: String
       field :port_num, type: Integer

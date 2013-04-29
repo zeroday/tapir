@@ -27,9 +27,11 @@ class Task
   attr_accessor :task_run
 
   def candidates
-    x = []
-    Entity.instance.all.each {|o| x << o if self.allowed_types.include? o.class }
-  x
+    candidate_list = []
+    Tapir::Entities::Base.all.each do |entity| 
+      candidate_list << entity if self.allowed_types.include? entity.class
+    end
+  candidate_list
   end
 
   def underscore

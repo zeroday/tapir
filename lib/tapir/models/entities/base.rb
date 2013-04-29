@@ -14,20 +14,9 @@ module Tapir
       end
 
       # Class method to convert to a path
-      def self.path
-        "/entities/#{self.id}"
-      end
-
-      # Class method to convert to a path
       def self.underscore
         self.class.to_s.downcase.gsub("::","_")
       end
-
-      # Instance method to convert to a path
-      def path
-        "/entities/#{self.id}"
-      end
-
 
       def all
         entities = []
@@ -35,25 +24,13 @@ module Tapir
         Tapir::Entities::Base.descendants.each do |x|
           x.all.each {|y| entities << y } unless x.all == [] 
         end
+        
       entities
       end
-
-
-      # This allows us to refer to all objects as entities
-      # as opposed to working about generating path / url 
-      # helpers for every type of entity
-      # http://api.rubyonrails.org/classes/ActiveModel/Naming.html#method-c-param_key
-      #def self.model_name
-      #  super.class.model_name
-      #end
 
       def model_name
         self.model_name
       end
-
-      #def self.model_name
-      #  super.model_name
-      #end
 
       extend ActiveModel::Naming
 

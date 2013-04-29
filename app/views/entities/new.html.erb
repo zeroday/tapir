@@ -1,7 +1,8 @@
 <h1>New entity</h1>
 
 <%= form_tag "/tapir/entities" do %>
-  <%= text_field_tag "type", "Domain" %>
+  <%= select_tag "type", options_from_collection_for_select(@entity_types, "name", "name") %>
+
   <%= submit_tag "Save" %>
 <% end %>
 

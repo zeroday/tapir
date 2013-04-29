@@ -1,8 +1,28 @@
 <p id="notice"><%= notice %></p>
+<p>
+<%= render 'display' %>
+</p>
+<p>
+<b>Run Task:</b>
+  <form name="task_runner" id="run_task" action="/tapir/run_task" method="POST"> 
+    <input type="hidden" name="entities" value=<%="#{@entity._type}##{@entity._id}" %></input>
+    <select>
+    <% @entity.tasks.each do |t| %>
+      <option value="<%=t.name%>" name="task_name"><%=t%></option>
+    <% end %>
+    </select>
+    <input type="Submit" value="Run Task"></input>
+  </form>
+  
+</p>
 
 <p>
-  <b>Name:</b>
-  <%= @entity.name %>
+<b>Task Runs:</b>
+  <ul>
+  <% @entity.task_runs.each {|r|%>
+    <li><%= link_to r, tapir_task_run_path(r)  %></li>
+  <% } %>
+  </ul>
 </p>
 
 <p>
@@ -23,24 +43,6 @@
   </ul>
 </p>
 
-<p>
-<b>Tasks:</b>
-  <ul>
-  <% @entity.tasks.each {|t|%>
-    <li><%= link_to t,tapir_task_path(t.task_name)  %></li>
-  <% } %>
-  </ul>
-</p>
-
-<p>
-<b>Task Runs:</b>
-  <ul>
-  <% @entity.task_runs.each {|r|%>
-    <li><%= link_to r, tapir_task_run_path(r)  %></li>
-  <% } %>
-  </ul>
-</p>
-
-<%= link_to "Destroy", tapir_entities_path(@entity.id), :confirm => 'Are you sure?', :method => :delete %> | 
-<%= link_to 'Edit', edit_tapir_entity_path(@entity) %> |
+<%= link_to "Destroy", tapir_entity_path(@entity, :type => @entity._type), :confirm => 'Are you sure?', :method => :delete %>| 
+<%= link_to 'Edit', edit_tapir_entity_path(@entity, :type => @entity._type) %> |
 <%= link_to 'Back', tapir_entities_path %>

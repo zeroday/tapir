@@ -68,10 +68,10 @@ def run
       # If we resolved, create the right entitys
       if resolved_address
  
-        @task_logger.log_good "Creating domain and host entitys..."
+        @task_logger.log_good "Creating domain and host entities..."
 
         # create new host and domain entitys
-        d = create_entity(Tapir::Entities::Domain, {:name => domain, :organization => @entity.organization })
+        d = create_entity(Tapir::Entities::Domain, {:name => domain })
         h = create_entity(Tapir::Entities::Host, {:ip_address => resolved_address})
 
       end
