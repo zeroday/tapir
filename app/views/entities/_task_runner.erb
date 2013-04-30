@@ -1,0 +1,17 @@
+<p>
+<% if @entity.tasks.count > 0 %>
+  <b>Run Task:</b>
+  <form name="task_runner" id="run_task" action="/tapir/run_task" method="POST"> 
+    <input type="hidden" type="checkbox" name="entities[<%="#{@entity._type}##{@entity.id}"%>]" value="checked"></input>
+    <select name="task_name">
+    <% @entity.tasks.each do |t| %>
+      <option value="<%=t.name%>"><%=t%></option>
+    <% end %>
+    </select>
+    <input type="Submit" value="Run Task"></input>
+  </form>
+<% else %>
+  <b>Run Task:</b>
+  No tasks.
+<% end %>
+</p>

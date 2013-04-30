@@ -1,14 +1,8 @@
 module Tapir
   module Entities
     class User < Base
-      #belongs_to  :organization
-      #has_many    :physical_locations
-      #has_many    :task_runs
-      #has_many    :accounts
-      #validates_presence_of :usernames
-      
-      before_save :default_values, :cleanup_usernames 
-      after_create :set_usernames_empty
+      #before_save :default_values, :cleanup_usernames 
+      #after_create :set_usernames_empty
 
       field :first_name, type: String
       field :last_name, type: String

@@ -23,7 +23,7 @@ Tapir::Application.routes.draw do
     ###
     ### Task Runner
     ###
-    match "/run_task" => "task_run_sets#run"
+    match "/run_task" => "task_run_sets#run", :via => [:post, :get]
   end
 
   match "/" => "tapir/welcome#index"

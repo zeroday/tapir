@@ -2,19 +2,8 @@
 <p>
 <%= render 'display' %>
 </p>
-<p>
-<b>Run Task:</b>
-  <form name="task_runner" id="run_task" action="/tapir/run_task" method="POST"> 
-    <input type="hidden" name="entities" value=<%="#{@entity._type}##{@entity._id}" %></input>
-    <select>
-    <% @entity.tasks.each do |t| %>
-      <option value="<%=t.name%>" name="task_name"><%=t%></option>
-    <% end %>
-    </select>
-    <input type="Submit" value="Run Task"></input>
-  </form>
-  
-</p>
+
+<%= render 'task_runner' %>
 
 <p>
 <b>Task Runs:</b>

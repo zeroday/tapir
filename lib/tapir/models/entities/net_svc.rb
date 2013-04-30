@@ -7,12 +7,8 @@ module Tapir
       field :created_at, type: Time
       field :updated_at, type: Time
 
-      def capitalize 
-        "Tapir::Entities::NetSvc"
-      end
-
-      def underscore
-        "tapir_entities_net_svc"
+      def to_s
+         super << "#{port_num}/#{proto}"
       end
 
     end

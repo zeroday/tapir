@@ -129,11 +129,6 @@ class Task
   def create_entity(type, params, current_entity=@entity)
     @task_logger.log "Attempting to create new entity of type: #{type}"
 
-    # Ensure we're in the proper namespace
-    #binding.pry 
-    #type = "Tapir::Entities::#{type}" unless type =~ /^Tapir::Entities::/
-    #binding.pry
-
     #
     # Call the create method for this type
     #
@@ -142,8 +137,7 @@ class Task
     #
     # Check for dupes & return right away if this doesn't save a new
     # entity. This should prevent the entity mapping from getting created.
-    #
-    
+    #    
     if new_entity.save
       @task_logger.log_good "Created new entity: #{new_entity}"
     else
@@ -155,7 +149,7 @@ class Task
     # If we have a new entity, then we should keep track of the information
     # that created this entity
     #
-    # TODO - this currently prevents entitys from being mapped as children twice (with different task runs)
+    # TODO - this currently prevents entities from being mapped as children twice (with different task runs)
     # this might not be desired behavior in some cases
     #
     if current_entity.children.include? new_entity

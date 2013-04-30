@@ -10,7 +10,7 @@ module Tapir
       field :confidence, type: Integer
 
       def to_s
-        "#{entity_type} #{name}"
+        "#{entity_type.capitalize}: #{name}"
       end
 
       # Class method to convert to a path

@@ -1,6 +1,5 @@
 module Tapir
 class EntityMapping
-  #belongs_to :task_run
   include Mongoid::Document
 
   belongs_to :task_run

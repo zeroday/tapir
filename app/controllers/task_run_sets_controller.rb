@@ -90,17 +90,11 @@ class TaskRunSetsController < ApplicationController
     options = params[:options] || {}
     task_run_set = Tapir::TaskRunSet.create
     
-
-    # TODO: Removable?
-    # If we got a string for our entity set (it was a get param), convert it
-    # to checkbox syntax.
-    #
-    #entity_set = [[entity_set, "on"]]  if entity_set.kind_of? String
-
     #
     # If we don't have reasonable input, return
     #
-    # TODO - flash error?
+    # TODO - this is currently broken - how to send back to the 
+    # previous page?
     redirect_to :action => "show" unless task_name
     redirect_to :action => "show" unless entity_set
 
