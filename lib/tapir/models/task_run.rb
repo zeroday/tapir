@@ -14,7 +14,7 @@ class TaskRun
   end
 
   def entity_mappings
-    EntityMapping.all_of(
+    EntityMapping.any_of(
       {"$and" => [{:child_id => self.task_entity_id},
         {:child_type => self.task_entity_type}]}, 
       {"$and" => [{:parent_id => self.task_entity_id},

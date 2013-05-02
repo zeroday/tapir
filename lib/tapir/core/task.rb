@@ -127,8 +127,6 @@ class Task
   #  new_entity keeps track of the new entity
   #
   def create_entity(type, params, current_entity=@entity)
-    @task_logger.log "Attempting to create new entity of type: #{type}"
-
     #
     # Call the create method for this type
     #
@@ -150,8 +148,9 @@ class Task
     # that created this entity
     #
     # TODO - this currently prevents entities from being mapped as children twice (with different task runs)
-    # this might not be desired behavior in some cases
+    # this should not be desired behavior in most cases
     #
+    binding.pry
     if current_entity.children.include? new_entity
       @task_logger.log "Skipping association of #{current_entity} and #{new_entity}. It's already a child."
     else
@@ -208,17 +207,16 @@ class Task
     # Do some logging in the main Tapir log
     # 
     TapirLogger.instance.log "Running task: #{self.name}"
-    TapirLogger.instance.log "entity: #{entity}"
+    TapirLogger.instance.log "Entity: #{entity}"
     TapirLogger.instance.log "Options: #{options}"
 
     #
-    # Call the methods to actually do something with the entitys that have
-    # been passed into this task
+    # Call the methods to actually do something with the entities that have been passed into this task
     #
     self.setup(entity, options)
     
     #
-    # UGH. This is so we can keep track of which tasks were run together.
+    # Keep track of which tasks were run together.
     #
     TapirLogger.instance.log "Associating task run #{@task_run} with set #{task_run_set_id}"
     @task_run.task_run_set_id = task_run_set_id
@@ -228,18 +226,7 @@ class Task
     self.cleanup 
     
     #
-    # Record results in the task_run
-    #
-    @task_logger.log "Recording results"
-    
-    #
-    # Mark complete in the task log
-    #
-    @task_logger.log "done recording"
-    # End recording of results
-    
-    #
-    # return the log
+    # Return the log
     #
     @task_run.task_log = @task_logger.text
     @task_run.save

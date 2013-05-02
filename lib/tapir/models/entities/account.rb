@@ -7,7 +7,7 @@ module Tapir
       field :check_uri, type: String
       #field :user_id, type: Integer
       field :created_at, type: Time
-      field :updated_at, type: Time         
+      field :updated_at, type: Time        
     end
   end
 end

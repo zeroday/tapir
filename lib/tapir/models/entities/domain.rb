@@ -11,6 +11,8 @@ module Tapir
       field :referral_whois, type: String
       field :registered, type: String
       field :available, type: String
+      #field :organization_id, Integer
+      #field :host_id, Inteer
       field :created_at, type: Time
       field :updated_at, type: Time
       

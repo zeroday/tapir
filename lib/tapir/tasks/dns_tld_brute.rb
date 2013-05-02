@@ -73,7 +73,7 @@ def run
   else
     gtld_list = ['co', 'co.uk', 'com' ,'net', 'biz', 'org', 'int', 'mil', 'edu',
     'biz', 'info', 'name', 'pro', 'aero', 'coop', 'museum', 'asia', 'cat', 'jobs',
-    'mobi', 'tel', 'travel', 'arpa', 'gov', "us", "cn", "to", "xxx"]
+    'mobi', 'tel', 'travel', 'arpa', 'gov', "us", "cn", "to", "xxx", "io"]
   end
 
   @task_logger.log "Using gtld list: #{gtld_list}"

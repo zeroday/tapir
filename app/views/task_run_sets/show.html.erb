@@ -12,7 +12,7 @@
     <td>
       <ul>
       <% task_run.entity_mappings.each do |x| %>
-        <li><%= link_to(x.get_child.to_s, x.get_child) %></li>
+        <li><%= link_to(x.get_child,"/tapir/entities/#{x.get_child.id}",) %></li>
       <% end %>
       </ul>
     </td>

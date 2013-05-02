@@ -7,5 +7,10 @@ module Tapir
       field :created_at, type: Time
       field :updated_at, type: Time
     end
+
+    def to_s
+       super << "#{range}"
+    end
+
   end
 end

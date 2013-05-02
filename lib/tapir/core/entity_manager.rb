@@ -9,7 +9,7 @@ class EntityManager
   # This method will find all children for a particular entity
   #
   def find_children(id, type)
-    all_mapped_children = EntityMapping.all(
+    all_mapped_children = Tapir::EntityMapping.all(
           :conditions => {  :parent_id => id,
                             :parent_type => type})
     children = []
@@ -35,7 +35,7 @@ class EntityManager
   # This method will find all parents for a particular entity
   #
   def find_parents(id, type)
-    all_mapped_parents = EntityMapping.all(
+    all_mapped_parents = Tapir::EntityMapping.all(
           :conditions => {  :child_id => id,
                             :child_type => type})
     parents = []
@@ -61,7 +61,7 @@ class EntityManager
   # This function is much the same as the find_parents and find_children functions
   #
   def find_task_runs(id, type)
-      all_mapped_parents = EntityMapping.all(
+      all_mapped_parents = Tapir::EntityMapping.all(
           :conditions => {  :child_id => id,
                             :child_type => type})
     task_runs = []
