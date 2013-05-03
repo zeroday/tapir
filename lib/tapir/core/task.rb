@@ -150,7 +150,6 @@ class Task
     # TODO - this currently prevents entities from being mapped as children twice (with different task runs)
     # this should not be desired behavior in most cases
     #
-    binding.pry
     if current_entity.children.include? new_entity
       @task_logger.log "Skipping association of #{current_entity} and #{new_entity}. It's already a child."
     else

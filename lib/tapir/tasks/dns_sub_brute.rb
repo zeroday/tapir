@@ -41,7 +41,7 @@ def run
   else
     # Add a builtin domain list  
     subdomain_list = ["mx", "mx1", "mx2", "www", "ww2", "ns1", "ns2", "ns3", "test", "mail", "owa", "vpn", "admin",
-      "gateway", "secure", "admin", "service", "tools", "doc", "docs", "network", "help", "en" ]
+      "gateway", "secure", "admin", "service", "tools", "doc", "docs", "network", "help", "en", "sharepoint", "portal"]
   end
 
   @task_logger.log_good "Using subdomain list: #{subdomain_list}"
