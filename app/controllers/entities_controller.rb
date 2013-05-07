@@ -24,7 +24,7 @@ class EntitiesController < ApplicationController
   # GET /tapir/entities/new
   # GET /tapir/entities/new.json
   def new
-    @entity_types = Tapir::Entities::Base.descendants
+    @entity_types = Tapir::Entities::Base.descendants.map{|x| x.name.split("::").last}
 
     respond_to do |format|
       format.html # new.html.erb
@@ -45,7 +45,7 @@ class EntitiesController < ApplicationController
     # interpret the type based on the user's input. 
     # TODO - SECURITY - limit this to valid type
     type = params[:type]
-    @entity = eval("#{type}").new
+    @entity = eval("Tapir::Entities::#{type}").new
 
     respond_to do |format|
       if @entity.save
@@ -77,7 +77,6 @@ class EntitiesController < ApplicationController
   # DELETE /tapir/entities/1
   # DELETE /tapir/entities/1.json
   def destroy
-    binding.pry
     type = params[:type]
     @entity = eval("#{type}").find(params[:id])
     @entity.destroy
