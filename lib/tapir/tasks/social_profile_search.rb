@@ -13,8 +13,9 @@ end
 
 ## Returns an array of types that are allowed to call this task
 def allowed_types
-  [ Tapir::Entities::SearchString, 
-    Tapir::Entities::User]
+  [ Tapir::Entities::SearchString,
+    Tapir::Entities::User,
+    Tapir::Entities::Username]
 end
 
 ## Returns an array of valid options and their description/type for this task
@@ -34,7 +35,7 @@ def run
   # Store the account name, depending on the entity we passed in.
   #
   if @entity.kind_of? Tapir::Entities::User
-    account_names = @entity.usernames || ["#{@entity.first_name}_#{@entity.last_name}"]
+    account_names = @entity.usernames.all
   else
     account_names = [@entity.name]
   end

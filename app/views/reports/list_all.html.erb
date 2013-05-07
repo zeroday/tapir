@@ -1,8 +1,8 @@
 <p>
 <b>Entities:</b>
   <ul>
-  <% @entitys.each {|t|%>
-    <li><%= link_to t, eval("#{t.underscore}_path(t)")  %></li>
+  <% @entities.each {|t|%>
+    <li><%= link_to t, t.id.to_s %></li>
   <% } %>
   </ul>
 </p>

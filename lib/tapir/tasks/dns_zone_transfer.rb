@@ -62,6 +62,8 @@ def run
             zt.server = nameserver
             zone = zt.transfer(@entity.name)
 
+            create_entity Tapir::Entities::Finding, { :name => "Zone Transfer", :content => "#{nameserver} -> #{@entity.name}", :details => zone }
+
             # Create host records for each item in the zone
             zone.each do |z|
               if z.type == "A"

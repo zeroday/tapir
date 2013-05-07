@@ -6,7 +6,7 @@ Tapir::Application.routes.draw do
     resources :task_run_sets
     resources :entity_mappings
     resources :entities
-  
+    
     ###
     ### Welcome page
     ###
@@ -16,9 +16,9 @@ Tapir::Application.routes.draw do
     ### Reports
     ###
     match "/reports" => "reports#index"
-    match "/reports/google_default"
-    match "/reports/list_all"
-    match "/reports/organization_report"
+    match "/reports/google_default" => "reports#google_default"
+    match "/reports/list_all" => "reports#list_all"
+    match "/reports/organization_report" => "reports#organization_report"
     
     ###
     ### Task Runner

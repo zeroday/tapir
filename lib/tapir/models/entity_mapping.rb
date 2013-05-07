@@ -27,12 +27,12 @@ class EntityMapping
   def get_parent
     TapirLogger.instance.log "Trying to find #{parent_type}:#{parent_id}"
     
-    begin
-      eval "#{parent_type}.find #{parent_id}"
-    rescue ActiveRecord::RecordNotFound => e
-      TapirLogger.instance.log "Oops, couldn't find #{child_type}:#{child_id}"
-      nil
-    end
+    #begin
+      eval "#{parent_type}.find(\"#{parent_id}\")"
+    #rescue ActiveRecord::RecordNotFound => e
+    #  TapirLogger.instance.log "Oops, couldn't find #{child_type}:#{child_id}"
+    #  nil
+    #end
   end
 
   def to_s

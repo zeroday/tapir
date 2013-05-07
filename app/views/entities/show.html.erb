@@ -18,7 +18,7 @@
 <b>Parents:</b>
   <ul>
   <% @entity.parents.each {|p|%>
-    <li><%= link_to p, eval("tapir_entities_#{p.underscore}_path(p)")  %></li>
+    <li><%= link_to p, p.id.to_s  %></li>
   <% } %>
   </ul>
 </p>  
@@ -27,7 +27,7 @@
 <b>Children:</b>
   <ul>
   <% @entity.children.each {|c|%>
-    <li><%= link_to c, eval("tapir_entities_#{c.underscore}_path(c)")  %></li>
+    <li><%= link_to c, c.id.to_s  %></li>
   <% } %>
   </ul>
 </p>

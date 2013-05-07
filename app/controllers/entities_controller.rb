@@ -2,7 +2,12 @@ class EntitiesController < ApplicationController
   # GET /tapir/entities
   # GET /tapir/entities.json
   def index
-    @entities = Tapir::Entities::Base.all
+    entity_type = params['type']
+    if entity_type
+      @entities = eval("Tapir::Entities::#{entity_type.capitalize}.all")
+    else
+      @entities = Tapir::Entities::Base.all
+    end
 
     respond_to do |format|
       format.html # index.html.erb

@@ -8,7 +8,7 @@ module Tapir
       field :updated_at, type: Time
 
       def to_s
-         super << "#{port_num}/#{proto}"
+         super << " #{port_num}/#{proto}"
       end
 
     end

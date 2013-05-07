@@ -9,7 +9,7 @@ module Tapir
     end
 
     def to_s
-       super << "#{range}"
+       super << " #{handle}"
     end
 
   end

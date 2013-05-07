@@ -9,9 +9,8 @@ class EntityManager
   # This method will find all children for a particular entity
   #
   def find_children(id, type)
-    all_mapped_children = Tapir::EntityMapping.all(
-          :conditions => {  :parent_id => id,
-                            :parent_type => type})
+    all_mapped_children = Tapir::EntityMapping.where(:parent_id => id)
+
     children = []
     #
     # Here, we check to see if we just have a single entity mapping
@@ -35,9 +34,7 @@ class EntityManager
   # This method will find all parents for a particular entity
   #
   def find_parents(id, type)
-    all_mapped_parents = Tapir::EntityMapping.all(
-          :conditions => {  :child_id => id,
-                            :child_type => type})
+    all_mapped_parents = Tapir::EntityMapping.where(:child_id => id)
     parents = []
     #
     # Here, we check to see if we just have a single entity mapping

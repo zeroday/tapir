@@ -1,20 +1,22 @@
 module Tapir
   module Entities
     class User < Base
-      #before_save :default_values, :cleanup_usernames 
-      #after_create :set_usernames_empty
-
       field :first_name, type: String
       field :last_name, type: String
       field :middle_name, type: String
       field :email_addresses, type: String
-      field :usernames, type: String
-      field :first_name, type: String
       field :created_at, type: Time
       field :updated_at, type: Time
+      
+      has_many :usernames
+      accepts_nested_attributes_for :usernames, :allow_destroy => true
 
       def full_name
         "#{first_name} #{last_name}"
+      end
+
+      def to_s
+        super << " " << full_name
       end
 
     private

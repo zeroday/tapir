@@ -86,12 +86,10 @@ module EntityHelper
     # Pull out the relevant parameters
     new_entity = params[:child]
     task_run = params[:task_run]
-
-    # grab the entity's class
-    class_name = new_entity.class.to_s.downcase
     
     # And set us up as a parent through an entity_mapping
-    # new_entity._map_parent(params)  
+    # new_entity._map_parent(params)
+    
      # And associate the entity as a child through an entity mapping
     TapirLogger.instance.log "Associating #{self} with child entity #{new_entity}"
     _map_child(params)

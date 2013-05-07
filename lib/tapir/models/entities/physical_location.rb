@@ -13,7 +13,7 @@ module Tapir
 
 
       def to_s
-         super << "#{latitude}/#{longitude}"
+         super << " #{latitude}/#{longitude}"
       end
 
     end
