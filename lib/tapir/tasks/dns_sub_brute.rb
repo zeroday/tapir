@@ -4,6 +4,10 @@ def name
   "dns_sub_brute"
 end
 
+def pretty_name
+  "DNS Subdomain Brute"
+end
+
 # Returns a string which describes what this task does
 def description
   "Simple DNS Subdomain Bruteforce"
@@ -11,7 +15,12 @@ end
 
 # Returns an array of valid types for this task
 def allowed_types
-  [Domain]
+  [Tapir::Entities::Domain]
+end
+
+## Returns an array of valid options and their description/type for this task
+def allowed_options
+ []
 end
 
 def setup(entity, options={})
@@ -32,7 +41,7 @@ def run
   else
     # Add a builtin domain list  
     subdomain_list = ["mx", "mx1", "mx2", "www", "ww2", "ns1", "ns2", "ns3", "test", "mail", "owa", "vpn", "admin",
-      "gateway", "secure", "admin", "service", "tools", "doc", "docs", "network", "help", "en" ]
+      "gateway", "secure", "admin", "service", "tools", "doc", "docs", "network", "help", "en", "sharepoint", "portal"]
   end
 
   @task_logger.log_good "Using subdomain list: #{subdomain_list}"
@@ -59,15 +68,11 @@ def run
       # If we resolved, create the right entitys
       if resolved_address
  
-        @task_logger.log_good "Creating domain and host entitys..."
+        @task_logger.log_good "Creating domain and host entities..."
 
         # create new host and domain entitys
-        d = create_entity(Domain, {:name => domain, :organization => @entity.organization })
-        h = create_entity(Host, {:ip_address => resolved_address})
-
-        # Associate our host and domain entitys. 
-        d.hosts << h
-        h.domains << d
+        d = create_entity(Tapir::Entities::Domain, {:name => domain })
+        h = create_entity(Tapir::Entities::Host, {:ip_address => resolved_address})
 
       end
 

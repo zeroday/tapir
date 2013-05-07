@@ -6,6 +6,10 @@ def name
   "twitpic_photo_locations"
 end
 
+def pretty_name
+  "Twitpic search for photos and their EXIF tags"
+end
+
 # Returns a string which describes what this task does
 def description
   "This task pulls down photos for a specified users. It greps the photo data for location info."
@@ -13,7 +17,12 @@ end
 
 # Returns an array of types that are allowed to call this task
 def allowed_types
-  [User]
+  [Tapir::Entities::User]
+end
+
+## Returns an array of valid options and their description/type for this task
+def allowed_options
+ []
 end
 
 def setup(entity, options={})
@@ -49,7 +58,7 @@ def run
           # Don't create them if they're useless
           #
           unless lat == 0 and long == 0
-            @entity.physical_locations << create_entity(PhysicalLocation, {:latitude => "#{lat}",  :longitude => "#{long}"})
+            create_entity(PhysicalLocation, {:latitude => "#{lat}",  :longitude => "#{long}"})
           end
           
         else
@@ -59,7 +68,7 @@ def run
         @task_logger.log_error "Unable to parse, malformed jpg"
       end
 
-      create_entity Image, 
+      create_entity Tapir::Entities::Image, 
         :local_path => photo.local_path,
         :remote_path => photo.remote_path, 
         :description => "twitpic image"

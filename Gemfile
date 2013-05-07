@@ -3,23 +3,16 @@ source 'http://rubygems.org'
 # Require recent Rails:
 gem 'rails' # Latest gem
 # Use edge Rails instead:
-# gem 'rails',     :git => 'git://github.com/rails/rails.git'
-
-# Console
-gem 'pry'
+#gem 'rails',     :git => 'git://github.com/rails/rails.git'
 
 # Rails / Database
-gem 'sqlite3'
 gem 'therubyracer'
-
 gem 'formtastic', :git => 'git://github.com/justinfrench/formtastic.git', :branch => '2.1-stable'
 gem 'formtastic-bootstrap', :git => 'https://github.com/cgunther/formtastic-bootstrap.git', :branch => 'bootstrap2-rails3-2-formtastic-2-1'
 gem 'tabulous' 
-gem 'datatables'
 
-# Background Processing
-gem 'delayed_job_active_record'
-gem 'daemons'
+# Mongo Database
+gem "mongoid", "~> 3.0.0"
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -86,11 +79,6 @@ gem 'capybara'
 gem 'fog'
 
 group :pain do
-
-  # Postgres database
-  # If you're on ubuntu, you'll need to run: apt-get install libpq-dev
-  gem 'pg'
-
   # Requires QTwebkit
   # https://github.com/thoughtbot/capybara-webkit#readme
   # If you're on ubuntu, you'll need to run: apt-get install libqt4-dev

@@ -1,0 +1,36 @@
+<%= 
+form_for(@entity) do |f| %>
+  <% if @entity.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@entity.errors.count, "error") %> prohibited this entity from being saved:</h2>
+
+      <ul>
+      <% @entity.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="fields">
+
+    <input type="hidden" name="oid" value="<%= @entity.id %>"></input>
+    <input type="hidden" name="type" value="<%= @entity._type %>"></input>
+
+    <!-- Iterate through fields here --> 
+    <table>
+    <% @entity.fields.each do |field,value|
+        next if field =~ /_type|_id|created_at|updated_at|status/ %>
+      <tr>
+        <td><%= value.name %>:</td>
+        <td><input name="<%=value.name%>" type="string" value=<%= eval("@entity.#{value.name}")%> > </input></td>
+      </tr>
+    <% end %>
+    </table>
+    <!-- Done iterating through fields --> 
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+
+<% end %>

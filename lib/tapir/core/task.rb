@@ -1,3 +1,4 @@
+module Tapir
 class Task
 
   # Rails model compatibility #
@@ -26,9 +27,11 @@ class Task
   attr_accessor :task_run
 
   def candidates
-    x = []
-    Entity.instance.all.each {|o| x << o if self.allowed_types.include? o.class }
-  x
+    candidate_list = []
+    Tapir::Entities::Base.all.each do |entity| 
+      candidate_list << entity if self.allowed_types.include? entity.class
+    end
+  candidate_list
   end
 
   def underscore
@@ -49,6 +52,10 @@ class Task
   
   def task_name
     name
+  end
+
+  def pretty_name
+    "Generic Task"
   end
   
   def description
@@ -101,7 +108,7 @@ class Task
   # Convenience Method - do not override
   #
   def safe_system(command)
-    @task_logger.log_error "UNSAFE SYSTEM CALL DUDE."
+    @task_logger.log_error "UNSAFE SYSTEM CALL. NOT COOL."
   
     if command =~ /(\||\;)/
       raise "Illegal character"
@@ -120,7 +127,6 @@ class Task
   #  new_entity keeps track of the new entity
   #
   def create_entity(type, params, current_entity=@entity)
-    @task_logger.log "Attempting to create new entity of type: #{type}"
     #
     # Call the create method for this type
     #
@@ -129,14 +135,7 @@ class Task
     #
     # Check for dupes & return right away if this doesn't save a new
     # entity. This should prevent the entity mapping from getting created.
-    #
-    
-    
-    #
-    # DEBUG
-    #
-    #binding.pry
-    
+    #    
     if new_entity.save
       @task_logger.log_good "Created new entity: #{new_entity}"
     else
@@ -148,8 +147,8 @@ class Task
     # If we have a new entity, then we should keep track of the information
     # that created this entity
     #
-    # TODO - this currently prevents entitys from being mapped as children twice (with different task runs)
-    # this might not be desired behavior in some cases
+    # TODO - this currently prevents entities from being mapped as children twice (with different task runs)
+    # this should not be desired behavior in most cases
     #
     if current_entity.children.include? new_entity
       @task_logger.log "Skipping association of #{current_entity} and #{new_entity}. It's already a child."
@@ -180,15 +179,15 @@ class Task
   #
   def find_entity(type, params)
     if type == Host
-      return Host.find_by_ip_address params[:ip_address]
+      return Tapir::Entities::Host.find_by_ip_address params[:ip_address]
     elsif type == Account
-      return Account.find_by_account_name_and_service_name params[:account_name],params[:service_name]
+      return Tapir::Entities::Account.find_by_account_name_and_service_name params[:account_name],params[:service_name]
     elsif type == NetBlock
-      return NetBlock.find_by_range params[:range]
+      return Tapir::Entities::NetBlock.find_by_range params[:range]
     elsif type == NetSvc
-      return NetSvc.find_by_host_and_port_num parasm[:host],params[:port_num]
+      return Tapir::Entities::NetSvc.find_by_host_and_port_num parasm[:host],params[:port_num]
     elsif type == ParsableFile
-      return ParsableFile.find_by_path params[:path]
+      return Tapir::Entities::ParsableFile.find_by_path params[:path]
     else
       if params.has_key? :name
         return type.send(:find_by_name, params[:name])
@@ -207,17 +206,16 @@ class Task
     # Do some logging in the main Tapir log
     # 
     TapirLogger.instance.log "Running task: #{self.name}"
-    TapirLogger.instance.log "entity: #{entity}"
+    TapirLogger.instance.log "Entity: #{entity}"
     TapirLogger.instance.log "Options: #{options}"
 
     #
-    # Call the methods to actually do something with the entitys that have
-    # been passed into this task
+    # Call the methods to actually do something with the entities that have been passed into this task
     #
     self.setup(entity, options)
     
     #
-    # UGH. This is so we can keep track of which tasks were run together.
+    # Keep track of which tasks were run together.
     #
     TapirLogger.instance.log "Associating task run #{@task_run} with set #{task_run_set_id}"
     @task_run.task_run_set_id = task_run_set_id
@@ -227,21 +225,11 @@ class Task
     self.cleanup 
     
     #
-    # Record results in the task_run
-    #
-    @task_logger.log "Recording results"
-    
-    #
-    # Mark complete in the task log
-    #
-    @task_logger.log "done recording"
-    # End recording of results
-    
-    #
-    # return the log
+    # Return the log
     #
     @task_run.task_log = @task_logger.text
     @task_run.save
   end
   
+end
 end

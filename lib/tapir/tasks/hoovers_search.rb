@@ -7,6 +7,10 @@ def name
   "hoovers_company_search"
 end
 
+def pretty_name
+  "Hoovers Search"
+end
+
 # Returns a string which describes this task.
 def description
   "This task scrapes Hoovers and creates organizations for all companies found."
@@ -14,7 +18,12 @@ end
 
 # Returns an array of valid types for this task
 def allowed_types
-  [SearchString]
+  [Tapir::Entities::SearchString]
+end
+
+## Returns an array of valid options and their description/type for this task
+def allowed_options
+ []
 end
 
 def setup(entity, options={})
@@ -45,10 +54,10 @@ def run
       @task_logger.log "Using Company search URI: #{company_uri}"
 
       # Create a new organization entity
-      o = create_entity(Organization, { :name => company_name })
+      o = create_entity(Tapir::Entities::Organization, { :name => company_name })
 
       # Queue a detailed search
-      TaskManager.instance.queue_task_run("hoovers_company_detail",o, {})
+      # TaskManager.instance.queue_task_run("hoovers_company_detail",o, {})
 
     end
   rescue Exception => e

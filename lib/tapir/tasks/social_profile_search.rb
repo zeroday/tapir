@@ -2,6 +2,10 @@ def name
   "social_profile_search"
 end
 
+def pretty_name
+  "Social Profile Search"
+end
+
 ## Returns a string which describes what this task does
 def description
   "This task searches for common social media profiles"
@@ -9,7 +13,14 @@ end
 
 ## Returns an array of types that are allowed to call this task
 def allowed_types
-  [SearchString, User]
+  [ Tapir::Entities::SearchString,
+    Tapir::Entities::User,
+    Tapir::Entities::Username]
+end
+
+## Returns an array of valid options and their description/type for this task
+def allowed_options
+ []
 end
 
 def setup(entity, options={})
@@ -23,8 +34,8 @@ def run
   #
   # Store the account name, depending on the entity we passed in.
   #
-  if @entity.kind_of? User
-    account_names = @entity.usernames || ["#{@entity.first_name}_#{@entity.last_name}"]
+  if @entity.kind_of? Tapir::Entities::User
+    account_names = @entity.usernames.all
   else
     account_names = [@entity.name]
   end
@@ -52,7 +63,7 @@ def run
         #
         # Create an account w/ the correct parameters
         #
-        obj = create_entity Account, 
+        obj = create_entity Tapir::Entities::Account, 
         :account_name => account_name, 
         :service_name => client.service_name, 
         :check_uri => client.check_account_uri_for(account_name),
@@ -61,10 +72,11 @@ def run
         #
         # If we passed in a user, associate that with our new account entity
         #
-        if @entity.kind_of? User
-          obj.user_id = @entity.id
-          obj.save!
-        end
+        #if @entity.kind_of? User
+        #  obj.user_id = @entity.id
+        #  obj.save!
+        #end
+        
       else 
         @task_logger.log "No #{client.service_name} account found at: #{client.check_account_uri_for(account_name)}"
       end

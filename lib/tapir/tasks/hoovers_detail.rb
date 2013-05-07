@@ -7,6 +7,10 @@ def name
   "hoovers_detail"
 end
 
+def pretty_name
+  "Hoovers Search for Organization Detail"
+end
+
 # Returns a string which describes this task.
 def description
   "This task scrapes Hoovers for specific details about the organization."
@@ -14,7 +18,12 @@ end
 
 # Returns an array of valid types for this task
 def allowed_types
-  [Organization]
+  [Tapir::Entities::Organization]
+end
+
+## Returns an array of valid options and their description/type for this task
+def allowed_options
+ []
 end
 
 def setup(entity, options={})
@@ -63,7 +72,7 @@ def run
         @task_logger.log_good "Got City & State: #{city_state}"
 
         # Set the City and State
-        @entity.physical_locations << create_entity(PhysicalLocation, {
+        create_entity(Tapir::Entities::PhysicalLocation, {
           :address => street_address,
           :city => city_state.split(' ').first, 
           :state => city_state.split(' ').last })
@@ -80,7 +89,7 @@ def run
 
           # Create the user entitys
           @task_logger.log_good "Adding user entity for: #{full_name}"
-          @entity.users << create_entity(User, { 
+          create_entity(Tapir::Entities::User, { 
             :first_name => first_name, 
             :last_name => last_name })
         end

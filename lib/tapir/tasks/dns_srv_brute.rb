@@ -4,6 +4,10 @@ def name
   "dns_srv_brute"
 end
 
+def pretty_name
+  "DNS SRV Brute"
+end
+
 # Returns a string which describes what this task does
 def description
   "Simple DNS Service Record Bruteforce"
@@ -11,7 +15,12 @@ end
 
 # Returns an array of valid types for this task
 def allowed_types
-  [Domain]
+  [Tapir::Entities::Domain]
+end
+
+## Returns an array of valid options and their description/type for this task
+def allowed_options
+ []
 end
 
 def setup(entity, options={})
@@ -73,20 +82,14 @@ def run
           @task_logger.log_good "Creating domain and host entitys..."
 
           # Create a domain. pass down the organization if we have it.
-          d = create_entity(Domain, {:name => domain, :organization => @entity.organization })
+          d = create_entity(Tapir::Entities::Domain, {:name => domain, :organization => @entity.organization })
 
           # Create a host to store the ip address
-          h = create_entity(Host, {:ip_address => resolved_address})
-
-          # associate the newly-created host with the domain
-          d.hosts << h 
-          h.domains << d
+          h = create_entity(Tapir::Entities::Host, {:ip_address => resolved_address})
           
-          # create a service, and also associate that with our host.
-          h.net_svcs << create_entity(NetSvc, {:type => "tcp", :port => port, :host => h})
+          # Create a service, and also associate that with our host.
+          create_entity(NetSvc, {:type => "tcp", :port => port, :host => h})
 
-          # Save the raw content of our query
-          #@task_run.save_raw_result rec.to_s
         end
 
       end

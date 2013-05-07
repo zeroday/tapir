@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <p>
   <b>Task Name:</b>
   <%= @task_run.task_name %>
@@ -22,7 +20,7 @@
 
 <p>
   <b>Task log:</b><br/>
-  blah
+  <%= simple_format @task_run.task_log %>
 </p>
 
 <p>
@@ -36,4 +34,4 @@
 
 
 <%= link_to "Destroy", @task_run, :confirm => 'Are you sure?', :method => :delete %>
-<%= link_to 'Back', task_runs_path %>
+<%= link_to 'Back', tapir_task_runs_path %>

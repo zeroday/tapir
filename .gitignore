@@ -13,6 +13,7 @@
 # Ignore configuration files
 config/database.yml
 config/api_keys.yml
+config/mongoid.yml
 
 # Ignore the default SQLite database.
 db/*.sqlite3
@@ -23,4 +24,6 @@ data/geolitecity/latest.dat
 # Ignore all logfiles and tempfiles.
 log/*.log
 tmp
+
+# Ignore public files
 public/tapir/*

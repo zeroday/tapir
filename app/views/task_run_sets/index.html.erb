@@ -1,5 +1,3 @@
-<h1>Listing task_run_sets</h1>
-
 <table>
   <tr>
     <th>ID</th>
@@ -14,7 +12,7 @@
     <td><%= task_run_set.id %></td>
     <td><%= task_run_set.task_runs.count %></td>
     <td><%= link_to 'Show', task_run_set %></td>
-    <td><%= link_to 'Edit', edit_task_run_set_path(task_run_set) %></td>
+    <td><%= link_to 'Edit', edit_tapir_task_run_set_path(task_run_set) %></td>
     <td><%= link_to 'Destroy', task_run_set, confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>
@@ -22,4 +20,4 @@
 
 <br />
 
-<%= link_to 'New Task Run set', new_task_run_set_path %>
+<%= link_to 'Back', tapir_entities_path %>

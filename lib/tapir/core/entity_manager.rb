@@ -1,5 +1,6 @@
 require 'singleton'
 
+module Tapir
 class EntityManager
 
   include Singleton
@@ -8,9 +9,8 @@ class EntityManager
   # This method will find all children for a particular entity
   #
   def find_children(id, type)
-    all_mapped_children = EntityMapping.all(
-          :conditions => {  :parent_id => id,
-                            :parent_type => type})
+    all_mapped_children = Tapir::EntityMapping.where(:parent_id => id)
+
     children = []
     #
     # Here, we check to see if we just have a single entity mapping
@@ -34,9 +34,7 @@ class EntityManager
   # This method will find all parents for a particular entity
   #
   def find_parents(id, type)
-    all_mapped_parents = EntityMapping.all(
-          :conditions => {  :child_id => id,
-                            :child_type => type})
+    all_mapped_parents = Tapir::EntityMapping.where(:child_id => id)
     parents = []
     #
     # Here, we check to see if we just have a single entity mapping
@@ -60,7 +58,7 @@ class EntityManager
   # This function is much the same as the find_parents and find_children functions
   #
   def find_task_runs(id, type)
-      all_mapped_parents = EntityMapping.all(
+      all_mapped_parents = Tapir::EntityMapping.all(
           :conditions => {  :child_id => id,
                             :child_type => type})
     task_runs = []
@@ -75,4 +73,5 @@ class EntityManager
   task_runs
   end
   
+end
 end

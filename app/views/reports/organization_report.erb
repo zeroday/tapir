@@ -1,0 +1,7 @@
+<p>
+<b>Organizations:</b>
+  <% Tapir::Entities::Organization.all.each do |o| %>
+    <p><%= link_to o, o.id.to_s %></p>
+  <% end %>
+  </p>
+</p>

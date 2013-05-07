@@ -1,25 +1,15 @@
-<h1>Listing tasks</h1>
-
 <table>
   <tr>
     <th>Name</th>
-    <th>&nbsp;</th>
-    <th>Accepts</th>
+    <th>Description</th>
   </tr>
 
 <% @tasks.each do |task| %>
   <tr>
-    <td><%= link_to task.name, task_path(task.name) %></td>
-    <td>&nbsp;</td>
-    <td>
-      <% x=[]; task.allowed_types.each do |t|  %>
-       <%= link_to(t, t) %>
-      <% end %>
-    </td>
+    <td><%= link_to task.pretty_name, tapir_task_path(task.name) %></td>
+    <td><%= task.description %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
-
-<%= link_to 'New task', new_task_path %>

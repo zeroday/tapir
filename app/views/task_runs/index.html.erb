@@ -1,25 +1,11 @@
-<h1>Listing task_runs</h1>
-
 <table>
   <tr>
     <th>Task Name</th>
-    <th>Task entity</th>
-    <th>Task entity type</th>
-    <th>Task options hash</th>
-    <th></th>
-    <th></th>
-    <th></th>
   </tr>
 
-<% @task_runs.each do |task_run| %>
+<% @task_runs.reverse.each do |task_run| %>
   <tr>
-    <td><%= task_run.task_name %></td>
-    <td><%= task_run.task_entity_id %></td>
-    <td><%= task_run.task_entity_type %></td>
-    <td><%= task_run.task_options_hash %></td>
-    <td><%= link_to 'Show', task_run %></td>
-    <td><%= link_to 'Edit', edit_task_run_path(task_run) %></td>
-    <td><%= link_to 'Destroy', task_run, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to task_run, task_run %></td>
   </tr>
 <% end %>
 </table>

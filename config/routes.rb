@@ -1,37 +1,35 @@
 Tapir::Application.routes.draw do
-  resources :task_run_sets
-  resources :parsable_files
-  resources :accounts
-  resources :images
-  resources :net_blocks
-  resources :findings
-  resources :web_apps
-  resources :web_forms
-  resources :net_svcs
-  resources :physical_locations
-  resources :search_strings
-  resources :domains
-  resources :hosts
-  resources :users
-  resources :organizations
-  resources :tasks
-  resources :task_runs 
-  resources :entity_mappings
 
+  resource :tapir do
+    resources :tasks
+    resources :task_runs
+    resources :task_run_sets
+    resources :entity_mappings
+    resources :entities
+    
+    ###
+    ### Welcome page
+    ###
+    match "/welcome" => "welcome#index"
 
+    ###
+    ### Reports
+    ###
+    match "/reports" => "reports#index"
+    match "/reports/google_default" => "reports#google_default"
+    match "/reports/list_all" => "reports#list_all"
+    match "/reports/organization_report" => "reports#organization_report"
+    
+    ###
+    ### Task Runner
+    ###
+    match "/run_task" => "task_run_sets#run", :via => [:post, :get]
+  end
 
-  # Welcome page
-  match "/" => "welcome#index"
-  match "/welcome" => "welcome#index"
+  match "/" => "tapir/welcome#index"
+  
   root :to => redirect("/")
 
-  # Task Runner
-  match "/task_runner" => "task_run_sets#run"
-  
-  # handle reports
-  match "/reports" => "reports#index"
-  match "/reports/list_all"
-  match "/reports/google_default"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

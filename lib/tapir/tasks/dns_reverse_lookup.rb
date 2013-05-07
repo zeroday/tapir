@@ -2,13 +2,22 @@ def name
   "dns_reverse_lookup"
 end
 
+def pretty_name
+  "DNS Reverse Lookup"
+end
+
 def description
-  "Reverse DNS Lookup"
+  "Look up the name of the given ip address"
 end
 
 ## Returns an array of valid types for this task
 def allowed_types
-  [Host]
+  [Tapir::Entities::Host]
+end
+
+## Returns an array of valid options and their description/type for this task
+def allowed_options
+ []
 end
 
 def setup(entity, options={})
@@ -26,14 +35,7 @@ def run
       @task_logger.log_good "Creating domain #{name}"
       
       # Create our new domain entity with the resolved name
-      d = create_entity(Domain, {:name => resolved_name})
-
-      # Assocate the resolved name with the host
-      @entity.domains << d # add a domain name for this host
-      d.hosts << @entity # add this host as an address
-
-      # Save the raw data
-      #@task_run.save_raw_result resolved_name.to_s
+      d = create_entity(Tapir::Entities::Domain, {:name => resolved_name})
 
     else
       @task_logger.log "Unable to find a name for #{@entity.ip_address}"

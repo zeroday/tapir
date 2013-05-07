@@ -2,7 +2,7 @@ class TaskRunsController < ApplicationController
   # GET /task_runs
   # GET /task_runs.json
   def index
-    @task_runs = TaskRun.all
+    @task_runs = Tapir::TaskRun.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -13,7 +13,7 @@ class TaskRunsController < ApplicationController
   # GET /task_runs/1
   # GET /task_runs/1.json
   def show
-    @task_run = TaskRun.find(params[:id])
+    @task_run = Tapir::TaskRun.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -24,7 +24,7 @@ class TaskRunsController < ApplicationController
   # GET /task_runs/new
   # GET /task_runs/new.json
   def new
-    @task_run = TaskRun.new
+    @task_run = Tapir::TaskRun.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -34,13 +34,13 @@ class TaskRunsController < ApplicationController
 
   # GET /task_runs/1/edit
   def edit
-    @task_run = TaskRun.find(params[:id])
+    @task_run = Tapir::TaskRun.find(params[:id])
   end
 
   # POST /task_runs
   # POST /task_runs.json
   def create
-    @task_run = TaskRun.new(params[:task_run])
+    @task_run = Tapir::TaskRun.new(params[:tapir_task_run])
 
     respond_to do |format|
       if @task_run.save
@@ -56,10 +56,10 @@ class TaskRunsController < ApplicationController
   # PUT /task_runs/1
   # PUT /task_runs/1.json
   def update
-    @task_run = TaskRun.find(params[:id])
+    @task_run = Tapir::TaskRun.find(params[:id])
 
     respond_to do |format|
-      if @task_run.update_attributes(params[:task_run])
+      if @task_run.update_attributes(params[:tapir_task_run])
         format.html { redirect_to @task_run, notice: 'Task run was successfully updated.' }
         format.json { head :ok }
       else
@@ -72,7 +72,7 @@ class TaskRunsController < ApplicationController
   # DELETE /task_runs/1
   # DELETE /task_runs/1.json
   def destroy
-    @task_run = TaskRun.find(params[:id])
+    @task_run = Tapir::TaskRun.find(params[:id])
     @task_run.destroy
 
     respond_to do |format|

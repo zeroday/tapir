@@ -5,6 +5,10 @@ def name
   "web_screenshot"
 end
 
+def pretty_name
+  "Web Screenshot"
+end
+
 ## Returns a string which describes what this task does
 def description
   "This takes a screenshot of a website using webdriver"
@@ -12,7 +16,13 @@ end
 
 ## Returns an array of types that are allowed to call this task
 def allowed_types
-  [Domain, Host]
+  [ Tapir::Entities::Domain, 
+    Tapir::Entities::Host]
+end
+
+## Returns an array of valid options and their description/type for this task
+def allowed_options
+ []
 end
 
 def setup(entity, options={})
@@ -59,10 +69,11 @@ def run
       driver.navigate.to browse_location
       driver.save_screenshot save_location
 
-      create_entity Image, 
+      create_entity Tapir::Entities::Image, 
         :local_path => save_location,
         :remote_path => browse_location, 
         :description => "screenshot"
+        
     end
     
     #

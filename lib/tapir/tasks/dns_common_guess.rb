@@ -4,6 +4,10 @@ def name
   "dns_common_guess"
 end
 
+def pretty_name
+  "DNS Common Name Guess"
+end
+
 ## Returns a string which describes what this task does
 def description
   "Guess some common domain names based on the organization name"
@@ -11,7 +15,12 @@ end
 
 ## Returns an array of valid types for this task
 def allowed_types
-  [Organization]
+  [Tapir::Entities::Organization]
+end
+
+## Returns an array of valid options and their description/type for this task
+def allowed_options
+ []
 end
 
 def setup(entity, options={})
@@ -33,15 +42,10 @@ def run
       res_answer = Resolv.new.getaddress(domain)
       if res_answer
         @task_logger.log_good "DNS Guess succeeded for #{res_answer}"
-        #@task_run.save_raw_result "domain: #{res_answer}"
 
         # We know the domain is ~valid, and the ip address too
-        d = create_entity(Domain, :name => domain)
-        h = create_entity(Host, :ip_address => res_answer)
-
-        # Associate
-        @entity.domains << d if d
-        d.hosts << h if h
+        d = create_entity(Tapir::Entities::Domain, :name => domain)
+        h = create_entity(Tapir::Entities::Host, :ip_address => res_answer)
 
     end
     rescue Dnsruby::Refused

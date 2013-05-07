@@ -2,6 +2,10 @@ def name
   "robots_txt"
 end
 
+def pretty_name
+  "Robots.txt search"
+end
+
 ## Returns a string which describes what this task does
 def description
   "This task grabs the robots.txt and adds a record with the contents"
@@ -9,13 +13,18 @@ end
 
 ## Returns an array of types that are allowed to call this task
 def allowed_types
-  [WebApp]
+  [Tapir::Entities::WebApp]
+end
+
+## Returns an array of valid options and their description/type for this task
+def allowed_options
+ []
 end
 
 def setup(entity, options={})
   super(entity, options)
 
-  if @entity.kind_of? Host
+  if @entity.kind_of? Tapir::Entities::Host
     url = "http://#{@entity.ip_address}/robots.txt"
   else
     url = "http://www.#{@entity.name}/robots.txt"

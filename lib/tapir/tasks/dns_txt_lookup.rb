@@ -4,14 +4,23 @@ def name
   "dns_txt_lookup"
 end
 
+def pretty_name
+  "DNS TXT Record lookup"
+end
+
 ## Returns a string which describes what this task does
 def description
-  "DNS TXT Record Lookup"
+  "Query for txt records at this domain"
 end
 
 ## Returns an array of valid types for this task
 def allowed_types
-  [Domain]
+  [Tapir::Entities::Domain]
+end
+
+## Returns an array of valid options and their description/type for this task
+def allowed_options
+ []
 end
 
 def setup(entity, options={})
@@ -33,21 +42,23 @@ def run
     # If we got a success to the query.
     if res_answer
       @task_logger.log_good "TXT lookup succeeded on #{@entity.name}:\n #{res_answer.answer}"
+      @task_logger.log_good "Answer: #{res_answer}"
+
 
       # TODO - Parse for netbocks and hostnames
 
 #     res_answer.downcase.split("ipv4").
 #     create_entity NetBlock, :range
-
-      create_entity Finding, :name => "dns_txt_lookup", :content => res_answer.answer
-
-      # save the raw result
-      #@task_run.save_raw_result res_answer.to_s
+      
+      # Create a finding for each 
+      unless res_answer.answer.count == 0
+        res_answer.answer.each do |answer|
+          create_entity Tapir::Entities::Finding, { :name => "TXT Record", :content => answer , :details => res_answer }
+        end
+      end
+      
     end
 
-    
-    
-    
   rescue Dnsruby::Refused
     @task_logger.log "Zone Transfer against #{@entity.name} refused."
 

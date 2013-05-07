@@ -21,20 +21,16 @@ function check(field) {
 </p>
 
 <p>
-  <b>Entities:</b><br/>
-  <form name="task_runner" id="task_runner" action="/task_runner" method="POST"> 
+  <b>Available Entities:</b><br/>
+  <form name="task_runner" id="run_task" action="/tapir/run_task" method="POST"> 
   <input type="hidden" name="task_name" id="task_name" value="<%=@task.name%>"><br/>
   <input type="checkbox" name="Toggle" value="Toggle" onClick="check(document.task_runner)"><br/>
-  <% @task.candidates.each do |o|
-     r = "#{o.underscore}##{o.id}"
-   %>
-
-    <input id="<%=r%>" type="checkbox" name="entitys[<%=r%>]" /><a href="<%=request.url%>/../../<%=o.underscore%>s/<%=o.id%>"><%=o.to_s%></a><br/>
-    
+  <% @task.candidates.each do |entity| %>
+    <input id="/tapir/entities/<%=entity.id%>" type="checkbox" name="entities[<%="#{entity._type}##{entity.id}"%>]" /><%= "#{entity}" %><br/>
   <% end %>
   <input id="submit" type="submit" /><br/>
   </form>
   </p>
 
-<%= link_to 'Back', tasks_path %>
+<%= link_to 'Back', tapir_tasks_path %>
 

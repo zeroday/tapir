@@ -12,7 +12,7 @@
     <td>
       <ul>
       <% task_run.entity_mappings.each do |x| %>
-        <li><%= link_to(x.get_child.to_s, x.get_child) %></li>
+        <li><%= link_to(x.get_child,"/tapir/entities/#{x.get_child.id}",) %></li>
       <% end %>
       </ul>
     </td>
@@ -21,5 +21,4 @@
   <% end %>
 </table>
 
-<%= link_to 'Edit', edit_task_run_set_path(@task_run_set) %> |
-<%= link_to 'Back', task_run_sets_path %>
+<%= link_to 'Back', tapir_entities_path %>

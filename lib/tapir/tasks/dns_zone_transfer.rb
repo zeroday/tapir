@@ -4,6 +4,10 @@ def name
   "dns_zone_transfer"
 end
 
+def pretty_name
+  "DNS Zone Transfer"
+end
+
 ## Returns a string which describes what this task does
 def description
   "DNS Zone Tranfer"
@@ -11,7 +15,12 @@ end
 
 ## Returns an array of valid types for this task
 def allowed_types
-  [Domain]
+  [Tapir::Entities::Domain]
+end
+
+## Returns an array of valid options and their description/type for this task
+def allowed_options
+ []
 end
 
 def setup(entity, options={})
@@ -53,14 +62,13 @@ def run
             zt.server = nameserver
             zone = zt.transfer(@entity.name)
 
+            create_entity Tapir::Entities::Finding, { :name => "Zone Transfer", :content => "#{nameserver} -> #{@entity.name}", :details => zone }
+
             # Create host records for each item in the zone
             zone.each do |z|
               if z.type == "A"
-                h = create_entity Host, { :ip_address => z.address.to_s }
-                d = create_entity Domain, { :name => z.name.to_s }
-                # Associate them 
-                h.domains << d
-                d.hosts << h
+                h = create_entity Tapir::Entities::Host, { :ip_address => z.address.to_s }
+                d = create_entity Tapir::Entities::Domain, { :name => z.name.to_s }
               elsif z.type == "CNAME"
                 # TODO - recursively lookup cname host
                 @task_logger.log "TODO - handle a CNAME record"
