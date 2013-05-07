@@ -46,6 +46,26 @@ def setup(entity, options={})
           create_entity(Tapir::Entities::Finding, {:name => "Javascript Finding", :content => "Found Javascript"})
         end
 
+        if contents =~ /urchin.js/
+          create_entity(Tapir::Entities::Finding, {:name => "Google Analytics Finding", :content => "Found Google Analytics"})
+        end
+
+        if contents =~ /optimizely/
+          create_entity(Tapir::Entities::Finding, {:name => "Optimizely Finding", :content => "Found Optimizely"})
+        end
+
+        if contents =~ /trackalyze/
+          create_entity(Tapir::Entities::Finding, {:name => "Trackalyze Finding", :content => "Found Trackalyze"})
+        end
+
+        if contents =~ /munchkin.js/
+          create_entity(Tapir::Entities::Finding, {:name => "Marketo Finding", :content => "Found Marketo"})
+        end
+
+        if contents =~ /doubleclick.net|googleadservices/
+          create_entity(Tapir::Entities::Finding, {:name => "Google Ads Finding", :content => "Found Google Ads"})
+        end
+
       end
 
     rescue Timeout::Error
