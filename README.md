@@ -33,10 +33,10 @@ These prerequisites can be installed via apt:
 
 Mongo can be installed with the following: 
 
-  sudo apt-key adv --keyserver keyserver.ubuntu.com --recv 7F0CEB10
-  echo 'deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen' | sudo tee /etc/apt/sources.list.d/10gen.list
-  sudo apt-get update
-  sudo apt-get install mongodb-10gen
+	sudo apt-key adv --keyserver keyserver.ubuntu.com --recv 7F0CEB10
+	echo 'deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen' | sudo tee /etc/apt/sources.list.d/10gen.list
+	sudo apt-get update
+	sudo apt-get install mongodb-10gen
 
 See: http://docs.mongodb.org/manual/tutorial/install-mongodb-on-ubuntu/ for more information
 
@@ -46,7 +46,7 @@ Brew can be used to install prerequisites on OSX:
 
 	brew install qt
 	brew install nmap
-  brew install mongo
+	brew install mongo
 
 ### Initial Tapir setup (platform independent): 
 
@@ -54,7 +54,7 @@ Execute the bundle installer:
 
 	$ gem install bundle 
 	$ bundle install      # from within the ear application root
-  $ rake setup:initial  # from within the ear application root
+	$ rake setup:initial  # from within the ear application root
 
 ## Getting Started with Tapir
 
@@ -62,8 +62,8 @@ Execute the bundle installer:
 
 To start the server, in the root of the Tapir directory, run: 
 
-  $ bundle exec rackup
-   
+	$ bundle exec rackup
+	 
 Now browse to http://[server_name]:9292, and you're in the jungle baby!
 
 ### Using the Scriptable Console (Advanced)
@@ -71,20 +71,20 @@ Once you have a database, simply run `$ util/console.rb` - this will give you ac
 
 Creating a host entity & running tasks: 
 
-    ear> h = Tapir::Entities::Host.create(:ip_address => "8.8.8.8")
-    ear> h.run_task("dns_reverse_lookup")
-    ear> h.run_task("geolocate_host")
-    ear> h.children
+		ear> h = Tapir::Entities::Host.create(:ip_address => "8.8.8.8")
+		ear> h.run_task("dns_reverse_lookup")
+		ear> h.run_task("geolocate_host")
+		ear> h.children
 
 ## Advanced
 
 ### Configuration files
 
 The config/api_keys.yml file configures API key required for API operations and where they may be located. 
-    
+		
 The latest geolitecity (geolocation) data can be pulled by running: 
 
-  $ data/geolitecity/get_latest.sh 
+	$ data/geolitecity/get_latest.sh 
 
 ### Known Issues
 
