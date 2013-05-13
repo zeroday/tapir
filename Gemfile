@@ -25,7 +25,7 @@ end
 
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
-gem 'jquery-datatables-rails', github: 'rweng/jquery-datatables-rails'
+gem 'jquery-datatables-rails', :git => 'https://github.com/rweng/jquery-datatables-rails'
 gem 'will_paginate'
 
 # To use ActiveModel has_secure_password
