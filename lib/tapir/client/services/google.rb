@@ -1,5 +1,6 @@
 require "capybara"  
 require "capybara/dsl"
+require "googleajax"
 
 module Tapir
 module Client
@@ -72,6 +73,8 @@ module Google
   class SearchService
 
     def initialize
+      GoogleAjax.referrer = "localhost"
+      #GoogleAjax.api_key = Tapir::ApiKeys.instance.keys['google_ajax_key']
     end
 
     # 
@@ -80,27 +83,7 @@ module Google
     # Ruturns: An array of search results 
     #
     def search(search_string)
-
-      # Convert to a get-paramenter
-      #search_string = CGI.escapeHTML search_string
-      search_string.gsub!(" ", "&nbsp;")
-
-      results = []
-
-      #@task_logger.log "Using Company URI: #{uri}"
-      api_path = "http://ajax.googleapis.com/ajax/services/search/web"
-      search_data = "?v=1.0&key=#{Tapir::ApiKeys.instance.keys['google_api_key']}&q=#{search_string}&rsz=large"
-      response = open(api_path + search_data, 
-        "User-Agent" => "Tapir",
-        "Referer" => "http://www.pentestify.com")
-      
-      JSON.parse(response.string)['responseData']['results'].each do |result| 
-        s = SearchResult.new
-        s.parse_json(result)
-        results << s
-      end
-    
-      return results
+      GoogleAjax::Search.web(search_string)[:results]
     end
   end
 

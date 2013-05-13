@@ -34,38 +34,42 @@ def setup(entity, options={})
         # Prevent encoding errors
         contents = open("#{url}").read.force_encoding('UTF-8')
 
-        if contents =~ /[W|w]ordpress/
-          create_entity(Tapir::Entities::Finding, {:name => "Wordpress Finding", :content => "Found Wordpress"})
-        end
+        target_strings = [
 
-        if contents =~ /[D|d]rupal/
-          create_entity(Tapir::Entities::Finding, {:name => "Drupal Finding", :content => "Found Drupal"})
-        end
+          ### Marketing / Tracking
+          {:regex => /urchin.js/, :finding => "Google Analytics"},
+          {:regex => /optimizely/, :finding => "Optimizely"},
+          {:regex => /trackalyze/, :finding => "Trackalyze"},
+          {:regex => /doubleclick.net|googleadservices/, :finding => "Google Ads"},
+          {:regex => /munchkin.js/, :finding => "Marketo"},
 
-        if contents =~ /javascript/
-          create_entity(Tapir::Entities::Finding, {:name => "Javascript Finding", :content => "Found Javascript"})
-        end
+          ### Technologies
+          {:regex => /javascript/, :finding => "Javascript"},
 
-        if contents =~ /urchin.js/
-          create_entity(Tapir::Entities::Finding, {:name => "Google Analytics Finding", :content => "Found Google Analytics"})
-        end
+          ### Platform
+          {:regex => /[W|w]ordpress/, :finding => "Wordpress"},
+          {:regex => /[D|d]rupal/, :finding => "Drupal"},
 
-        if contents =~ /optimizely/
-          create_entity(Tapir::Entities::Finding, {:name => "Optimizely Finding", :content => "Found Optimizely"})
-        end
+          ### Provider
+          {:regex => /Content Delivery Network via Amazon Web Services/, :finding => "Amazon Cloudfront"},
 
-        if contents =~ /trackalyze/
-          create_entity(Tapir::Entities::Finding, {:name => "Trackalyze Finding", :content => "Found Trackalyze"})
-        end
+          ### Wordpress Plugins
+          { :regex => /wp-content\/plugins\/.*?\//, :finding => "Wordpress Plugin"},
+          { :regex => /xmlrpc.php/, :finding => "Wordpress API"},
+          #{:regex => /Yoast WordPress SEO plugin/, :finding => "Yoast Wordress SEO Plugin"},
+          #{:regex => /PowerPressPlayer/, :finding => "Powerpress Wordpress Plugin"},
+        ]
 
-        if contents =~ /munchkin.js/
-          create_entity(Tapir::Entities::Finding, {:name => "Marketo Finding", :content => "Found Marketo"})
+        target_strings.each do |target|
+          matches = contents.scan(target[:regex]) #.map{Regexp.last_match}
+          matches.each do |match|
+            create_entity(Tapir::Entities::Finding,
+              { :name => "#{@entity.name} - #{target[:finding]}",
+                :content => "Found #{match} on #{@entity.name}",
+                :details => contents 
+              })
+          end if matches
         end
-
-        if contents =~ /doubleclick.net|googleadservices/
-          create_entity(Tapir::Entities::Finding, {:name => "Google Ads Finding", :content => "Found Google Ads"})
-        end
-
       end
 
     rescue Timeout::Error

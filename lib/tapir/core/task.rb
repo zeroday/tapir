@@ -178,20 +178,16 @@ class Task
   # send "name" and special case anything else.
   #
   def find_entity(type, params)
-    if type == Host
-      return Tapir::Entities::Host.find_by_ip_address params[:ip_address]
-    elsif type == Account
-      return Tapir::Entities::Account.find_by_account_name_and_service_name params[:account_name],params[:service_name]
-    elsif type == NetBlock
-      return Tapir::Entities::NetBlock.find_by_range params[:range]
-    elsif type == NetSvc
-      return Tapir::Entities::NetSvc.find_by_host_and_port_num parasm[:host],params[:port_num]
-    elsif type == ParsableFile
-      return Tapir::Entities::ParsableFile.find_by_path params[:path]
+    if type == Tapir::Entities::Host
+      return Tapir::Entities::Host.where({:ip_address => params[:ip_address]}).first
+    elsif type == Tapir::Entities::NetBlock
+      return Tapir::Entities::NetBlock.where({:range => params[:range]}).first
+    elsif type == Tapir::Entities::ParsableFile
+      return Tapir::Entities::ParsableFile.where({:path => params[:path]}).first
     else
       if params.has_key? :name
-        return type.send(:find_by_name, params[:name])
-        else
+        return type.send(:where, :name => params[:name]).first
+      else
         raise "Don't know how to find this entity of type #{type}"
       end
     end

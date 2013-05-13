@@ -4,9 +4,7 @@ module Tapir
       field :content, type: String
       field :details, type: String
     
-      def to_s
-        super << " #{content}"
-      end
+      validates_uniqueness_of :content
 
     end
   end

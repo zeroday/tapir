@@ -8,6 +8,14 @@ class ReportsController < ApplicationController
     end
   end
 
+  def findings
+    @entities = Tapir::Entities::Finding.all
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @entities }
+    end
+  end
+
   # GET /reports/google_default
   # GET /reports/google_default.json
   def google_default

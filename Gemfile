@@ -69,6 +69,7 @@ gem 'pry-nav'
 # Scraping
 gem 'mechanize'
 gem 'nokogiri'
+gem 'googleajax'
 #gem 'gsearch-parser'
 
 # Heavy-duty javascript scraping
@@ -79,6 +80,7 @@ gem 'capybara'
 gem 'fog'
 
 group :pain do
+  
   # Requires QTwebkit
   # https://github.com/thoughtbot/capybara-webkit#readme
   # If you're on ubuntu, you'll need to run: apt-get install libqt4-dev
