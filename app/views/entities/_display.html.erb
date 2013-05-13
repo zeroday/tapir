@@ -9,6 +9,11 @@
       <td><%= eval("@entity.#{value.name}")%></td>
     </tr>
   <% end %>
+
+  <% if @entity.kind_of?(Tapir::Entities::Image) %>
+      <tr><td>Image:</td><td><img src="/<%=@entity.local_path.split("/").last%>"/></td><tr>
+  <% end %>
+
   </table>
   <!-- Done iterating through fields --> 
 </div>

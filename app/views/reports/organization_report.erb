@@ -1,7 +1,20 @@
 <p>
 <b>Organizations:</b>
-  <% Tapir::Entities::Organization.all.each do |o| %>
-    <p><%= link_to o, o.id.to_s %></p>
+  <p>
+  <ul>
+  <% @entities.each do |org| %>  
+    <li><%= link_to org, tapir_entity_path(org.id.to_s) %></li>
+    <ul>
+    <% org.children.each do |child| %>
+     <li><%= link_to child, tapir_entity_path(child.id.to_s) %></li>
+      <ul>
+      <% child.children.each do |grandchild| %>
+       <li><%= link_to grandchild, tapir_entity_path(grandchild.id.to_s) %></li>
+      <% end %>
+      </ul>
+    <% end %>
+    </ul>
   <% end %>
+  </ul>
   </p>
 </p>

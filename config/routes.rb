@@ -17,9 +17,10 @@ Tapir::Application.routes.draw do
     ###
     match "/reports" => "reports#index"
     match "/reports/google_default" => "reports#google_default"
+    match "/reports/findings" => "reports#findings"
     match "/reports/list_all" => "reports#list_all"
     match "/reports/organization_report" => "reports#organization_report"    
-    match "/reports/findings" => "reports#findings"
+    match "/reports/peeping_tom" => "reports#peeping_tom"
 
     ###
     ### Task Runner

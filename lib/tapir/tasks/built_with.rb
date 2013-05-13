@@ -30,9 +30,12 @@ def setup(entity, options={})
 
     begin
 
-      status = Timeout.timeout(10) do
+      status = Timeout.timeout(30) do
         # Prevent encoding errors
-        contents = open("#{url}").read.force_encoding('UTF-8')
+        contents = open("#{url}", :allow_redirections => :safe).read #.force_encoding('UTF-8')
+
+        contents.encode!('UTF-8', 'UTF-8', :invalid => :replace)
+
 
         target_strings = [
 
@@ -44,7 +47,9 @@ def setup(entity, options={})
           {:regex => /munchkin.js/, :finding => "Marketo"},
 
           ### Technologies
-          {:regex => /javascript/, :finding => "Javascript"},
+          #{:regex => /javascript/, :finding => "Javascript"},
+          {:regex => /jquery.js/, :finding => "JQuery"},
+          {:regex => /bootstrap.css/, :finding => "Twitter Bootstrap"},
 
           ### Platform
           {:regex => /[W|w]ordpress/, :finding => "Wordpress"},

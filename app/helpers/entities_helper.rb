@@ -1,9 +1,5 @@
 module EntitiesHelper
 
-  def tapir_entities_path(id=nil)
-    "/tapir/entities/#{id}"
-  end
-
   ### TODO - There's probably a better way to do this
   ### even if it means using method_missing
   def tapir_entities_account_path(id=nil, whatever=nil)

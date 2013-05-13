@@ -1,0 +1,16 @@
+<p>
+<b>Peeping Tom:</b>
+<table>
+  <% @entities.each_with_index do |image, index|%>
+    <% if index%6 == 0  %>
+      <tr>
+    <% end %>      
+      <td>
+        <a href="/tapir/entities/<%= image._id %>"><img width=150 height=150 src="/<%=image.local_path.split("/").last%>"/></a>
+      </td>
+    <% if index%6 == 5  %>
+      </tr>
+    <% end %>
+  <% end %>
+</table>
+  

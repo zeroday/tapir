@@ -11,7 +11,7 @@ class EntitiesController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @entities }
+      format.json { render json: EntitiesDatatable.new(view_context) }
     end
   end
 

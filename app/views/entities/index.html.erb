@@ -1,14 +1,15 @@
 Count: <%= @entities.count%>
-<table>
-  <tr>
-    <th>Name</th>
-  </tr>
-<% @entities.each do |entity| %>
-  <tr>
-    <td><%= link_to entity, tapir_entities_path(entity.id) %></td>
-  </tr>
-<% end %>
+
+<table id='entities' class="display" data-source="<%= tapir_entities_url(format: "json") %>">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Parents</th>
+      <th>Children</th>
+    </tr>
+  </thead>
+  <tbody>
+  </tbody>
 </table>
-<br />
 
 <%= link_to 'New Entity', new_tapir_entity_path %>

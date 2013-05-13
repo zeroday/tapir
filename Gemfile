@@ -40,9 +40,9 @@ gem 'will_paginate'
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
 
-#########################
-# EAR Data manipulation #
-#########################
+######################
+#  Data manipulation #
+######################
 gem 'fastercsv'
 gem 'librex'
 gem 'nmap-parser'
@@ -70,7 +70,7 @@ gem 'pry-nav'
 gem 'mechanize'
 gem 'nokogiri'
 gem 'googleajax'
-#gem 'gsearch-parser'
+gem 'open_uri_redirections'
 
 # Heavy-duty javascript scraping
 gem 'selenium-webdriver' # browser based scraping with capybara

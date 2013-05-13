@@ -41,6 +41,19 @@ class ReportsController < ApplicationController
   end
 
   def organization_report
+    @entities = Tapir::Entities::Organization.all
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @entities }
+    end
+  end
+
+  def peeping_tom
+    @entities = Tapir::Entities::Image.all
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @entities }
+    end
   end
 
   def index
