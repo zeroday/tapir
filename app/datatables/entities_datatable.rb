@@ -31,24 +31,24 @@ private
   def fetch_entities
 
     # Fetch the correct objects
-    entities = Tapir::Entities::Base.order_by("#{sort_column} #{sort_direction}")
-    
-    # Page the objects if necessary
-    #entities = entities.page(page).per_page(per_page)
-
     if params[:sSearch].present?
       entities = entities.where(name: /#{params[:sString]}/i)
+    else
+      entities = Tapir::Entities::Base.order_by("#{sort_column} #{sort_direction}")
     end
+    
+    # Page the objects if necessary
+    entities = entities[start..(start + per_page)]
 
     entities
   end
 
-  def page
-    params[:iDisplayStart].to_i/per_page + 1
+  def start
+    params[:iDisplayStart].to_i #/per_page + 1
   end
 
   def per_page
-    params[:iDisplayLength].to_i > 0 ? params[:iDisplayLength].to_i : 10
+    params[:iDisplayLength].to_i > 0 ? params[:iDisplayLength].to_i : 100
   end
 
   def sort_column
