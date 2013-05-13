@@ -32,7 +32,6 @@ def run
 
   begin 
     # Get the authoritative nameservers & query each of them
-    binding.pry
     answer = Whois::Client.new.lookup(@entity.name)
     resolved_list = nil
   rescue Exception => e
