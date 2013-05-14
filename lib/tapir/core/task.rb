@@ -182,6 +182,8 @@ class Task
       return Tapir::Entities::Host.where({:ip_address => params[:ip_address]}).first
     elsif type == Tapir::Entities::NetBlock
       return Tapir::Entities::NetBlock.where({:range => params[:range]}).first
+    #elsif type == Tapir::Entities::NetSvc
+    #  return Tapir::Entities::NetSvc.where({:port_num => params[:port_num]}).first
     elsif type == Tapir::Entities::ParsableFile
       return Tapir::Entities::ParsableFile.where({:path => params[:path]}).first
     else

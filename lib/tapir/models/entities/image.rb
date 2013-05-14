@@ -7,6 +7,8 @@ module Tapir
       field :created_at, type: Time
       field :updated_at, type: Time
 
+      validates_uniqueness_of :local_path
+
       def filename
         self.local_path.split(File::SEPARATOR).last
       end

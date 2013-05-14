@@ -68,16 +68,18 @@ def run
 
     [:tcp, :udp].each do |proto_type|
       host.getports(proto_type, "open") do |port|
-      @task_logger.log "Creating Service: #{port}"
-      create_entity(Tapir::Entities::NetSvc, {
-        :host_id => @entity.id,
-        :port_num => port.num,
-        :proto => port.proto,
-        :fingerprint => "#{port.service.name} #{port.service.product} #{port.service.version}"})
+        @task_logger.log "Creating Network Service: #{port}"
+        Tapir::Entities::NetSvc.create({
+          :host => @entity,
+          :port_num => port.num,
+          :proto => port.proto,
+          :fingerprint => "#{port.service.name} #{port.service.product} #{port.service.version}"})
       end
       # reset this back to the main task entity & loop
       @entity = master_entity
     end
+
+    File.delete rand_file_path
   
   end
 end

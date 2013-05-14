@@ -7,8 +7,13 @@ module Tapir
       field :created_at, type: Time
       field :updated_at, type: Time
 
+      #belongs_to :host
+      #validates_uniqueness_of :proto, :port_num, :scope => [:host_id]
+
+      embedded_in :host
+
       def to_s
-         super << " #{port_num}/#{proto}"
+         super << " #{host.name}:#{port_num}/#{proto}"
       end
 
     end

@@ -29,7 +29,10 @@ class EntitiesController < ApplicationController
   # GET /tapir/entities/new
   # GET /tapir/entities/new.json
   def new
-    @entity_types = Tapir::Entities::Base.descendants.map{|x| x.name.split("::").last}
+    @entity_types = []
+    Tapir::Entities::Base.descendants.map do |t| 
+      @entity_types << t.name.split("::").last if not t.embedded?
+    end
 
     respond_to do |format|
       format.html # new.html.erb

@@ -6,11 +6,13 @@ module Tapir
       field :description, type: String
       field :created_at, type: Time
       field :updated_at, type: Time
-    end
+    
+      validates_uniqueness_of :range
+    
+      def to_s
+         super << " #{handle}"
+      end
 
-    def to_s
-       super << " #{handle}"
-    end
-
+    end    
   end
 end

@@ -8,8 +8,10 @@ module Tapir
       field :created_at, type: Time
       field :updated_at, type: Time  
 
+      embedded_in :user
+
       def to_s
-        super << service_name
+        super << " #{service_name}"
       end
 
     end

@@ -7,7 +7,6 @@ module Tapir
 
       field :name, type: String
       field :status, type: String
-      field :confidence, type: Integer
 
       def to_s
         "#{entity_type.capitalize}: #{name}"
@@ -22,7 +21,7 @@ module Tapir
         entities = []
 
         Tapir::Entities::Base.descendants.each do |x|
-          x.all.each {|y| entities << y } unless x.all == [] 
+          x.all.each {|y| entities << y if not y.embedded? } unless x.all == []
         end
         
       entities
