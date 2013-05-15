@@ -46,11 +46,19 @@ module EntitiesHelper
     "/tapir/entities/#{id}"  
   end
 
+  def tapir_entities_search_result_path(id=nil, whatever=nil)
+    "/tapir/entities/#{id}"  
+  end
+
   def tapir_entities_search_string_path(id=nil, whatever=nil)
     "/tapir/entities/#{id}"  
   end
 
   def tapir_entities_user_path(id=nil, whatever=nil)
+    "/tapir/entities/#{id}"  
+  end
+
+  def tapir_entities_twitter_account_path(id=nil, whatever=nil)
     "/tapir/entities/#{id}"  
   end
 

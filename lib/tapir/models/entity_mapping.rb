@@ -15,24 +15,24 @@ class EntityMapping
   def get_child
     TapirLogger.instance.log "Trying to find #{child_type}:#{child_id}"
     
-    #begin
+    begin
       eval "#{child_type}.find(\"#{child_id}\")"
-    #rescue ActiveRecord::RecordNotFound => e
-    #  TapirLogger.instance.log "Oops, couldn't find #{child_type}:#{child_id}"
-    #  nil
-    #end
+    rescue Mongoid::Errors::DocumentNotFound => e
+      TapirLogger.instance.log "Oops, couldn't find #{child_type}:#{child_id}:\n #{e}"
+      nil
+    end
     
   end
   
   def get_parent
     TapirLogger.instance.log "Trying to find #{parent_type}:#{parent_id}"
     
-    #begin
+    begin
       eval "#{parent_type}.find(\"#{parent_id}\")"
-    #rescue ActiveRecord::RecordNotFound => e
-    #  TapirLogger.instance.log "Oops, couldn't find #{child_type}:#{child_id}"
-    #  nil
-    #end
+    rescue Mongoid::Errors::DocumentNotFound => e
+      TapirLogger.instance.log "Oops, couldn't find #{parent_type}:#{parent_id}"
+      nil
+    end
   end
 
   def to_s

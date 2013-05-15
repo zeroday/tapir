@@ -14,6 +14,8 @@ module Tapir
       field :created_at, type: Time
       field :updated_at, type: Time
       
+      validates_uniqueness_of :name
+
     end
   end
 end

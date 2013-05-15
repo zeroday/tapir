@@ -19,7 +19,7 @@ private
   def data
     entities.map do |entity|
       [
-        link_to(entity, "/tapir/entities/#{entity._id}"), entity.parents.count, entity.children.count
+        link_to(entity, "/tapir/entities/#{entity._id}")
       ]
     end
   end

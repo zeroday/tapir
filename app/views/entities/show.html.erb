@@ -27,7 +27,7 @@
 <b>Children:</b>
   <ul>
   <% @entity.children.each {|c|%>
-    <li><%= link_to c, c.id.to_s  %></li>
+    <li><%= link_to(c, c.id.to_s) %></li>
   <% } %>
   </ul>
 </p>

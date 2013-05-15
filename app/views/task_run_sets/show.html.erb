@@ -12,8 +12,11 @@
     <td>
       <ul>
       <% task_run.entity_mappings.each do |x| %>
-        <li><%= link_to(x.get_child,"/tapir/entities/#{x.get_child.id}",) %></li>
-      <% end %>
+        <% child = x.get_child 
+          if child %>
+        <li><%= link_to(child,"/tapir/entities/#{child.id}")  %></li>
+      <%  end 
+        end %>
       </ul>
     </td>
     <td><%= simple_format task_run.task_log %></td>

@@ -11,14 +11,10 @@ module Tapir
       has_many :usernames
       accepts_nested_attributes_for :usernames, :allow_destroy => true
 
-      def full_name
+      def name
         "#{first_name} #{last_name}"
       end
-
-      def to_s
-        super << " " << full_name
-      end
-
+      
     private
 
       def default_values

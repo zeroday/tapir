@@ -18,9 +18,10 @@ class EntityManager
     if all_mapped_children.kind_of? EntityMapping
       children << all_mapped_children
     else
+
       #
       # Because we have to account for missing parents, this is 
-      # pretty careful about what get returns from this function
+      # pretty careful about what get returned from this function
       #
       all_mapped_children.each do |mapping|
         child = mapping.get_child

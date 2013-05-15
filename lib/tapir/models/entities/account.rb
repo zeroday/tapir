@@ -9,7 +9,11 @@ module Tapir
       field :updated_at, type: Time  
 
       def to_s
-        super << service_name
+        super << " #{service_name}"
+      end
+
+      def name
+        "#{account_name}"
       end
 
     end
