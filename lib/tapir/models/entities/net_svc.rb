@@ -7,6 +7,8 @@ module Tapir
       field :created_at, type: Time
       field :updated_at, type: Time
 
+      has_one :host
+
       def to_s
          super << " #{port_num}/#{proto}"
       end

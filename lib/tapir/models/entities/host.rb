@@ -5,6 +5,8 @@ module Tapir
       field :created_at, type: Time
       field :updated_at, type: Time
 
+      has_many :net_svcs
+
       #
       # This method is highly questionable, but folks generally refer to a host
       # by its ip address(es), and thus, this makes tasks easier to code.

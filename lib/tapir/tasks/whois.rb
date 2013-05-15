@@ -75,7 +75,7 @@ def run
       #
       @entity.disclaimer = answer.disclaimer
 #      @entity.domain = answer.domain
-      @entity.referral_whois = answer.referral_whois
+      #@entity.referral_whois = answer.referral_whois
       @entity.status = answer.status
       @entity.registered = answer.registered?
       @entity.available = answer.available?

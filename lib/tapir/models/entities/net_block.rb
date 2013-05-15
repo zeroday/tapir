@@ -6,11 +6,10 @@ module Tapir
       field :description, type: String
       field :created_at, type: Time
       field :updated_at, type: Time
+    
+      def to_s
+        super << " #{range}"
+      end
     end
-
-    def to_s
-       super << " #{handle}"
-    end
-
   end
 end
