@@ -34,7 +34,7 @@ def run
   #
   begin 
     whois = Whois::Client.new(:timeout => 20)
-    answer = whois.query @entity.name 
+    answer = whois.lookup @entity.name 
   rescue Whois::Error => e
     @task_logger.log "Unable to query whois: #{e}"
   rescue StandardError => e
