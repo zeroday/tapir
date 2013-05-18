@@ -8,6 +8,8 @@ module Tapir
       field :zip, type: String
       field :latitude, type: String
       field :longitude, type: String
+      
+      tenant(:tenant)
 
       def to_s
          super << " #{latitude}/#{longitude}"

@@ -7,6 +7,8 @@ module Tapir
 
       has_one :host
 
+      tenant(:tenant)
+
       def to_s
          super << " #{port_num}/#{proto}"
       end

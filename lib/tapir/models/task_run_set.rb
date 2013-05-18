@@ -7,7 +7,6 @@ class TaskRunSet
 
   tenant(:tenant)
 
-
   def task_runs
     TaskRun.where(:task_run_set_id => self.id)
   end

@@ -58,17 +58,16 @@ class EntitiesController < ApplicationController
     @entity_types = _get_valid_type_class_names
     
     # TODO - there has to be a better way to do this
-    render action: "new" unless @entity_types.include?(type)
+    render action: "new", notice: "invalid entity type." unless @entity_types.include?(type)
 
     @entity = eval("Tapir::Entities::#{type}").new
-    binding.pry
 
     respond_to do |format|
       if @entity.save
         format.html { render action: "edit", notice: 'entity was successfully created.' }
         format.json { render json: @entity, status: :created, location: @entity }
       else
-        format.html { render action: "new", notice: 'unable to save entity.' }
+        format.html { render action: "new", notice: "unable to save entity." }
         format.json { render json: @entity.errors, status: :unprocessable_entity }
       end
     end
@@ -79,6 +78,7 @@ class EntitiesController < ApplicationController
   def update
     type = params[:type]
     @entity = eval("#{type}").find(params[:oid])
+
     respond_to do |format|
       if @entity.update_attributes(params)
         format.html { redirect_to tapir_entity_path(@entity), notice: 'Entity was successfully updated.' }

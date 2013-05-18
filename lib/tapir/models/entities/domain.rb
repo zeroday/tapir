@@ -14,6 +14,8 @@ module Tapir
       
       validates_uniqueness_of :name
 
+      tenant(:tenant)
+
     end
   end
 end

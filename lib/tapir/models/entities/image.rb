@@ -5,6 +5,8 @@ module Tapir
       field :remote_path, type: String
       field :description, type: String
 
+      tenant(:tenant)
+
       def filename
         self.local_path.split(File::SEPARATOR).last
       end

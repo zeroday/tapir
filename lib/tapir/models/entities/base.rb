@@ -5,14 +5,14 @@ module Tapir
       include Mongoid::Document
       include Mongoid::Timestamps
       include Mongoid::Multitenancy::Document
-      
-      include EntityHelper
 
-      tenant(:tenant)
+      include EntityHelper
 
       field :name, type: String
       field :status, type: String
-      field :confidence, type: Integer
+      field :confidence, type: Integer      
+
+      tenant(:tenant)
 
       def to_s
         "#{entity_type.capitalize}: #{name}"

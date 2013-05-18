@@ -3,9 +3,10 @@ module Tapir
     class Finding < Base
       field :content, type: String
       field :details, type: String
-    
-      validates_uniqueness_of :content
 
+      tenant(:tenant)    
+
+      validates_uniqueness_of :content
     end
   end
 end

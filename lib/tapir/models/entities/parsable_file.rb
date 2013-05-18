@@ -4,6 +4,8 @@ module Tapir
       field :path, type: String
       field :type, type: String
 
+      tenant(:tenant)
+
     end
   end
 end

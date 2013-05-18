@@ -6,7 +6,6 @@ class EntityMapping
 
   tenant(:tenant)
 
-
   belongs_to :task_run
 
   field :child_id, type: String
