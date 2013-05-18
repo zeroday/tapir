@@ -2,9 +2,7 @@ module Tapir
 class TaskRunSet
 
   include Mongoid::Document
-
-  field :created_at, type: Time
-  field :updated_at, type: Time
+  include Mongoid::Timestamps
 
   def task_runs
     TaskRun.where(:task_run_set_id => self.id)

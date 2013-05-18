@@ -22,6 +22,10 @@ module EntitiesHelper
     "/tapir/entities/#{id}"  
   end
 
+  def tapir_entities_linkedin_account_path(id=nil, whatever=nil)
+    "/tapir/entities/#{id}"  
+  end
+
   def tapir_entities_net_block_path(id=nil, whatever=nil)
     "/tapir/entities/#{id}"  
   end

@@ -1,6 +1,6 @@
 module Tapir
   module Entities
-    class Username < Base
+    class LinkedinAccount < Base 
     end
   end
 end

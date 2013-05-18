@@ -1,6 +1,7 @@
 module Tapir
 class EntityMapping
   include Mongoid::Document
+  include Mongoid::Timestamps
 
   belongs_to :task_run
 
@@ -9,8 +10,6 @@ class EntityMapping
   field :parent_id, type: String
   field :parent_type, type: String
   field :task_run_id, type: String
-  field :created_at, type: Time
-  field :updated_at, type: Time
 
   def get_child
     TapirLogger.instance.log "Trying to find #{child_type}:#{child_id}"

@@ -5,8 +5,6 @@ module Tapir
       field :last_name, type: String
       field :middle_name, type: String
       field :email_addresses, type: String
-      field :created_at, type: Time
-      field :updated_at, type: Time
       
       has_many :usernames
       accepts_nested_attributes_for :usernames, :allow_destroy => true

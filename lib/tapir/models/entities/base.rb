@@ -3,6 +3,8 @@ module Tapir
     class Base
 
       include Mongoid::Document
+      include Mongoid::Timestamps
+
       include EntityHelper
 
       field :name, type: String

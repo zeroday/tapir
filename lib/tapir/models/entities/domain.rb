@@ -11,8 +11,6 @@ module Tapir
       field :referral_whois, type: String
       field :registered, type: String
       field :available, type: String
-      field :created_at, type: Time
-      field :updated_at, type: Time
       
       validates_uniqueness_of :name
 

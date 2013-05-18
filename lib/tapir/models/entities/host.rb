@@ -2,8 +2,6 @@ module Tapir
   module Entities
     class Host < Base
       field :ip_address, type: String
-      field :created_at, type: Time
-      field :updated_at, type: Time
 
       has_many :net_svcs
 

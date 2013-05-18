@@ -8,9 +8,6 @@ module Tapir
       field :zip, type: String
       field :latitude, type: String
       field :longitude, type: String
-      field :created_at, type: Time
-      field :updated_at, type: Time
-
 
       def to_s
          super << " #{latitude}/#{longitude}"
