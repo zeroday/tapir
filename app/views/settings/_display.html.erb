@@ -1,0 +1,13 @@
+<div class="fields">
+  <!-- Iterate through fields here --> 
+  <table>
+  <% @setting.fields.each do |field,value|
+      next if field =~ /_type|_id|created_at|updated_at|status|visibility/ %>
+    <tr>
+      <td><%= value.name %>:</td>
+      <td><%= eval("@setting.#{value.name}")%></td>
+    </tr>
+  <% end %>
+  </table>
+  <!-- Done iterating through fields --> 
+</div>

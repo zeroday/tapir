@@ -6,6 +6,7 @@ Tapir::Application.routes.draw do
     resources :task_run_sets
     resources :entity_mappings
     resources :entities
+    resources :settings
     
     ###
     ### Welcome page

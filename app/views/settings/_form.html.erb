@@ -1,0 +1,35 @@
+<%= form_for(@setting) do |f| %>
+  <% if @setting.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@setting.errors.count, "error") %> prohibited this setting from being saved:</h2>
+
+      <ul>
+      <% @setting.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="fields">
+
+    <input type="hidden" name="oid" value="<%= @setting.id %>"></input>
+    <input type="hidden" name="type" value="<%= @setting._type %>"></input>
+
+    <!-- Iterate through fields here --> 
+    <table>
+    <% @setting.fields.each do |field,value|
+        next if field =~ /_type|_id|created_at|updated_at|status|visibility/ %>
+      <tr>
+        <td><%= value.name %>:</td>
+        <td><input name="<%=value.name%>" type="string" value=<%= eval("@setting.#{value.name}")%> > </input></td>
+      </tr>
+    <% end %>
+    </table>
+    <!-- Done iterating through fields --> 
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

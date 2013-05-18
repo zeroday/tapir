@@ -2,6 +2,10 @@ module Tapir
 class TaskRun
   include Mongoid::Document
   include Mongoid::Timestamps
+  include Mongoid::Multitenancy::Document
+
+  tenant(:tenant)
+
 
   field :task_name, type: String
   field :task_run_set_id, type: String

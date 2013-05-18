@@ -13,6 +13,7 @@ gem 'tabulous', "~> 1.3.2"
 
 # Mongo Database
 gem "mongoid", "~> 3.0.0"
+gem 'mongoid-multitenancy'
 
 # Gems used only for assets and not required
 # in production environments by default.

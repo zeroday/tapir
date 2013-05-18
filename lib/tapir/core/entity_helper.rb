@@ -99,14 +99,14 @@ module EntityHelper
   # This method returns a pretty print version of the relationships
   #  of this entity
   # 
-  def to_graph(indent=nil)
-    out = "Parents:\n"
-    self.parents.each { |parent| out << " #{parent}" }
-    out << "\Entity: #{self.to_s}\n"
-    out << "Children:\n"
-    self.children.each { |child| out << " #{child}" }
-    out
-  end
+  #def to_graph(indent=nil)
+  #  out = "Parents:\n"
+  #  self.parents.each { |parent| out << " #{parent}" }
+  #  out << "\Entity: #{self.to_s}\n"
+  #  out << "Children:\n"
+  #  self.children.each { |child| out << " #{child}" }
+  #  out
+  #end
 
   def _map_child(params)
     TapirLogger.instance.log "Creating new child mapping #{self} => #{params[:child]}"

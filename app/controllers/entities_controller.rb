@@ -1,4 +1,5 @@
 class EntitiesController < ApplicationController
+
   # GET /tapir/entities
   # GET /tapir/entities.json
   def index
@@ -29,7 +30,7 @@ class EntitiesController < ApplicationController
   # GET /tapir/entities/new
   # GET /tapir/entities/new.json
   def new
-    @entity_types = Tapir::Entities::Base.descendants.map{|x| x.name.split("::").last}
+    @entity_types = _get_valid_type_class_names
 
     respond_to do |format|
       format.html # new.html.erb
@@ -40,6 +41,9 @@ class EntitiesController < ApplicationController
   # GET /tapir/entities/1/edit
   def edit
     type = params[:type]
+
+    # TODO - security - verify.
+
     @entity = eval("#{type}").find(params[:id])
   end
 
@@ -48,16 +52,23 @@ class EntitiesController < ApplicationController
   def create
 
     # interpret the type based on the user's input. 
-    # TODO - SECURITY - limit this to valid type
     type = params[:type]
+
+    # Check valid entities
+    @entity_types = _get_valid_type_class_names
+    
+    # TODO - there has to be a better way to do this
+    render action: "new" unless @entity_types.include?(type)
+
     @entity = eval("Tapir::Entities::#{type}").new
+    binding.pry
 
     respond_to do |format|
       if @entity.save
         format.html { render action: "edit", notice: 'entity was successfully created.' }
         format.json { render json: @entity, status: :created, location: @entity }
       else
-        format.html { render action: "new" }
+        format.html { render action: "new", notice: 'unable to save entity.' }
         format.json { render json: @entity.errors, status: :unprocessable_entity }
       end
     end
@@ -91,4 +102,17 @@ class EntitiesController < ApplicationController
       format.json { head :ok }
     end
   end
+
+  private
+
+  # Return the valid entity types
+  def _get_valid_type_class_names
+    Tapir::Entities::Base.descendants.map{|x| x.name.split("::").last}
+  end
+  
+  # Return the valid entity types
+  def _get_valid_types
+    Tapir::Entities::Base.descendants
+  end
+
 end

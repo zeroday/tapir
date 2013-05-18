@@ -4,8 +4,11 @@ module Tapir
 
       include Mongoid::Document
       include Mongoid::Timestamps
-
+      include Mongoid::Multitenancy::Document
+      
       include EntityHelper
+
+      tenant(:tenant)
 
       field :name, type: String
       field :status, type: String
@@ -23,7 +26,7 @@ module Tapir
       def all
         entities = []
 
-        Tapir::Entities::Base.descendants.each do |x|
+        Tapir::Entities::Base.unscoped.descendants.each do |x|
           x.all.each {|y| entities << y } unless x.all == [] 
         end
         

@@ -54,24 +54,21 @@ module LinkedIn
 #
 class SearchService
 
-  def initialize
+  def initialize(api_key, secret_key, access_keys)
     
-    @client = ::LinkedIn::Client.new(
-      Tapir::ApiKeys.instance.keys['linkedin_api_key'], 
-      Tapir::ApiKeys.instance.keys['linkedin_secret_key'])
-    rtoken = @client.request_token.token
-    rsecret = @client.request_token.secret
-    pin = Tapir::ApiKeys.instance.keys['linkedin_pin']
-
+    @client = ::LinkedIn::Client.new(api_key, secret_key)
+    #rtoken = @client.request_token.token
+    #rsecret = @client.request_token.secret
+    #pin = Tapir::ApiKeys.instance.keys['linkedin_pin']
     # to test from your desktop, open the following url in your browser
     # and record the pin it gives you
     #@client.request_token.authorize_url
 
     # then fetch your access keys
-    access_keys = @client.authorize_from_request(rtoken, rsecret, pin)
+    #access_keys = @client.authorize_from_request(rtoken, rsecret, pin)
 
     # or authorize from previously fetched access keys
-    #@client.authorize_from_access(access_keys.first, access_keys.last)
+    @client.authorize_from_access(access_keys.first, access_keys.last)
   end
 
   # Public: search for a string

@@ -2,7 +2,6 @@
 
 <%= form_tag "/tapir/entities" do %>
   <%= select_tag "type",options_from_collection_for_select(@entity_types, "to_s", "to_s") %>
-
   <%= submit_tag "Save" %>
 <% end %>
 

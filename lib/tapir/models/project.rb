@@ -1,16 +1,12 @@
 module Tapir
-class TaskRunSet
-
+class Project
   include Mongoid::Document
   include Mongoid::Timestamps
   include Mongoid::Multitenancy::Document
 
   tenant(:tenant)
 
-
-  def task_runs
-    TaskRun.where(:task_run_set_id => self.id)
-  end
+  field :name, type: String
 
 end
 end
