@@ -26,4 +26,4 @@ log/*.log
 tmp
 
 # Ignore public files
-public/tapir/*
+public/images/*
