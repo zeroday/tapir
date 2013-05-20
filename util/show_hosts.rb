@@ -1,13 +1,15 @@
-#!/usr/bin/ruby
+#!/usr/bin/env ruby
+puts "Loading Rails environment"
+require "#{File.join(File.dirname(__FILE__), "..", "config", "environment")}"
 
-current_dir = File.expand_path(File.dirname(__FILE__))
-require "#{current_dir}/../config/environment"
+# Set the current tenant - this is required because
+# all entities must be scoped according to the tenant
+Mongoid::Multitenancy.current_tenant = Tapir::Tenant.all.first
 
 # add in a lookup
 Tapir::Entities::Host.all.each do |h|
-    puts h
-    puts "  #{h.task_runs}"
-    puts "  #{Tapir::TaskRun.find_by_parent_id(h.id)}"
+    puts "Name         : #{h}"
+    puts "Tenant       : #{h.tenant.host}"
 end
 
 puts "Done."

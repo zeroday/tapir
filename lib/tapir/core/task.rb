@@ -179,11 +179,18 @@ class Task
   #
   def find_entity(type, params)
     if type == Tapir::Entities::Host
-      return Tapir::Entities::Host.where({:ip_address => params[:ip_address]}).first
+      return Tapir::Entities::Host.where({
+        :ip_address => params[:ip_address]}).first
     elsif type == Tapir::Entities::NetBlock
-      return Tapir::Entities::NetBlock.where({:range => params[:range]}).first
+      return Tapir::Entities::NetBlock.where({
+        :range => params[:range]}).first
     elsif type == Tapir::Entities::ParsableFile
-      return Tapir::Entities::ParsableFile.where({:path => params[:path]}).first
+      return Tapir::Entities::ParsableFile.where({
+        :path => params[:path]}).first
+    elsif type == Tapir::Entities::PhysicalLocation
+      return Tapir::Entities::PhysicalLocation.where({
+        :latitude => params[:latitude], 
+        :longitude => params[:longitude]}).first
     else
       if params.has_key? :name
         return type.send(:where, :name => params[:name]).first
