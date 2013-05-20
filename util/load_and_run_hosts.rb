@@ -11,7 +11,7 @@ puts "Running..."
 f.each do |line| 
   begin 
     # create the domain entity
-    h = Host.create :ip_address => line.strip
+    h = Tapir::Entities::Host.create :ip_address => line.strip
   rescue Exception => e
     puts "ohnoes! #{e}"
   end

@@ -6,6 +6,6 @@ f = File.open(ARGV[0])
 
 puts "Importing..."
 f.each { |line| 
-	d = Domain.create :name => line.chomp
+	d = Tapir::Entities::Domain.create :name => line.chomp
 }
 puts "Done."

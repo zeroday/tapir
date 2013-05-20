@@ -9,7 +9,7 @@ f = File.open(ARGV[0], "r")
 puts "Running..."
 f.each do |line| 
   begin 
-    h = Host.create :ip_address => line.strip
+    h = Tapir::Entities::Host.create :ip_address => line.strip
   rescue Exception => e
     puts "ohnoes! #{e}"
   end

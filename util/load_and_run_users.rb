@@ -25,7 +25,7 @@ users.each do |user|
   begin 
 
     # create the user entity
-    u = User.create :usernames => [user]
+    u = Tapir::Entities::User.create :usernames => [user]
     u.run_task "twitpic_photo_locations"
 
   rescue Exception => e

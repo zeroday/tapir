@@ -7,6 +7,6 @@ f = File.open(top_domains)
 
 puts "Importing #{top_domains}"
 f.each { |line| 
-	d = Domain.create :name => line.chomp
+	d = Tapir::Entities::Domain.create :name => line.chomp
 }
 puts "Done."

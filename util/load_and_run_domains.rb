@@ -11,7 +11,7 @@ f.each do |line|
   begin 
 
     # create the domain entity
-    d = Domain.create :name => line.strip
+    d = Tapir::Entities::Domain.create :name => line.strip
   
     # Screenshot task. -- add more tasks here.
     #d.run_task "web_screenshot", { :timeout => "20" }
