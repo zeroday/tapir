@@ -67,7 +67,7 @@ To start the server, in the root of the Tapir directory, run:
 Now browse to http://[server_name]:9292, and you're in the jungle baby!
 
 ### Using the Scriptable Console (Advanced)
-Once you have a database, simply run `$ bundle exec rails c` - this will give you access to a shell from which you can create entities and run tasks against them. 
+Once you have a database, simply run `$ bundle exec ./util/console.rb` - this will give you access to a shell from which you can create entities and run tasks against them. 
 
 Creating a host entity & running tasks: 
 
