@@ -71,10 +71,10 @@ Once you have a database, simply run `$ bundle exec ./util/console.rb` - this wi
 
 Creating a host entity & running tasks: 
 
-		ear> h = Tapir::Entities::Host.create(:ip_address => "8.8.8.8")
-		ear> h.run_task("dns_reverse_lookup")
-		ear> h.run_task("geolocate_host")
-		ear> h.children
+		tapir> h = Tapir::Entities::Host.create(:ip_address => "8.8.8.8")
+		tapir> h.run_task("dns_reverse_lookup",{})
+		tapir> h.run_task("geolocate_host",{})
+		tapir> h.children
 
 ## Advanced
 
