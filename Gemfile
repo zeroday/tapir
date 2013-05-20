@@ -57,6 +57,7 @@ gem 'dnsruby'
 gem 'geoip'
 gem 'whois'
 gem 'packetfu'
+gem 'pcaprub'
 
 # Web Services
 gem 'linkedin'
@@ -86,11 +87,6 @@ group :pain do
   # https://github.com/thoughtbot/capybara-webkit#readme
   # If you're on ubuntu, you'll need to run: apt-get install libqt4-dev
   gem 'capybara-webkit'
-
-  # Requires Libpcap-dev
-  # apt-get install libpcap-dev
-  gem 'pcaprub'
-  
 end
 
 group :test do

@@ -10,8 +10,10 @@ require "packetfu"
 
 raise ArgumentError, "Please specify interface" unless ARGV[0]
 
-@cap = PacketFu::Capture.new(
-  :iface => ARGV[0],
+require 'pry'
+binding.pry
+
+@cap = PacketFu::Capture.new(:iface => ARGV[0],
   :start => true,
   :filter => "ip")
 
@@ -33,11 +35,9 @@ raise ArgumentError, "Please specify interface" unless ARGV[0]
   next unless !excluded || !packet.is_ip?
   
   #Check to see if we have the host's details already
-  host = Host.find_by_ip_address(packet.ip_daddr)
+  host = Tapir::Entities::Host.find_by_ip_address(packet.ip_daddr)
   next if host
 
   puts "New host: #{packet.ip_daddr}, creating a record..."
-  h = Host.create(:ip_address => packet.ip_daddr)
-  h.run_task "geolocate_host"
-  h.run_task "dns_reverse_lookup"
+  h = Tapir::Entities::Host.new(:ip_address => packet.ip_daddr)
 end
