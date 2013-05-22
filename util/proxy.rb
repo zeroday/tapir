@@ -14,7 +14,6 @@ s = WEBrick::HTTPProxyServer.new(
     :RequestCallback => Proc.new { |req,res| 
       begin
         Mongoid::Multitenancy.current_tenant = Tapir::Tenant.all.first
-        puts "#{req.host}:#{req.port}"
         Tapir::Entities::Domain.create(:name => "#{req.host}")
         Tapir::Entities::NetSvc.create(:port_num => req.port, :proto => "tcp")
       rescue Exception => e
