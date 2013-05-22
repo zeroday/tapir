@@ -37,6 +37,8 @@ def run
       # Create our new domain entity with the resolved name
       d = create_entity(Tapir::Entities::Domain, {:name => resolved_name})
 
+      # Add the domain for this host
+      @entity.domains << d
     else
       @task_logger.log "Unable to find a name for #{@entity.ip_address}"
     end

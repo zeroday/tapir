@@ -5,14 +5,13 @@ module Tapir
       field :proto, type: String
       field :port_num, type: Integer
 
-      has_one :host
+      belongs_to :host
 
       tenant(:tenant)
 
       def to_s
          super << " #{port_num}/#{proto}"
       end
-
     end
   end
 end

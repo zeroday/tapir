@@ -3,13 +3,6 @@ class EntitiesController < ApplicationController
   # GET /tapir/entities
   # GET /tapir/entities.json
   def index
-    entity_type = params['type']
-    if entity_type
-      @entities = eval("Tapir::Entities::#{entity_type.capitalize}.all")
-    else
-      @entities = Tapir::Entities::Base.all
-    end
-
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: EntitiesDatatable.new(view_context) }
@@ -63,7 +56,7 @@ class EntitiesController < ApplicationController
     @entity = eval("Tapir::Entities::#{type}").new
 
     respond_to do |format|
-      if @entity.save
+      if @entity.save(:validate => false)
         format.html { render action: "edit", notice: 'entity was successfully created.' }
         format.json { render json: @entity, status: :created, location: @entity }
       else

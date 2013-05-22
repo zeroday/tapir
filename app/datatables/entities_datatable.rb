@@ -29,10 +29,9 @@ private
   end
 
   def fetch_entities
-
     # Fetch the correct objects
     if params[:sSearch].present?
-      entities = entities.where(name: /#{params[:sString]}/i)
+      entities = Tapir::Entities::Base.where(:name => /#{params[:sSearch]}/i)
     else
       entities = Tapir::Entities::Base.order_by("#{sort_column} #{sort_direction}")
     end
