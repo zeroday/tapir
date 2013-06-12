@@ -11,7 +11,7 @@
   <% end %>
 
   <% if @entity.kind_of?(Tapir::Entities::Image) %>
-      <tr><td>Image:</td><td><img src="/<%=@entity.local_path.split("/").last%>"/></td><tr>
+      <tr><td>Image:</td><td><img src="/images/<%=@entity.local_path.split("/").last%>"/></td><tr>
   <% end %>
 
   </table>
